@@ -5,16 +5,26 @@
 <div id="welcome">Welcome to Sorbitol !</div>
 
 <form class="col-md-10" method="POST" action="/login" role="form">
-    <div class="form-login">
-        <div class="innerform-login">
-            User name:<div class="input-login"><input type="text" id="signin-name" autocomplete="on" placeholder="old user"></div>
-            Password: <div class="input-login"><input type="password" id="signin-password"></div>
+        {{ form.csrf_token }}
+        {% for error in form.email.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+        {% for error in form.password.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+
+        <div class="login-form-group">
+                {{ form.email(class="form-control", placeholder="Email") }}
+        </div>
+        <div class="login-form-group">
+                {{form.label}}{{ form.password(class="form-control",  placeholder="Password") }}
+        </div>
+        <div class="login-form-group">
             <div class="">
-                <button type="submit" class="btn btn-default">Log in</button>
+                <button type="submit" class="btn btn-default">Sign in</button>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
 {% endblock %}
 

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from flasj_wtf import Form
+from flask_wtf import Form
 from wtforms import TextField, PasswordField, TextAreaField
 from wtforms.validators import Email, DataRequired, Length
 
 class SignupForm(Form):
+    username = TextField('email',
+                      [Email(), DataRequired(), Length(min = 6, max = 120)])
     email = TextField('email', 
                       [Email(), DataRequired(), Length(min = 6, max = 120)])
     password = PasswordField('password', 

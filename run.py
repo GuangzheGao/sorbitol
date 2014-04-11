@@ -1,10 +1,24 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, Blueprint, render_template
+from flask.ext.login import LoginManager, current_user
 from views.views import main_app
+
+from models.user import User
 
 app = Flask(__name__)
 app.register_blueprint(main_app)
+app.secret_key = 's3cr3t'
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def get_user(user_id):
+    return User.get(user_id)
+
+@app.route('/')
+def index():
+    return render_template('index.html', user=current_user)
 
 @app.errorhandler(404)
 def page_not_found(e):

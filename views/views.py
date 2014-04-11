@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, jsonify
-from models.forms import SignupForm, LoginForm
+from flask import request, redirect, url_for, Blueprint, render_template, jsonify
+from models.user import User
+from models.forms.login_form import LoginForm
+from models.forms.signup_form import SignupForm
 from flask.ext.login import login_user, logout_user, current_user, login_required
 
 main_app = Blueprint('main_app', __name__)
-
-@main_app.route('/')
-def index():
-    return render_template('index.html')
 
 @main_app.route('/login',  methods=['GET', 'POST'])
 def render_login():
     form = LoginForm(request.form)
     if request.method == 'POST':
+        print "POST"
         if form.validate_on_submit():
             login_user(form.user)
             return redirect(url_for('index'))
@@ -28,31 +27,33 @@ def logout():
 @main_app.route('/signup', methods=['GET', 'POST'])
 def render_signup():
     # if current user, redirect to index
-    if current_user:
+    if not current_user.is_anonymous():
         return redirect(url_for('index'))
 
     form = SignupForm(request.form)
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User()
-            username_exist = 
-                User.query.filter_by(username = form.username.data).first()
+            username_exist = User.query.filter_by(username = form.username.data).first()
             email_exist = User.query.filter_by(email = form.email.data).first()
 
-        # check if the username or email is exist
-        if user_exist:
-            form.username.errors.append('Username is already in use.')
-        if email_exist:
-            form.email.errors.append('Email is already in use.')
-        if user_exist or email_exist:
-            # any of them exist, redraw signup page
-            return render_template('signup.html', form = form)
+            # check if the username or email is exist
+            if username_exist:
+                form.username.errors.append('Username is already in use.')
+            if email_exist:
+                form.email.errors.append('Email is already in use.')
+            if user_exist or email_exist:
+                # any of them exist, redraw signup page
+                return render_template('signup.html', form = form)
         else:
             # add new user to database, redirect to login
+            print "username", form.username.data
+            print "password", form.password.data
+            print "email", form.email.data
             user_id = User.signup(form.username.data,
                                   form.password.data,
                                   form.email.data)
-            return redirect(url_for('login'))
+            return redirect(url_for('.render_login'), code=303)
     else:
         # if the form is not valid, redraw signup page
         return render_template('signup.html', form = form)
