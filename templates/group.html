@@ -83,6 +83,11 @@
                 $("div.members-group").css("display", "block");
             }
         }
+
+        /* board linkage */
+        $(document.body).on("click", "div.board-index", function(event){
+            window.location.href = "/b/" + $(this).text();
+        });
     });
 </script>
 

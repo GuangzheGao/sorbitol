@@ -83,7 +83,38 @@
 </div>
 
 <!-- static card that is rendered and poped when card is clicked -->
-<div class="panel panel-info card-details-board">card name<div id='cross-mark-board'>X</div> </div>
+<div class="panel panel-info" id="card-details-board">
+    <div id='cross-mark-board'>X</div>
+
+    <div class="card-info-board"><div class="card-name-board">CardName</div> <div class="list-info-board">in list blabla</div>  </div>
+
+    <div class="card-leftpanel-board">
+        <div class="card-description-board"> Description:
+            <div class="card-description-content-board"> This task is blaaaaa............. </div>
+        </div>
+        <div class="card-activities-board">
+
+            <!-- comments in card -->
+            <div class="card-comment-board">
+                <div class="card-newcomment-board">
+                    <input placeholder="Write a comment..">
+                </div>
+            </div>
+
+            <!-- activities in card -->
+            <div class="card-past-activities-board">
+                <div class="card-past-activity-board">
+                    ssssssssssssssssssssss
+                </div>
+                <div class="card-past-activity-board">
+                    yyyyyyyyyyyyyyyyyyyyyyy
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-rightpanel-board">  </div>
+</div>
 <!-- /* for background dimming purpose on the pop up*/ -->
 <div id="background-fade-board"> </div>
 
@@ -128,19 +159,28 @@
         });
 
         /*AJAX get*/
-        $(document.body).on("click", "div.card-board", function(){ /* AJAX get detailed card info */
-            $("div.card-details-board").html(
+        /* pop up */
+        $(document.body).on("click", "div.card-board", function(e){ /* AJAX get detailed card info */
+            e.stopPropagation(); /* avoid the exit pop up listener */
+            $("div#card-details-board").html(
                 /* TODO: append AJAX in elements form get here*/
             );
-            $("div.card-details-board").fadeIn(300);
+            $("div#card-details-board").fadeIn(300);
             $("div#background-fade-board").fadeIn(300);
         });
 
+        /* exit pop up when click x or out side div*/
         $(document.body).on("click", "div#cross-mark-board", function(){
-            $("div.card-details-board").fadeOut(300);
+            $("div#card-details-board").fadeOut(300);
             $("div#background-fade-board").fadeOut(300);
         });
 
+        $(document).click(function(e) {
+            if (!(e.target.id === "card-details-board")) {
+                $("div#card-details-board").fadeOut(300);
+                $("div#background-fade-board").fadeOut(300);
+            }
+        });
         /*
         $.ajax({
             type: "GET",

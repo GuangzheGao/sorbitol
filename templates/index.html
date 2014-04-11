@@ -39,14 +39,14 @@
         /* background effect */
         $(document.body).on({
             mouseenter: function () {
-                $(this).css("background", "#23719f");
+                $(this).css("background", "#46adff");
             },
             mouseleave: function () {
                 $(this).css("background", "#38e1ff");
             }
         }, "div.board-index");
 
-        /* linkage */
+        /* group and board linkage */
         $(document.body).on("click", "div.group-index", function(event){
             window.location.href = "/group/" + $(this).text();
         });

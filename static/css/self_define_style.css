@@ -63,7 +63,7 @@ div#background-fade-board{
     z-index: 2000; /* on top of everything but the pop up, bootstrap navbar has very high z-index. */
 }
 
-div.card-details-board{
+div#card-details-board{
     background-color:#FFFFFF;
     border:1px solid #999999;
     cursor:default;
@@ -195,26 +195,26 @@ div.group-index{
 
 
 /* sign in-up form rendering */
-div.form-login-signin{
+div.form-login, div.form-signup{
     position: relative;
     height: 300px;
     width: 500px;
     left: 43%;
     margin: 20px 20px 20px 20px;
-    border: 1px solid #8585AD;
+    border: 2px solid #a3ad99;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     background: #23719f; /* background color */
 }
 
-div.innerform-login-signin{
+div.innerform-login, div.innerform-signup{
     margin: 20px 20px 20px 20px;
     text-align:center; /* allign words horizontally */
 }
 
 /* input rendering  */
-div.input-login-signin{
+div.input-login, div.input-signup{
     margin-top: 20px;
     margin-bottom: 20px;
 }

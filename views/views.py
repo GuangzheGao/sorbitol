@@ -24,5 +24,9 @@ def card(cardID):
     pass; #show things inside card
 
 @main_app.route('/login', methods=['GET', 'POST'])
-def route():
-    return render_template('login_sign_up.html');
+def login():
+    return render_template('login.html');
+
+@main_app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    return render_template('signup.html');
