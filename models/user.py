@@ -25,11 +25,11 @@ class User(Base):
     @classmethod
     def get_validate_user(cls, user_email, user_unsafe_password):
         user = mysql_session.query(cls).filter_by(email=user_email).first()
-        user.id = long(user.id)
         
         if not user:
             return None
         
+        user.id = long(user.id)
         if user.check_password(user_unsafe_password):
             return user
         else:
@@ -60,7 +60,7 @@ class User(Base):
     def is_active(self):
         return True
 
-    def is_anoymous(self):
+    def is_anonymous(self):
         return False
 
     def get_id(self):

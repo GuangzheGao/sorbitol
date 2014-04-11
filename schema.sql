@@ -68,7 +68,17 @@ CREATE TABLE `card_label` (
   `card_id` int(12) NOT NULL,
   `label_id` int(12) NOT NULL,
   `label_name` varchar(512) NOT NULL,
+  `text` text,
   PRIMARY KEY (`card_id`, `label_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `card_member`;
+CREATE TABLE `card_member` (
+  `card_id` int(12) NOT NULL,
+  `member_id` int(12) NOT NULL,
+  PRIMARY KEY (`card_id`, `member_id`),
+  KEY `idx_card_id` (`card_id`),
+  KEY `idx_member_id` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

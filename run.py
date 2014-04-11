@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, Blueprint, render_template
+from flask import Flask, Blueprint, render_template, redirect, url_for
 from flask.ext.login import LoginManager, current_user
 from views.views import main_app
 
@@ -18,6 +18,8 @@ def get_user(user_id):
 
 @app.route('/')
 def index():
+    if not current_user or current_user.is_anonymous():
+        return redirect(url_for('main_app.render_login'))
     return render_template('index.html', user=current_user)
 
 @app.errorhandler(404)
