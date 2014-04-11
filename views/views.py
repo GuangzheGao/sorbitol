@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, jsonify
 from models.forms import SignupForm, LoginForm
 from flask.ext.login import login_user, logout_user, current_user, login_required
+
 main_app = Blueprint('main_app', __name__)
 
 @main_app.route('/')
@@ -17,14 +18,46 @@ def render_login():
             return redirect(url_for('index'))
 
     return render_template('login.html', form = form)
-            
+
+@main_app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 @main_app.route('/signup', methods=['GET', 'POST'])
 def render_signup():
-    form = SignupForm(request.form)
-    if request.method == 'POST':
+    # if current user, redirect to index
+    if current_user:
         return redirect(url_for('index'))
 
-    return render_template('signup.html', form = from)
+    form = SignupForm(request.form)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = User()
+            username_exist = 
+                User.query.filter_by(username = form.username.data).first()
+            email_exist = User.query.filter_by(email = form.email.data).first()
+
+        # check if the username or email is exist
+        if user_exist:
+            form.username.errors.append('Username is already in use.')
+        if email_exist:
+            form.email.errors.append('Email is already in use.')
+        if user_exist or email_exist:
+            # any of them exist, redraw signup page
+            return render_template('signup.html', form = form)
+        else:
+            # add new user to database, redirect to login
+            user_id = User.signup(form.username.data,
+                                  form.password.data,
+                                  form.email.data)
+            return redirect(url_for('login'))
+    else:
+        # if the form is not valid, redraw signup page
+        return render_template('signup.html', form = form)
+
+    return render_template('signup.html', form = SignupForm())
 
 @main_app.route('/group')
 def render_groups():

@@ -42,13 +42,13 @@ class User(Base):
         return len(password) in range(6, 121) and re.match(r'[\w]*$', password)
 
     @classmethod
-    def register(cls, username, unsafe_password, user_email):
+    def signup(cls, username, unsafe_password, user_email):
         safe_password = generate_password_hash(unsafe_password)
         user = User(username = username,
                     password = safe_password, 
                     email = user_email)
-        mysql_session.add(user)
         try:
+            mysql_session.add(user)
             mysql_session.commit()
         except Exception as e:
             mysql_session.flush()
