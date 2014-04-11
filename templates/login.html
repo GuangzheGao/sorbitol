@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="welcome">Welcome to Sorbitol !</div>
+
+<form class="col-md-10" method="POST" action="/login" role="form">
+    <div class="form-login">
+        <div class="innerform-login">
+            User name:<div class="input-login"><input type="text" id="signin-name" autocomplete="on" placeholder="old user"></div>
+            Password: <div class="input-login"><input type="password" id="signin-password"></div>
+            <div class="">
+                <button type="submit" class="btn btn-default">Log in</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script type='text/javascript'>
+    $(document).ready(function() {
+        $(document.body).addClass("gradual-background");
+    });
+</script>
+
+{% endblock %}

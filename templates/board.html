@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="welcome" class="groupname-board">Team Name</div>
+
+<div class="panel panel-default leftpanels-board">
+    <div class="list-board">
+        <div class="list-header-board">
+            Blabla
+        </div>
+
+        <div class="list-card-board card-board">
+                Invite your team to this board using the Add Members button
+        </div>
+        <div class="list-card-board card-board">
+                OKKKKKK
+        </div>
+
+        <div class="list-card-board addcard-board">
+                add a card
+        </div>
+    </div>
+
+    <div class="list-board">
+        <div class="list-header-board">
+            laaaaas
+        </div>
+
+        <div class="list-card-board card-board">
+                yaaaaaa
+        </div>
+        <div class="list-card-board card-board">
+                yaaaaaa
+        </div>
+
+        <div class="list-card-board addcard-board">
+                add a card
+        </div>
+    </div>
+
+    <div class="list-board">
+        <div class="list-card-board addlist-board">
+            add a list
+        </div>
+    </div>
+</div>
+
+
+
+<div class="panel panel-default rightpanels-board">
+    <div class="members-board">
+        <div class="members-header-board">
+            Members
+        </div>
+        <div class="members-content-group">
+            <ul class="list-group">
+              <li class="list-group-item">Sicheng Liu</li>
+              <li class="list-group-item">Guangzhe Gao</li>
+              <li class="list-group-item">Jackie</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="activity-board">
+        <div class="activity-header-board">
+            Activity
+        </div>
+        <div class="activity-list-board">
+            <div class="individual-activity-board">
+                <div class="user-activity-board">Guangzhe Gao</div>
+                <div class="activity-content-board">did not wash his hands.</div>
+                <div class="activity-time-board">March 20th 2015 </div>
+            </div>
+
+            <div class="individual-activity-board">
+                <div class="user-activity-board">Sicheng Liu</div>
+                <div class="activity-content-board">did not watch TV.</div>
+                <div class="activity-time-board">March 21th 2017 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- static card that is rendered and poped when card is clicked -->
+<div class="panel panel-info" id="card-details-board">
+    <div id='cross-mark-board'>X</div>
+
+    <div class="card-info-board"><div class="card-name-board">CardName</div> <div class="list-info-board">in list blabla</div>  </div>
+
+    <div class="card-leftpanel-board">
+        <div class="card-description-board"> Description:
+            <div class="card-description-content-board"> This task is blaaaaa............. </div>
+        </div>
+        <div class="card-activities-board">
+
+            <!-- comments in card -->
+            <div class="card-comment-board">
+                <div class="card-newcomment-board">
+                    <input placeholder="Write a comment..">
+                </div>
+            </div>
+
+            <!-- activities in card -->
+            <div class="card-past-activities-board">
+                <div class="card-past-activity-board">
+                    ssssssssssssssssssssss
+                </div>
+                <div class="card-past-activity-board">
+                    yyyyyyyyyyyyyyyyyyyyyyy
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-rightpanel-board">  </div>
+</div>
+<!-- /* for background dimming purpose on the pop up*/ -->
+<div id="background-fade-board"> </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script type='text/javascript'>
+    $(document).ready(function() {
+
+        /* click effects */
+        $(document.body).on("click", "div.addcard-board", function(){
+            $(this).before("<div class='cardcomposer-board'><textarea class='cardcomposer-board'></textarea>" +
+                    "<button class='btn btn-default cardcomposer-board'>Submit</button></div>");
+            $(this).remove(); /*remove add button*/
+        });
+
+        $(document.body).on("click", "div.addlist-board", function(){
+            $(this).before("<div class='listcomposer-board'><input class='listcomposer-board'>" +
+                    "<button class='btn btn-default listcomposer-board'>Submit</button></div>");
+            $(this).remove(); /*remove add button*/
+        });
+
+        /*  AJAX send*/
+        $(document.body).on("click", "button.cardcomposer-board", function(){ /* AJAX send card text */
+            var parentStore = $(this).parent();
+            var textToAdd = parentStore.text();
+            parentStore.before("<div class='list-card-board card-board'>" + $(this).prev().val() + "</div>"); /* user input text is in prev element*/
+            /* TODO: AJAX send here with list info(parent)*/
+            parentStore.before("<div class='list-card-board addcard-board'>add a card</div>"); /*put add card back*/
+            parentStore.remove();
+        });
+
+        $(document.body).on("click", "button.listcomposer-board", function(){ /* AJAX send list name */
+            var parentStore = $(this).parent();
+            var textToAdd = parentStore.text();
+            parentStore.before("<div class='list-header-board'>" + $(this).prev().val() + "</div>" +
+                    "<div class='list-card-board addcard-board'>add a card</div>");  /* user input text is in prev element*/
+            /* TODO: AJAX send here*/
+            parentStore.parent().after("<div class='list-board'><div class='list-card-board addlist-board'>add a list</div></div>"); /*put add list back*/
+            parentStore.remove();
+        });
+
+        /*AJAX get*/
+        /* pop up */
+        $(document.body).on("click", "div.card-board", function(e){ /* AJAX get detailed card info */
+            e.stopPropagation(); /* avoid the exit pop up listener */
+            $("div#card-details-board").html(
+                /* TODO: append AJAX in elements form get here*/
+            );
+            $("div#card-details-board").fadeIn(300);
+            $("div#background-fade-board").fadeIn(300);
+        });
+
+        /* exit pop up when click x or out side div*/
+        $(document.body).on("click", "div#cross-mark-board", function(){
+            $("div#card-details-board").fadeOut(300);
+            $("div#background-fade-board").fadeOut(300);
+        });
+
+        $(document).click(function(e) {
+            if (!(e.target.id === "card-details-board")) {
+                $("div#card-details-board").fadeOut(300);
+                $("div#background-fade-board").fadeOut(300);
+            }
+        });
+        /*
+        $.ajax({
+            type: "GET",
+            url:  link
+        })
+        .done(function(response) { //replace the body content to the file clicked
+            $("body").html(response);
+        })
+        .fail(function(xhr, textStatus, error) {
+           alert("fail: " + xhr.responseText + " !");
+           alert("fail: " +  textStatus + "  " + error + " !");
+        });
+        */
+    });
+</script>
+
+{% endblock javascript %}

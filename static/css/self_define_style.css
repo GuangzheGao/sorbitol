@@ -1,0 +1,220 @@
+
+/* gradual change background for log in page*/
+.gradual-background {
+    background-color: #e6e6e6;
+    -webkit-transition: background-color 1000ms linear;
+    -moz-transition: background-color 1000ms linear;
+    -o-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
+}
+
+div#welcome{
+    font-size: 50px;
+    text-align: center;
+}
+
+
+
+div.title-base{
+    position: absolute;
+    left: 50%;
+}
+
+/* not looking good now !!!!!! */
+div.searchbar-base{
+
+}
+
+
+
+div.activity-board {
+
+}
+
+div.activity-header-board{
+    display: block;
+    min-height: 20px;
+    margin-bottom: 6px;
+}
+
+div.activity-list-board {
+    position: relative;
+    z-index: 1;
+}
+
+div.addcard-board{
+    cursor: pointer;
+}
+
+div.addlist-board{
+    cursor: pointer;
+}
+
+/* for background dimming purpose on the pop up*/
+div#background-fade-board{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0,0,0,0.3); /* black semi-transparent */
+    z-index: 2000; /* on top of everything but the pop up, bootstrap navbar has very high z-index. */
+}
+
+div#card-details-board{
+    background-color:#FFFFFF;
+    border:1px solid #999999;
+    cursor:default;
+    display:none;
+    margin-top: 15px;
+    position:absolute;
+    left:40%;
+    text-align:left;
+    width:394px;
+    z-index:2500;
+    padding: 25px 25px 20px;
+}
+
+div#cross-mark-board{
+    color: rgba(99, 100, 86, 0.60);
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    position: absolute; /* top right relative to parent */
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+div.individual-activity-board {
+    background: #ffffff;
+    border-bottom: 1px solid #dcdcdc;
+    min-height: 30px;
+    padding: 8px 0 8px 38px;
+    position: relative;
+}
+
+div.leftpanels-board{
+    float: left;
+    overflow-x: auto; /* contains list board */
+}
+
+div.list-board{
+    background: #dbdbdb;
+    border-radius: 3px;
+    float: left;
+    margin: 0 5px;
+    padding: 4px 3px 3px;
+    position: relative;
+    width: 250px;
+    overflow-y: auto;
+}
+
+div.list-card-board{
+    margin: 5px 5px 5px 5px;
+    background: #ffffff;
+    padding: 6px 8px 4px;
+    position: relative;
+    z-index: 10; /* on top of things */
+    cursor: pointer;
+}
+
+div.rightpanels-board{
+    float: right;
+    background: #f0f0f0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    padding: 12px 6px 0 12px;
+    right: 0;
+    top: 0;
+}
+
+
+
+div.boards-group{
+    display: block; /* will be toggled by jquery dynamically */
+    width: 50%;
+    height: 10%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+div.members-group{
+    display: none; /* will be toggled by jquery dynamically */
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+/* group member */
+div.name-group{
+
+}
+
+/* group member authority */
+div.authority-group{
+    text-align: right;
+}
+
+
+
+/*draw boarder for board at index page*/
+div.board-index{
+    margin: 20px 20px 20px 20px;
+    border: 1px solid #8585AD;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    height: 150px;
+    line-height: 150px; /* allign vertically */
+    width: 350px;
+    text-align:center; /* allign horizontally */
+
+    cursor:pointer; /*cursor effect*/
+    background: #38e1ff; /* background color */
+}
+
+/*effect of group link at index page*/
+div.group-index{
+    cursor:pointer; /*cursor effect*/
+}
+
+
+
+
+/* sign in-up form rendering */
+div.form-login, div.form-signup{
+    position: relative;
+    height: 300px;
+    width: 500px;
+    left: 43%;
+    margin: 20px 20px 20px 20px;
+    border: 2px solid #a3ad99;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #23719f; /* background color */
+}
+
+div.innerform-login, div.innerform-signup{
+    margin: 20px 20px 20px 20px;
+    text-align:center; /* allign words horizontally */
+}
+
+/* input rendering  */
+div.input-login, div.input-signup{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
