@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import Column, Integer, String, TIMESTAMP
-from sqlalchemy.ext.declarative import declarative_base
 from utils.db import mysql_engine, mysql_session
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
-
-Base = declarative_base()
+from models.base import Base
 
 class User(Base):
     __tablename__ = 'users'
@@ -20,14 +18,14 @@ class User(Base):
     @classmethod
     def get(cls, user_id):
         '''warning: unsafe method, get user obj deirectly without checking password'''
-        user_id = int(user_id)
-        user = mysql_session.query(cls).filter_by(id = user_id).first()
+        user_id = long(user_id)
+        user = mysql_session.query(cls).filter_by(id=user_id).first()
         return user
 
     @classmethod
     def get_validate_user(cls, user_email, user_unsafe_password):
-        user = mysql_session.query(cls).filter_by(email = user_email).first()
-        user.id = int(user.id)
+        user = mysql_session.query(cls).filter_by(email=user_email).first()
+        user.id = long(user.id)
         
         if not user:
             return None
@@ -44,9 +42,9 @@ class User(Base):
     @classmethod
     def signup(cls, username, unsafe_password, user_email):
         safe_password = generate_password_hash(unsafe_password)
-        user = User(username = username,
-                    password = safe_password, 
-                    email = user_email)
+        user = User(username=username,
+                    password=safe_password, 
+                    email=user_email)
         try:
             mysql_session.add(user)
             mysql_session.commit()
@@ -66,12 +64,15 @@ class User(Base):
         return False
 
     def get_id(self):
-        return int(self.id)
+        return self.id
     
     def set_password(self, password):
         self.password = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+    
+    def get_groups(self):
+        return self.groups
 
 User.query = mysql_session.query(User)

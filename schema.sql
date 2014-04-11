@@ -45,8 +45,8 @@ CREATE TABLE `lists` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `group_members`;
-CREATE TABLE `group_members` (
+DROP TABLE IF EXISTS `group_member`;
+CREATE TABLE `group_member` (
   `group_id` int(12) NOT NULL,
   `member_id` int(12) NOT NULL,
   PRIMARY KEY (`group_id`, `member_id`),
@@ -54,8 +54,8 @@ CREATE TABLE `group_members` (
   KEY `idx_member_id` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `card_members`;
-CREATE TABLE `card_members` (
+DROP TABLE IF EXISTS `card_member`;
+CREATE TABLE `card_member` (
   `card_id` int(12) NOT NULL,
   `member_id` int(12) NOT NULL,
   PRIMARY KEY (`card_id`, `member_id`),
@@ -63,8 +63,8 @@ CREATE TABLE `card_members` (
   KEY `idx_member_id` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `card_labels`;
-CREATE TABLE `card_labels` (
+DROP TABLE IF EXISTS `card_label`;
+CREATE TABLE `card_label` (
   `card_id` int(12) NOT NULL,
   `label_id` int(12) NOT NULL,
   `label_name` varchar(512) NOT NULL,
