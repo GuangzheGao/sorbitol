@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="welcome">
+    Group Name
+</div>
+
+<div>
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active panel-group"><a href="#">Boards</a></li>
+        <li class="panel-group"><a href="#">Members</a></li>
+    </ul>
+</div>
+
+
+<div class="boards-group">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3 board-index">
+            Sample Board
+        </div>
+        <div class="col-md-3 col-md-offset-1 board-index">
+          <!--Body content-->
+            Sample Board
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3 board-index">
+            Sample Board
+        </div>
+        <div class="col-md-3 col-md-offset-1 board-index">
+          <!--Body content-->
+            Sample Board
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="members-group">
+    <ul class="list-group">
+      <li class="list-group-item"><div class="name-group">Sicheng Liu</div>  <div class="authority-group"> Admin </div></li>
+      <li class="list-group-item"><div class="name-group">Guangzhe Gao</div> <div class="authority-group"> Normal </div></li>
+      <li class="list-group-item"><div class="name-group">Jackie</div> <div class="authority-group"> Normal </div></li>
+    </ul>
+</div>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script type='text/javascript'>
+    $(document).ready(function() {
+        $(document.body).on({
+            mouseenter: function () {
+                $(this).css("background", "#46adff");
+            },
+            mouseleave: function () {
+                $(this).css("background", "#38e1ff");
+            }
+        }, "div.board-index");
+
+        $("li.panel-group").click(function(event){
+            if(!$(this).hasClass("active")){ /* inactive */
+                if ($(this).next().length == 0) { /* wrap around*/
+                    $(this).addClass("active").siblings(":nth-child(1)").removeClass("active");
+                }
+                else {
+                    $(this).addClass("active").next().removeClass("active"); /* change immediate sibling (we only have 2) */
+                }
+                show_and_hide($(this).text());
+            }
+        });
+
+        function show_and_hide(panel_click){
+            if(panel_click == "Boards"){
+                $("div.members-group").css("display", "none");
+                $("div.boards-group").css("display", "block");
+            }
+            else{ /* Members */
+                $("div.boards-group").css("display", "none");
+                $("div.members-group").css("display", "block");
+            }
+        }
+    });
+</script>
+
+{% endblock javascript %}

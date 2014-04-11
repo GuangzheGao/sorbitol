@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row group-index">
+    Group Name
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 board-index">
+        Sample Board
+    </div>
+    <div class="col-md-3 col-md-offset-1 board-index">
+      <!--Body content-->
+        Sample Board
+    </div>
+  </div>
+
+  <div class="row group-index">
+    Group Name
+  </div>
+  <div class="row">
+    <div class="col-md-3 board-index">
+        Sample Board
+    </div>
+    <div class="col-md-3 col-md-offset-1 board-index">
+      <!--Body content-->
+        Sample Board
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script type='text/javascript'>
+    $(document).ready(function() {
+        /* background effect */
+        $(document.body).on({
+            mouseenter: function () {
+                $(this).css("background", "#23719f");
+            },
+            mouseleave: function () {
+                $(this).css("background", "#38e1ff");
+            }
+        }, "div.board-index");
+
+        /* linkage */
+        $(document.body).on("click", "div.group-index", function(event){
+            window.location.href = "/group/" + $(this).text();
+        });
+
+        $(document.body).on("click", "div.board-index", function(event){
+            window.location.href = "/b/" + $(this).text();
+        });
+
+    });
+</script>
+{% endblock %}
