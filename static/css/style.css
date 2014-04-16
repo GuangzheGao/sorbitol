@@ -358,5 +358,29 @@ div.input-login, div.input-signup{
 
 .board-group-list > li > a{
     text-decoration:none;
+}
 
-}    
+.sign-panel {
+    background-color: #f0f0f0;
+    border: 1px solid #bfbfbf;
+    padding: 10px; 
+    width: 550px;
+    margin: auto;
+    margin-top: 55px;
+}
+
+.sign-panel-title {
+    font-size: 18px;
+    line-height: 1.2em;
+    color: #393939;
+    font-weight: bold;
+}
+
+.sign-form-group {
+    padding-bottom: 5px;
+}
+
+.sign-form-error {
+    color: #eb3800;
+    padding-bottom: 3px;
+}

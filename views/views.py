@@ -19,7 +19,6 @@ def render_login():
     return render_template('login.html', form = form)
 
 @main_app.route('/logout')
-@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -42,48 +41,50 @@ def render_signup():
                 form.username.errors.append('Username is already in use.')
             if email_exist:
                 form.email.errors.append('Email is already in use.')
-            if user_exist or email_exist:
+            if username_exist or email_exist:
                 # any of them exist, redraw signup page
                 return render_template('signup.html', form = form)
+            else:
+                # add new user to database, redirect to login
+                user_id = User.signup(form.username.data,
+                                      form.password.data,
+                                      form.email.data)
+                return redirect(url_for('.render_login'), code=303)
         else:
-            # add new user to database, redirect to login
-            print "username", form.username.data
-            print "password", form.password.data
-            print "email", form.email.data
-            user_id = User.signup(form.username.data,
-                                  form.password.data,
-                                  form.email.data)
-            return redirect(url_for('.render_login'), code=303)
-    else:
-        # if the form is not valid, redraw signup page
-        return render_template('signup.html', form = form)
-
+            # if the form is not valid, redraw signup page
+            return render_template('signup.html', form = form)
+    
     return render_template('signup.html', form = SignupForm())
 
 @main_app.route('/group')
+@login_required
 def render_groups():
     '''page listing groups for a user'''
-    return render_template('groups.html')
+    return render_template('groups.html', user = current_user)
 
 @main_app.route('/group/<path:group_id>')
+@login_required
 def render_singe_group(group_id = None):
     '''page for one single group'''
-    return render_template('single_group.html')
+    return render_template('single_group.html', user = current_user)
 
 @main_app.route('/group/<path:group_id>/members')
+@login_required
 def render_group_members(group_id = None):
     '''page for all members in a group'''
-    return render_template('group_members.html')
+    return render_template('group_members.html', user = current_user)
 
 @main_app.route('/user/<path:user_id>')
+@login_required
 def render_user(user_id = None):
     '''user page'''
-    return render_template('group_members.html')
+    return render_template('group_members.html', user = current_user)
 
 @main_app.route('/b/<path:board_id>')
+@login_required
 def render_board(board_id = None):
     '''board page'''
-    return render_template('board.html')
+    return render_template('board.html', user = current_user)
 
 @main_app.route('/l/<path:list_id>')
 def api_list(list_id = None):

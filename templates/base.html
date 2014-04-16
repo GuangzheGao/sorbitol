@@ -65,15 +65,15 @@
       </div> 
       <div class="js-open-header-menu header-user-user">
         <a id="user-menu" type="button" data-toggle="dropdown" class="btn btn-header btn-default btn-sm header-btn header-member js-open-header-member-menu header-btn-text" data-target="#">
-            {current_user.name}
+            {{user.username}}
         </a>
         <ul aria-labelledby="user-menu" class="header-dropdown-menu dropdown-menu" role="menu">
-          <li class="board-menu-title">{current_user.username}</li>
+          <li class="board-menu-title">{{user.username}}</li>
           <!-- for board in boards -->
           <a class="list-group-item head-dropdown-menu-heading" href="#">Profile</a>
           <a class="list-group-item head-dropdown-menu-heading" href="#">Cards</a>
           <a class="list-group-item head-dropdown-menu-heading" href="#">Settings</a>
-          <a class="list-group-item head-dropdown-menu-heading" href="#">Logout</a>       
+          <a class="list-group-item head-dropdown-menu-heading" href="/logout">Logout</a>       
           <!--end for-->
         </ul>
       </div>

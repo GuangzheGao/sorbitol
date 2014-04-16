@@ -1,35 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<div id="welcome">Sign up</div>
-
-    <form class="col-md-10" method="POST" action="/signup" role="form">
+<div class="container-fluid">
+  <div class="sign-panel panel panel-default">
+    <div class="panel-body">
+ 
+      <form class="col-md-10" method="POST" action="/signup" role="form">
         {{ form.csrf_token }}
-        {% for error in form.email.errors %}
-            <div class="alert alert-danger">{{ error }}</div>
-        {% endfor %}
-        {% for error in form.password.errors %}
-            <div class="alert alert-danger">{{ error }}</div>
-        {% endfor %}
-
-        <div class="login-form-group">
-                {{ form.email(class="form-control", placeholder="Email") }}
+        <div class="sign-panel-title">Create an Account</div> 
+        {{form.email.label}}
+        <div class="sign-form-group">
+          {{ form.email(class="form-control", placeholder="Email") }}
         </div>
-
-        <div class="login-form-group">
-                {{ form.username(class="form-control", placeholder="Username") }}
+        <div class="sign-form-error">{{form.email.errors | first}}</div>
+        {{form.username.label}}
+        <div class="sign-form-group">
+          {{ form.username(class="form-control", placeholder="Username") }}
         </div>
-        <div class="login-form-group">
-                {{form.label}}{{ form.password(class="form-control",  placeholder="Password") }}
+        <div class="sign-form-error">{{form.username.errors | first}}</div>
+        {{form.password.label}}
+        <div class="sign-form-group">
+          {{form.label}}{{ form.password(class="form-control",  placeholder="Password") }}
         </div>
-        <div class="login-form-group">
-            <div class="">
-                <button type="submit" class="btn btn-default">Sign Up</button>
-            </div>
+        <div class="sign-form-error">{{form.password.errors | first}}</div>
+        <div class="">
+          <button type="submit" class="btn btn-success">Create New Account</button>
         </div>
-    </form>
-
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block javascript %}

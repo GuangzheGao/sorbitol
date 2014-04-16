@@ -6,8 +6,8 @@ from wtforms.validators import Email, DataRequired, Length
 from models.user import User
 
 class LoginForm(Form):
-    email = TextField('email', [Email(), DataRequired(), Length(min=6, max=120)])
-    password = PasswordField('password', [DataRequired(), Length(min=6, max=20)])
+    email = TextField('Email', [Email(), DataRequired(), Length(min=6, max=20)])
+    password = PasswordField('Password', [DataRequired(), Length(min=6, max=20)])
 
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
