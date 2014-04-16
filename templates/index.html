@@ -1,60 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-
 <div class="container-fluid">
-  <div class="row group-index">
-    Group Name
-  </div>
+  <!-- for group in groups -->
+  <div class="board-group-widget">
+    <div class="board-group-title">
+       <h3><span class="glyphicon glyphicon-user"></span> {group.name}</h3>
+    </div>
+    <ul class="board-group-list">
+      <!-- for board in boards-->
+      <li>
+        <a href="#">
+        <div class="board-detail-panel panel panel-default active">
+          
+            <div class="panel-body">
+              {board.name}
+            </div>
 
-  <div class="row">
-    <div class="col-md-3 board-index">
-        Sample Board
-    </div>
-    <div class="col-md-3 col-md-offset-1 board-index">
-      <!--Body content-->
-        Sample Board
-    </div>
+        </div>
+        </a>
+      </li>
+      <li>
+        <div class="board-detail-panel panel panel-default active">
+          <div class="panel-body">
+          {board.name}
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="board-detail-panel panel panel-default active">
+          <div class="panel-body">
+          {board.name}
+          </div>
+        </div>
+      </li>
+      <!-- end for board -->
+    </ul>
   </div>
-
-  <div class="row group-index">
-    Group Name
-  </div>
-  <div class="row">
-    <div class="col-md-3 board-index">
-        Sample Board
-    </div>
-    <div class="col-md-3 col-md-offset-1 board-index">
-      <!--Body content-->
-        Sample Board
-    </div>
-  </div>
+  <!-- end for group -->
 </div>
-
-{% endblock %}
-
-{% block javascript %}
-<script type='text/javascript'>
-    $(document).ready(function() {
-        /* background effect */
-        $(document.body).on({
-            mouseenter: function () {
-                $(this).css("background", "#46adff");
-            },
-            mouseleave: function () {
-                $(this).css("background", "#38e1ff");
-            }
-        }, "div.board-index");
-
-        /* group and board linkage */
-        $(document.body).on("click", "div.group-index", function(event){
-            window.location.href = "/group/" + $(this).text();
-        });
-
-        $(document.body).on("click", "div.board-index", function(event){
-            window.location.href = "/b/" + $(this).text();
-        });
-
-    });
-</script>
 {% endblock %}
