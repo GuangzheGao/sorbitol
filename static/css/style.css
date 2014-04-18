@@ -40,7 +40,6 @@ div.activity-header-board{
 
 div.activity-list-board {
     position: relative;
-    z-index: 1;
 }
 
 div.addcard-board{
@@ -51,31 +50,6 @@ div.addlist-board{
     cursor: pointer;
 }
 
-/* for background dimming purpose on the pop up*/
-div#background-fade-board{
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    background-color: rgba(0,0,0,0.3); /* black semi-transparent */
-    z-index: 2000; /* on top of everything but the pop up, bootstrap navbar has very high z-index. */
-}
-
-div#card-details-board{
-    background-color:#FFFFFF;
-    border:1px solid #999999;
-    cursor:default;
-    display:none;
-    margin-top: 15px;
-    position:absolute;
-    left:40%;
-    text-align:left;
-    width:394px;
-    z-index:2500;
-    padding: 25px 25px 20px;
-}
 
 div#cross-mark-board{
     color: rgba(99, 100, 86, 0.60);
@@ -105,7 +79,7 @@ div.leftpanels-board{
     overflow-x: auto; /* contains list board */
 }
 
-div.list-board{
+.list-board{
     background: #dbdbdb;
     border-radius: 3px;
     float: left;
@@ -121,7 +95,6 @@ div.list-card-board{
     background: #ffffff;
     padding: 6px 8px 4px;
     position: relative;
-    z-index: 10; /* on top of things */
     cursor: pointer;
 }
 
@@ -138,6 +111,8 @@ div.rightpanels-board{
     padding: 12px 6px 0 12px;
     right: 0;
     top: 0;
+    height: 100%;
+    z-index: 20;
 }
 
 
@@ -300,6 +275,7 @@ div.input-login, div.input-signup{
     background: linear-gradient(to bottom, #27709b 0, #24688f 100%);
     min-height: 40px;
     height: 40px;
+    border-width: 0px;
 }
 
 .btn-header {
@@ -383,4 +359,180 @@ div.input-login, div.input-signup{
 .sign-form-error {
     color: #eb3800;
     padding-bottom: 3px;
+}
+
+.board-container {
+    background-color: rgb(35, 113, 159);
+}
+
+.board-header-name > a{
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 30px;
+    color: #f6f6f6;
+    text-decoration:none;
+}
+
+.rename-board-menu-title {
+    font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+    text-align: center;
+    color: #939393;
+    font-weight: bold;
+    line-height: 21px;
+}
+
+.menu-form {
+    float:left;
+    padding-left: 5px;
+}
+
+.dropdown-menu-form {
+    width: 270px;
+    padding: 8px;
+}
+.dropdown-menu-form > label {
+    display: block;
+    text-align: left;
+}
+
+.dropdown-menu-form > input[type="text"] {
+    display: block;
+    width: 100%;
+    float:left;
+    background-color: #e9e9e9;
+    border: 1px solid #bfbfbf;
+    border-radius: 3px;
+    min-height: 30px;
+}
+.dropdown-menu-form > input[type="submit"] {
+    display: block;
+    float:left;
+    margin-top: 20px;
+}
+
+.side-bar-show-btn {
+    float:right;
+}
+
+
+.side-bar-show-btn > a{
+    margin-top: 8px;
+    color: #f6f6f6;
+}
+
+.side-bar-show-btn > a:hover{
+    margin-right: 8px;
+    color: #f6f6f6;
+}
+
+.side-bar {
+    width: 246px;
+    float: right;
+    position: absolute;
+    left: -9999px;
+    background: #e9e9e9;
+    margin-top: 40px;
+}
+
+.list-header-board {
+    font-size: 15px;
+    line-height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    font-weight: bold;
+    padding: 3px 26px 2px 6px;
+}
+
+.list-card {
+    border-bottom: 1px solid #bdbdbd;
+    border-radius: 3px;
+}
+
+.list-card:hover {
+    background-color: #f2f2f2;
+}
+
+
+.list-card a {
+    color: #393939;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.list-card-hover {
+    display: block;
+    font-weight: normal;
+    margin: 3px 5px 2px;
+    overflow: hidden;
+    text-decoration: none;
+    word-wrap: break-word;
+}
+
+.list-card-badget {
+    float: left;
+    margin:3px 3px 0px 3px;
+    color: #b3b3b3;
+}
+
+.list-card-members {
+    float: right;
+}
+
+.list-cards-add {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    color: #939393;
+    margin: -4px -3px -3px;
+    padding: 5px 8px 5px;
+}
+
+
+.list-cards-add:hover{
+    background: #c3c3c3;
+    color: #222;
+    text-decoration: underline;
+}
+
+.list-cards-add-textarea {
+    width: 100%;
+}
+
+.list-cards-add-form-control a{
+    float:left;
+    padding: 3px;
+}
+
+.list-cards-add-form-control input[type="submit"]{
+    float:left;
+}
+
+.board-container{
+    margin-top: 40px;
+    background-color: rgb(35, 113, 159);
+    overflow-x: scroll;
+}
+
+.float-header {
+    top:40px;
+    position:absolute;
+    width: 100%
+}
+
+.float-header > .right{
+    float: right;
+}
+
+.float-header > .left{
+    float: left;
+}
+
+.trans-btn {
+    padding: 6px 8px 4px;
+    background: rgba(0,0,0,0.12);
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
 }

@@ -16,7 +16,7 @@ def render_login():
             login_user(form.user)
             return redirect(url_for('index'))
 
-    return render_template('login.html', form = form)
+    return render_template('login.html', form = form, user = None)
 
 @main_app.route('/logout')
 def logout():

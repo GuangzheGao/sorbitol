@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	// Navbar menu JS
+
 	$('.js-open-header-menu').on('show.bs.dropdown', function () {
 		var overhead = $(document).width(); 
 		/* fix the 1px off bug */
@@ -37,17 +38,91 @@ $(document).ready(function(){
 		$('.add-group-detail').hide()
 	})
 
+	var width = $(window).width(); 
+	var height = $(window).height();
+	var show_side_bar = false;
+	var list_count = $('.list-board').length
+	var lastScrollLeft = 0;
+	$('.js-auto-resize-to-full-window').css({
+		width:width,
+		height:height
+	})
+
+	$('.side-bar').css({
+		left: width
+	})
+
+	$('.js-resize-overflow').css({
+		width: 270*list_count,
+	})
+	$('.side-bar').hide()
+	$('.js-show-side-bar').click(function(e){
+		console.log("clicked")
+		show_side_bar = true
+		$('.side-bar').show()
+		$('.side-bar').animate({
+			left:"-=246px"
+		}, 200)
+	})
+
+	$('.js-close-side-bar').click(function(e){
+		console.log("clicked")
+		show_side_bar = false
+		$('.side-bar').animate({
+			left:"+=246px"
+		}, 200)
+		$('.side-bar').hide()
+	})
+
+	$('.js-list-cards-add').on("click", function(e){
+		var div_list_cards = $(this).parent().parent()
+		$('.list-cards-add-form').hide()
+		$('.js-list-cards-add').show()
+		div_list_cards.find('.list-cards-add-form').show()
+		div_list_cards.find('.js-list-cards-add').hide()
+	})
+
+	$('.list-cards-add-form').hide()
+	$('.list-cards-add-form .close').click(function(e){
+		console.log("clicked")
+		$('.list-cards-add-form').hide()
+		$('.js-list-cards-add').show()
+	})
 	// Responsive Boards JS
 	function resizeBoardPanel(e) {
-		var width = $(window).width(); 
-		console.log(width)
-		console.log($('.container-fluid').width())
-		if (width < 750) {
-			console.log($('.board-group-list'))
+		var new_width = $(window).width(); 
+		var new_height = $(window).height();
+		if (new_width < 750) {
 			$('.board-group-list').children().width('75%')
 		} else {
 			$('.board-group-list').children().width('0%')
 		}
+
+		$('.js-auto-resize-to-full-window').css({
+			width:new_width,
+			height:new_height
+		})
+		if (show_side_bar) {
+			$('.side-bar').css({
+				left:new_width-246
+			})
+		}else{
+			$('.side-bar').css({
+				left:new_width
+			})
+		}
+		
 	}
 	$(window).on("resize", resizeBoardPanel);
+	$('.list-list-add-form').hide()
+	$('.js-add-new-list').click(function(e){
+		console.log("clicked")
+		$(this).hide()
+		$('.list-list-add-form').show()
+	})
+	$('.list-cards-add-form-control.close').click(function(e){
+		console.log("clicked")
+		$('.js-add-new-list').show()
+		$('.list-list-add-form').hide()
+	})
 })

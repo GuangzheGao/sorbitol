@@ -1,200 +1,262 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="float-header">
+  <div class="board-header-name dropdown btn left">
+    <a data-toggle="dropdown" data-target="#" id="rename-board">
+      {board.name}
+    </a>
+    <ul aria-labelledby="rename-board" class="rename-board-menu dropdown-menu" role="menu">
+      <li class="rename-board-menu-title">  Rename Board
+      </li>
+      <form class="dropdown-menu-form">
+        <label class="menu-form menu-form-label">Name</label>
+        <input id="boardNewTitle" type="text" name="name" class="js-stop-propagation" placeholder="{board.name}">
+        <input type="submit" class="btn btn-success" value="Rename">
+      </form>
+    </ul>
+  </div>
+  <div class="side-bar-show-btn right">
+    <a href="#" class="js-show-side-bar btn"><span class="glyphicon glyphicon-chevron-left"></span> Show Sidebar
+    </a>
+  </div>
 
-<div id="welcome" class="groupname-board">Team Name</div>
-
-<div class="panel panel-default leftpanels-board">
-    <div class="list-board">
-        <div class="list-header-board">
-            Blabla
-        </div>
-
-        <div class="list-card-board card-board">
-                Invite your team to this board using the Add Members button
-        </div>
-        <div class="list-card-board card-board">
-                OKKKKKK
-        </div>
-
-        <div class="list-card-board addcard-board">
-                add a card
-        </div>
-    </div>
-
-    <div class="list-board">
-        <div class="list-header-board">
-            laaaaas
-        </div>
-
-        <div class="list-card-board card-board">
-                yaaaaaa
-        </div>
-        <div class="list-card-board card-board">
-                yaaaaaa
-        </div>
-
-        <div class="list-card-board addcard-board">
-                add a card
-        </div>
-    </div>
-
-    <div class="list-board">
-        <div class="list-card-board addlist-board">
-            add a list
-        </div>
-    </div>
 </div>
-
-
-
-<div class="panel panel-default rightpanels-board">
+<div class="side-bar panel panel-default rightpanels-board">
     <div class="members-board">
-        <div class="members-header-board">
-            Members
-        </div>
-        <div class="members-content-group">
-            <ul class="list-group">
-              <li class="list-group-item">Sicheng Liu</li>
-              <li class="list-group-item">Guangzhe Gao</li>
-              <li class="list-group-item">Jackie</li>
-            </ul>
-        </div>
+      <div class="members-header-board">
+          Members 
+          <a href="#" class="js-close-side-bar" style="color:#a9a9a9"><span class="glyphicon glyphicon-remove" style="float:right;"></span></a>
+      </div>
+      <div class="members-content-group">
+        <ul class="list-group">
+          <li class="list-group-item">Sicheng Liu</li>
+          <li class="list-group-item">Guangzhe Gao</li>
+          <li class="list-group-item">Jackie</li>
+        </ul>
+      </div>
     </div>
-
     <div class="activity-board">
-        <div class="activity-header-board">
-            Activity
+      <div class="activity-header-board">
+        Activity
+      </div>
+      <div class="activity-list-board">
+        <div class="individual-activity-board">
+          <div class="user-activity-board">Guangzhe Gao</div>
+          <div class="activity-content-board">did not wash his hands.</div>
+          <div class="activity-time-board">March 20th 2015 </div>
         </div>
-        <div class="activity-list-board">
-            <div class="individual-activity-board">
-                <div class="user-activity-board">Guangzhe Gao</div>
-                <div class="activity-content-board">did not wash his hands.</div>
-                <div class="activity-time-board">March 20th 2015 </div>
-            </div>
 
-            <div class="individual-activity-board">
-                <div class="user-activity-board">Sicheng Liu</div>
-                <div class="activity-content-board">did not watch TV.</div>
-                <div class="activity-time-board">March 21th 2017 </div>
-            </div>
+        <div class="individual-activity-board">
+          <div class="user-activity-board">Sicheng Liu</div>
+          <div class="activity-content-board">did not watch TV.</div>
+          <div class="activity-time-board">March 21th 2017 </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+<div class="board-container js-auto-resize-to-full-window container-fluid">
+  <div class="js-resize-overflow">
+    <!-- To Do List -->
 
-<!-- static card that is rendered and poped when card is clicked -->
-<div class="panel panel-info" id="card-details-board">
-    <div id='cross-mark-board'>X</div>
-
-    <div class="card-info-board"><div class="card-name-board">CardName</div> <div class="list-info-board">in list blabla</div>  </div>
-
-    <div class="card-leftpanel-board">
-        <div class="card-description-board"> Description:
-            <div class="card-description-content-board"> This task is blaaaaa............. </div>
-        </div>
-        <div class="card-activities-board">
-
-            <!-- comments in card -->
-            <div class="card-comment-board">
-                <div class="card-newcomment-board">
-                    <input placeholder="Write a comment..">
-                </div>
+    <div class="list-board">
+      <div class="list-header-board">
+        To Do
+      </div>
+      <div class="list-cards">
+        <div class="list-card panel">
+          <a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{card.title}</div>
+            <div class="list-card-badgets">
+              <div class="list-card-badget list-card-badgets-comments">
+                <span class="glyphicon glyphicon-comment"></span> 0
+              </div>
+              <div class="list-card-badget list-card-badgets-attachments">
+                <span class="glyphicon glyphicon-paperclip"></span> 0
+              </div>  
             </div>
 
-            <!-- activities in card -->
-            <div class="card-past-activities-board">
-                <div class="card-past-activity-board">
-                    ssssssssssssssssssssss
-                </div>
-                <div class="card-past-activity-board">
-                    yyyyyyyyyyyyyyyyyyyyyyy
-                </div>
+            <div class="list-card-members">
+              <!--for member in card.members-->
+              <div class="list-card-member">
+                {member.name}
+              </div> 
+              <!--end for-->
             </div>
+          </a> 
+          <!-- Modal -->
+          <div id="card-modal-0" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title" id="myModalLabel">Modal Heading</h4>
+                </div>
+                <div class="modal-body">
+                  <h4>Text in a modal</h4>
+                  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+                  <h4>Popover in a modal</h4>
+                  <p>This <a href="#" role="button" class="btn btn-default popover-test" title="" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on click.</p>
+                  <h4>Tooltips in a modal</h4>
+                  <p><a href="#" class="tooltip-test" title="" data-original-title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
+                  <h4>Overflowing text to show scroll behavior</h4>
+                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        </div><!-- /.list-card panel -->
+        <div  class="js-list-cards-add">
+          <a href="#">
+            <div class="list-cards-add">
+              Add a card...
+            </div>
+          </a>
         </div>
+        <div class="list-cards-add-form">
+          <form name='create_card'>
+            <textarea name='card-title' class="list-cards-add-textarea"></textarea>
+            <div class="list-cards-add-form-control">
+              <input type="submit" class="btn btn-success" value="Add" />
+              <a class="close"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+          </form>    
+        </div> 
+      </div>
     </div>
+    <!-- End To Do List -->
 
-    <div class="card-rightpanel-board">  </div>
+    <!-- Doing -->
+    <div class="list-board">
+      <div class="list-header-board">
+        Doing
+      </div>
+      <div class="list-cards">
+        <div class="list-card panel">
+          <a class="list-card-hover"><a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{card.title}</div>
+            <div class="list-card-badgets">
+              <div class="list-card-badget list-card-badgets-comments">
+                <span class="glyphicon glyphicon-comment"></span> 0
+              </div>
+              <div class="list-card-badget list-card-badgets-attachments">
+                <span class="glyphicon glyphicon-paperclip"></span> 0
+              </div>  
+            </div>
+
+            <div class="list-card-members">
+              <!--for member in card.members-->
+              <div class="list-card-member">
+                {member.name}
+              </div> 
+              <!--end for-->
+            </div>
+          </a> 
+        </div>
+        <div  class="js-list-cards-add">
+          <a href="#">
+            <div class="list-cards-add">
+              Add a card...
+            </div>
+          </a>
+        </div>
+        <div class="list-cards-add-form">
+          <form name='create_card'>
+            <textarea name='card-title' class="list-cards-add-textarea"></textarea>
+            <div class="list-cards-add-form-control">
+              <input type="submit" class="btn btn-success" value="Add" />
+              <a class="close"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+          </form>    
+        </div>    
+      </div>
+    </div>
+    <!-- End To Do List -->
+
+    <div class="add-new-list">
+      <a class="js-add-new-list" href="#"><div class="list-board trans-btn">Add a list...</div></a>
+      <div class="list-board list-list-add-form">
+        <form name='create_list'>
+          <textarea name='list-title' class="list-cards-add-textarea"></textarea>
+          <div class="list-cards-add-form-control">
+            <input type="submit" class="btn btn-success" value="Add" />
+            <a class="list-cards-add-form-control close"><span class="glyphicon glyphicon-remove"></span></a>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
 </div>
-<!-- /* for background dimming purpose on the pop up*/ -->
-<div id="background-fade-board"> </div>
-
 {% endblock %}
-
 {% block javascript %}
-
 <script type='text/javascript'>
-    $(document).ready(function() {
+  //async post thread
+$(document).ready(function(){
+  $("form[name='create_card']").submit(function(e){
+    e.preventDefault();
+    var title = $(this).find("textarea[name='card-title']").val();
+    var div_list_cards = $(this).parent().parent()
+    console.log(title)
+    if($('div[name=server-error]').length > 0){
+      $('div[name=server-error]').remove()
+    }
+    $.ajax({
+      type: "POST",
+      url: '/c',
+      data: {title: title, user_id: {{ user.id }}},
+      success: function(result) {
+        $(this).find("textarea[name='card_title']").val('');
+        div_list_cards.find('.list-cards-add-form').hide()
+        var card_div = $('<div class="list-card panel"><a class="list-card-hover"><a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{card.title}</div><div class="list-card-badgets"><div class="list-card-badget list-card-badgets-comments"><span class="glyphicon glyphicon-comment"></span> 0</div><div class="list-card-badget list-card-badgets-attachments"><span class="glyphicon glyphicon-paperclip"></span> 0</div></div><div class="list-card-members"><div class="list-card-member">{member.name}</div></div></a></div>')
+        div_list_cards.find('.js-list-cards-add').before(card_div);
+        div_list_cards.find('.js-list-cards-add').show()
+        card_div.find('.list-card-title').html(title);
 
-        /* click effects */
-        $(document.body).on("click", "div.addcard-board", function(){
-            $(this).before("<div class='cardcomposer-board'><textarea class='cardcomposer-board'></textarea>" +
-                    "<button class='btn btn-default cardcomposer-board'>Submit</button></div>");
-            $(this).remove(); /*remove add button*/
-        });
+      },
+      error: function(msg) {
+        var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
+        $('div[name="comment-panel"]').append(msg_div);
+      } 
+    })
+  });
+  $("form[name='create_list']").submit(function(e){
+      e.preventDefault();
+      var title = $(this).find("textarea[name='list-title']").val();
+      var div_lists = $(document).find('.add-new-list')
+      if($('div[name=server-error]').length > 0){
+        $('div[name=server-error]').remove()
+      }
+      $.ajax({
+        type: "POST",
+        url: '/l',
+        data: {title: title, user_id: {{ user.id }}},
+        success: function(result) {
+          $(this).find("textarea[name='list_title']").val('');
+          var list_div = $('<div class="list-board"><div class="list-header-board"></div><div class="list-cards"></div><div class="js-list-cards-add"><a href="#"><div class="list-cards-add">Add a card...</div></a></div><div class="list-cards-add-form"><form name="create_card"> <textarea name="card-title" class="list-cards-add-textarea"></textarea><div class="list-cards-add-form-control"><input type="submit" class="btn btn-success" value="Add" /><a class="close"><span class="glyphicon glyphicon-remove"></span></a></div></form></div></div>')
+          div_lists.before(list_div);
+          list_div.find('.list-cards-add-form').hide()
+          list_div.find('.list-header-board').html(title);
+          div_lists.find('.list-list-add-form').hide()
+          div_lists.find('.js-add-new-list').show()
 
-        $(document.body).on("click", "div.addlist-board", function(){
-            $(this).before("<div class='listcomposer-board'><input class='listcomposer-board'>" +
-                    "<button class='btn btn-default listcomposer-board'>Submit</button></div>");
-            $(this).remove(); /*remove add button*/
-        });
-
-        /*  AJAX send*/
-        $(document.body).on("click", "button.cardcomposer-board", function(){ /* AJAX send card text */
-            var parentStore = $(this).parent();
-            var textToAdd = parentStore.text();
-            parentStore.before("<div class='list-card-board card-board'>" + $(this).prev().val() + "</div>"); /* user input text is in prev element*/
-            /* TODO: AJAX send here with list info(parent)*/
-            parentStore.before("<div class='list-card-board addcard-board'>add a card</div>"); /*put add card back*/
-            parentStore.remove();
-        });
-
-        $(document.body).on("click", "button.listcomposer-board", function(){ /* AJAX send list name */
-            var parentStore = $(this).parent();
-            var textToAdd = parentStore.text();
-            parentStore.before("<div class='list-header-board'>" + $(this).prev().val() + "</div>" +
-                    "<div class='list-card-board addcard-board'>add a card</div>");  /* user input text is in prev element*/
-            /* TODO: AJAX send here*/
-            parentStore.parent().after("<div class='list-board'><div class='list-card-board addlist-board'>add a list</div></div>"); /*put add list back*/
-            parentStore.remove();
-        });
-
-        /*AJAX get*/
-        /* pop up */
-        $(document.body).on("click", "div.card-board", function(e){ /* AJAX get detailed card info */
-            e.stopPropagation(); /* avoid the exit pop up listener */
-            $("div#card-details-board").html(
-                /* TODO: append AJAX in elements form get here*/
-            );
-            $("div#card-details-board").fadeIn(300);
-            $("div#background-fade-board").fadeIn(300);
-        });
-
-        /* exit pop up when click x or out side div*/
-        $(document.body).on("click", "div#cross-mark-board", function(){
-            $("div#card-details-board").fadeOut(300);
-            $("div#background-fade-board").fadeOut(300);
-        });
-
-        $(document).click(function(e) {
-            if (!(e.target.id === "card-details-board")) {
-                $("div#card-details-board").fadeOut(300);
-                $("div#background-fade-board").fadeOut(300);
-            }
-        });
-        /*
-        $.ajax({
-            type: "GET",
-            url:  link
-        })
-        .done(function(response) { //replace the body content to the file clicked
-            $("body").html(response);
-        })
-        .fail(function(xhr, textStatus, error) {
-           alert("fail: " + xhr.responseText + " !");
-           alert("fail: " +  textStatus + "  " + error + " !");
-        });
-        */
-    });
+          list_div.find('.js-list-cards-add').on("click", '>a', function(e){
+            var div_list_cards = $(this).parent().parent()
+            $('.list-cards-add-form').hide()
+            $('.js-list-cards-add').show()
+            div_list_cards.find('.list-cards-add-form').show()
+            div_list_cards.find('.js-list-cards-add').hide()
+          })
+        },
+        error: function(msg) {
+          var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
+          $('div[name="comment-panel"]').append(msg_div);
+        }
+    })
+  })
+  
+})
 </script>
 
-{% endblock javascript %}
+{% endblock %}
