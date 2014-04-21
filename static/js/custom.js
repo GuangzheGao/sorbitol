@@ -39,7 +39,7 @@ $(document).ready(function(){
 
 	// Responsive Boards JS
 	function resizeBoardPanel(e) {
-		var width = $(window).width(); 
+		var width = $(window).width()
 		console.log(width)
 		console.log($('.container-fluid').width())
 		if (width < 750) {
