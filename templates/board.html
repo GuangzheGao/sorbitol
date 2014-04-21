@@ -248,6 +248,13 @@ $(document).ready(function(){
             div_list_cards.find('.list-cards-add-form').show()
             div_list_cards.find('.js-list-cards-add').hide()
           })
+
+          list_div.find('.list-cards-add-form .close').click(function(e){
+            console.log("clicked")
+            $('.list-cards-add-form').hide()
+            $('.js-list-cards-add').show()
+          })
+
         },
         error: function(msg) {
           var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"

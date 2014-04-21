@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	// Navbar menu JS
-
+	$('.js-draggable').udraggable();
 	$('.js-open-header-menu').on('show.bs.dropdown', function () {
 		var overhead = $(document).width(); 
 		/* fix the 1px off bug */
@@ -111,7 +111,6 @@ $(document).ready(function(){
 				left:new_width
 			})
 		}
-		
 	}
 	$(window).on("resize", resizeBoardPanel);
 	$('.list-list-add-form').hide()
