@@ -61,13 +61,13 @@ def render_signup():
         
         return render_template('signup.html', form = SignupForm())
 
-    @main_app.route('/group')
-    @login_required
-    def render_groups():
-        '''page listing groups for a user'''
-        return render_template('groups.html', user = current_user)
+@main_app.route('/group')
+@login_required
+def render_groups():
+    '''page listing groups for a user'''
+    return render_template('groups.html', user = current_user)
 
-    @main_app.route('/group/<path:group_id>')
+@main_app.route('/group/<path:group_id>')
 @login_required
 def render_singe_group(group_id = None):
     '''page for one single group'''

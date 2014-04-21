@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 #mongo_client = MongoClient()
 mysql_engine = create_engine(
-                 'mysql://root:root@localhost/sorbitol?charset=utf8',
+                 'mysql://root:password@localhost/sorbitol?charset=utf8',
                  echo=False)
 mysql_session = sessionmaker(bind=mysql_engine)()
 
