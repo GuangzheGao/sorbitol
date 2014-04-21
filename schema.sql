@@ -19,6 +19,10 @@ CREATE TABLE `users` (
   KEY `idx_user_password` (`username`,`password`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+
+
 DROP TABLE IF EXISTS `boards`;
 CREATE TABLE `boards` (
     `id` int(12) NOT NULL AUTO_INCREMENT,
@@ -28,57 +32,71 @@ CREATE TABLE `boards` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `cards`;
-CREATE TABLE `cards` (
+DROP TABLE IF EXISTS `activities`;
+CREATE TABLE `activities` (
     `id` int(12) NOT NULL AUTO_INCREMENT,
-    `title` varchar(512) NOT NULL,
+    `user_id` int(12) NOT NULL,
+    `board_id` int(12) NOT NULL,
+    `content` varchar(512) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `labels` int(12) NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `lists`;
 CREATE TABLE `lists` (
     `id` int(12) NOT NULL AUTO_INCREMENT,
+    `board_id` int(12) NOT NULL,
     `title` varchar(512) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`board_id`) REFERENCES boards(`id`) ON DELETE CASCADE,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `group_member`;
-CREATE TABLE `group_member` (
-  `group_id` int(12) NOT NULL,
-  `member_id` int(12) NOT NULL,
-  PRIMARY KEY (`group_id`, `member_id`),
-  KEY `idx_group_id` (`group_id`),
-  KEY `idx_member_id` (`member_id`)
+DROP TABLE IF EXISTS `cards`;
+CREATE TABLE `cards` (
+    `id` int(12) NOT NULL AUTO_INCREMENT,
+    `list_id` int(12) NOT NULL,
+    `title` varchar(512) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `labels` int(12) NOT NULL DEFAULT 0,
+    FOREIGN KEY (`list_id`) REFERENCES lists(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `card_member`;
-CREATE TABLE `card_member` (
-  `card_id` int(12) NOT NULL,
-  `member_id` int(12) NOT NULL,
-  PRIMARY KEY (`card_id`, `member_id`),
-  KEY `idx_card_id` (`card_id`),
-  KEY `idx_member_id` (`member_id`)
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments` (
+    `id` int(12) NOT NULL AUTO_INCREMENT,
+    `card_id` int(12) NOT NULL,
+    `user_id` int(12) NOT NULL,
+    `content` varchar(512) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`card_id`) REFERENCES cards(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `card_label`;
-CREATE TABLE `card_label` (
-  `card_id` int(12) NOT NULL,
-  `label_id` int(12) NOT NULL,
-  `label_name` varchar(512) NOT NULL,
-  `text` text,
-  PRIMARY KEY (`card_id`, `label_id`)
+DROP TABLE IF EXISTS `user_board`;
+CREATE TABLE `user_board` (
+    `user_id` int(12) NOT NULL,
+    `board_id` int(12) NOT NULL,
+    PRIMARY KEY (`user_id`, `board_id`),
+    FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+    FOREIGN KEY (`board_id`) REFERENCES boards(`id`),
+    KEY `idx_board_id` (`board_id`),
+    KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `card_member`;
-CREATE TABLE `card_member` (
-  `card_id` int(12) NOT NULL,
-  `member_id` int(12) NOT NULL,
-  PRIMARY KEY (`card_id`, `member_id`),
-  KEY `idx_card_id` (`card_id`),
-  KEY `idx_member_id` (`member_id`)
+DROP TABLE IF EXISTS `user_card`;
+CREATE TABLE `user_card` (
+    `user_id` int(12) NOT NULL,
+    `card_id` int(12) NOT NULL,
+    PRIMARY KEY (`user_id`, `card_id`),
+    FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+    FOREIGN KEY (`card_id`) REFERENCES cards(`id`),
+    KEY `idx_card_id` (`card_id`),
+    KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 

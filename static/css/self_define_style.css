@@ -77,6 +77,26 @@ div#card-details-board{
     padding: 25px 25px 20px;
 }
 
+div.card-info-board{
+    text-align: center;
+}
+
+div.card-name-board, div.list-info-board{
+    display: inline-block;
+    text-align: center;
+}
+
+div.card-leftpanel-board{
+    float: left;
+    width: 50%;
+}
+
+div.card-rightpanel-board{
+    float:right;
+}
+
+
+
 div#cross-mark-board{
     color: rgba(99, 100, 86, 0.60);
     font-family: 'Helvetica', 'Arial', sans-serif;

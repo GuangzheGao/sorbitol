@@ -3,6 +3,11 @@ from flask import request, redirect, url_for, Blueprint, render_template, jsonif
 from models.user import User
 from models.forms.login_form import LoginForm
 from models.forms.signup_form import SignupForm
+
+from models.board import Board
+from models.list import List
+from models.card import Card
+
 from flask.ext.login import login_user, logout_user, current_user, login_required
 
 main_app = Blueprint('main_app', __name__)
@@ -16,7 +21,7 @@ def render_login():
             login_user(form.user)
             return redirect(url_for('index'))
 
-    return render_template('login.html', form = form, user = None)
+    return render_template('login.html', form = form, user=None)
 
 @main_app.route('/logout')
 def logout():
@@ -52,17 +57,17 @@ def render_signup():
                 return redirect(url_for('.render_login'), code=303)
         else:
             # if the form is not valid, redraw signup page
-            return render_template('signup.html', form = form)
-    
-    return render_template('signup.html', form = SignupForm())
+                return render_template('signup.html', form = form)
+        
+        return render_template('signup.html', form = SignupForm())
 
-@main_app.route('/group')
-@login_required
-def render_groups():
-    '''page listing groups for a user'''
-    return render_template('groups.html', user = current_user)
+    @main_app.route('/group')
+    @login_required
+    def render_groups():
+        '''page listing groups for a user'''
+        return render_template('groups.html', user = current_user)
 
-@main_app.route('/group/<path:group_id>')
+    @main_app.route('/group/<path:group_id>')
 @login_required
 def render_singe_group(group_id = None):
     '''page for one single group'''
@@ -84,12 +89,45 @@ def render_user(user_id = None):
 @login_required
 def render_board(board_id = None):
     '''board page'''
-    return render_template('board.html', user = current_user)
+    board=Board.get(board_id)
+    if board == None:
+        return render_template('404.html');
+    else:
+        return render_template('board.html', user=current_user, board=board)
 
-@main_app.route('/l/<path:list_id>')
-def api_list(list_id = None):
-    return jsonify(None)
+''' AJAX endpoints, retrieve kids using parent '''
+@main_app.route('/l', methods=['GET', 'POST'])
+def api_list(board_id = None):
+    if request.method == 'GET':
+        board_id = request.args.get('board_id')
+        lists = List.get_all(board_id)
+        if lists != None:
+            return jsonify(json_list=[i.serialize() for i in lists])
+        else:
+            return jsonify(None)
+    else:
+        board_id = request.json['board_id']
+        title = request.json['title']
+        if board_id == None or title == None:
+            return -1
+        else:
+            return jsonify({"list_id": List.add(board_id, title)})
 
-@main_app.route('/c/<path:card_id>')
-def api_card(card_id = None):
-    return jsonify(None)
+@main_app.route('/c', methods=['GET', 'POST'])
+def api_card(list_id = None):
+    if request.method == 'GET':
+        list_id = request.args.get('list_id')
+        if list_id != None:
+            cards = Card.get_all(list_id)
+            return jsonify(json_list=[i.serialize() for i in cards])
+        else:
+            return jsonify(None)
+    else:
+        list_id = request.json['list_id']
+        title = request.json['title']
+        label = request.json['label']
+        if list_id == None or title == None or label == None:
+            return -1
+        else:
+            return jsonify({"card_id": Card.add(title, list_id, label)})
+
