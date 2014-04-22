@@ -12,8 +12,8 @@ class Activity(Base):
     __tablename__ = 'activities'
 
     id = Column(Integer, primary_key = True)
-    user_id = Column(Integer, ForeignKey('users.id'))
-    board_id = Column(Integer, ForeignKey('boards.id'))
+    user_id = Column(Integer)
+    board_id = Column(Integer)
     content = Column(String(512))
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
 
@@ -24,7 +24,10 @@ class Activity(Base):
             mysql_session.add(comment)
             mysql_session.commit()
         except Exception as e:
-            mysql_session.flush()
+            mysql_session.rollback()
+            raise
+        finally:
+            mysql_session.close()
             print "error in mysql commit:", e
 
         return comment.id

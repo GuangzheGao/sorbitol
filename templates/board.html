@@ -4,7 +4,7 @@
 <div class="float-header">
   <div class="board-header-name dropdown btn left">
     <a data-toggle="dropdown" data-target="#" id="rename-board">
-      {board.name}
+      {{board.title}}
     </a>
     <ul aria-labelledby="rename-board" class="rename-board-menu dropdown-menu" role="menu">
       <li class="rename-board-menu-title">  Rename Board
@@ -58,17 +58,18 @@
 <div class="board-container js-auto-resize-to-full-window container-fluid">
   <div class="js-resize-overflow">
     <!-- To Do List -->
-
+    {% for list in lists %}
     <div class="list-board">
       <div class="list-header-board">
-        To Do
+        {{list.title}}
       </div>
       <div class="list-cards">
+        {% for card in list.get_cards() %}
         <div class="list-card panel">
-          <a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{card.title}</div>
+          <a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{{card.title}}</div>
             <div class="list-card-badgets">
               <div class="list-card-badget list-card-badgets-comments">
-                <span class="glyphicon glyphicon-comment"></span> 0
+                <span class="glyphicon glyphicon-comment"></span> {{card.get_comment_count()}}
               </div>
               <div class="list-card-badget list-card-badgets-attachments">
                 <span class="glyphicon glyphicon-paperclip"></span> 0
@@ -109,6 +110,7 @@
             </div><!-- /.modal-dialog -->
           </div><!-- /.modal -->
         </div><!-- /.list-card panel -->
+        {% endfor %}
         <div  class="js-list-cards-add">
           <a href="#">
             <div class="list-cards-add">
@@ -128,65 +130,7 @@
       </div>
     </div>
     <!-- End To Do List -->
-
-    <!-- Doing -->
-    <div class="list-board">
-      <div class="list-header-board">
-        Doing
-      </div>
-      <div class="list-cards">
-        <div class="list-card panel">
-          <a class="list-card-hover"><a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{card.title}</div>
-            <div class="list-card-badgets">
-              <div class="list-card-badget list-card-badgets-comments">
-                <span class="glyphicon glyphicon-comment"></span> 0
-              </div>
-              <div class="list-card-badget list-card-badgets-attachments">
-                <span class="glyphicon glyphicon-paperclip"></span> 0
-              </div>  
-            </div>
-
-            <div class="list-card-members">
-              <!--for member in card.members-->
-              <div class="list-card-member">
-                {member.name}
-              </div> 
-              <!--end for-->
-            </div>
-          </a> 
-        </div>
-        <div  class="js-list-cards-add">
-          <a href="#">
-            <div class="list-cards-add">
-              Add a card...
-            </div>
-          </a>
-        </div>
-        <div class="list-cards-add-form">
-          <form name='create_card'>
-            <textarea name='card-title' class="list-cards-add-textarea"></textarea>
-            <div class="list-cards-add-form-control">
-              <input type="submit" class="btn btn-success" value="Add" />
-              <a class="close"><span class="glyphicon glyphicon-remove"></span></a>
-            </div>
-          </form>    
-        </div>    
-      </div>
-    </div>
-    <!-- End To Do List -->
-
-    <div class="add-new-list">
-      <a class="js-add-new-list" href="#"><div class="list-board trans-btn">Add a list...</div></a>
-      <div class="list-board list-list-add-form">
-        <form name='create_list'>
-          <textarea name='list-title' class="list-cards-add-textarea"></textarea>
-          <div class="list-cards-add-form-control">
-            <input type="submit" class="btn btn-success" value="Add" />
-            <a class="list-cards-add-form-control close"><span class="glyphicon glyphicon-remove"></span></a>
-          </div>
-        </form> 
-      </div>
-    </div>
+    {% endfor %}  
   </div>
 </div>
 {% endblock %}

@@ -61,18 +61,6 @@ def render_signup():
         
         return render_template('signup.html', form = SignupForm())
 
-@main_app.route('/group')
-@login_required
-def render_groups():
-    '''page listing groups for a user'''
-    return render_template('groups.html', user = current_user)
-
-@main_app.route('/group/<path:group_id>')
-@login_required
-def render_singe_group(group_id = None):
-    '''page for one single group'''
-    return render_template('single_group.html', user = current_user)
-
 @main_app.route('/group/<path:group_id>/members')
 @login_required
 def render_group_members(group_id = None):
@@ -93,7 +81,7 @@ def render_board(board_id = None):
     if board == None:
         return render_template('404.html');
     else:
-        return render_template('board.html', user=current_user, board=board)
+        return render_template('board.html', user=current_user, board=board, lists = board.get_lists())
 
 ''' AJAX endpoints, retrieve kids using parent '''
 @main_app.route('/l', methods=['GET', 'POST'])

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import Column, Integer, String, TIMESTAMP
-from utils.db import mysql_engine, mysql_session
+from utils.db import mysql_engine, mysql_session, r_server
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
@@ -41,6 +41,10 @@ class User(Base):
 
     @classmethod
     def signup(cls, username, unsafe_password, user_email):
+        return cls.add(username, unsafe_password, user_email)
+
+    @classmethod
+    def add(cls, username, unsafe_password, user_email):
         safe_password = generate_password_hash(unsafe_password)
         user = User(username=username,
                     password=safe_password, 
@@ -49,8 +53,11 @@ class User(Base):
             mysql_session.add(user)
             mysql_session.commit()
         except Exception as e:
-            mysql_session.flush()
+            mysql_session.rollback()
             print e
+            raise
+        finally:
+            mysql_session.close()
 
         return user.id
     
@@ -71,8 +78,11 @@ class User(Base):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-    
-    def get_groups(self):
-        return self.groups
+   
+    def get_boards(self):
+        return r_server.lrange('/user/%d/boards' % self.id, 0 , -1)
+
+    def add_board(self, board):
+        return r_server.rpush('/user/%d/boards' % self.id, board.id)
 
 User.query = mysql_session.query(User)

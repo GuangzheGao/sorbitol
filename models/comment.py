@@ -7,25 +7,29 @@ from datetime import datetime
 from models.base import Base
 from models.user import User
 
-
 class Comment(Base):
     __tablename__ = 'comments'
 
     id = Column(Integer, primary_key = True)
-    card_id = Column(Integer, ForeignKey('cards.id'))
-    user_id = Column(Integer, ForeignKey('users.id'))
+    card_id = Column(Integer)
+    user_id = Column(Integer)
     content = Column(String(512))
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
 
     @classmethod
     def add(cls, card_id, user_id, content):
         comment = cls(card_id = card_id, user_id = user_id, content = content)
+        from models.card import Card
+        Card.incr_comment(card_id)
         try:
             mysql_session.add(comment)
             mysql_session.commit()
         except Exception as e:
-            mysql_session.flush()
+            mysql_session.rollback()
             print "error in mysql commit:", e
+            raise
+        finally:
+            mysql_session.close()
 
         return comment.id
 
@@ -36,7 +40,7 @@ class Comment(Base):
         return comment
 
     @classmethod
-    def get_all(cls, card_id):
+    def get_comments_by_card_id(cls, card_id):
         card_id = long(card_id)
         comments = mysql_session.query(cls).filter_by(card_id = card_id)
         return comments

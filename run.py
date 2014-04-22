@@ -5,6 +5,7 @@ from flask.ext.login import LoginManager, current_user
 from views.views import main_app
 
 from models.user import User
+from models.board import Board
 
 app = Flask(__name__)
 app.register_blueprint(main_app)
@@ -20,7 +21,7 @@ def get_user(user_id):
 def index():
     if not current_user or current_user.is_anonymous():
         return redirect(url_for('main_app.render_login'))
-    return render_template('index.html', user=current_user)
+    return render_template('index.html', user=current_user, boards=Board.get_multi(current_user.get_boards()))
 
 @app.errorhandler(404)
 def page_not_found(e):
