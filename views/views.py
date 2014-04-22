@@ -61,17 +61,11 @@ def render_signup():
         
         return render_template('signup.html', form = SignupForm())
 
-@main_app.route('/group/<path:group_id>/members')
-@login_required
-def render_group_members(group_id = None):
-    '''page for all members in a group'''
-    return render_template('group_members.html', user = current_user)
-
-@main_app.route('/user/<path:user_id>')
+@main_app.route('/u/<path:user_id>')
 @login_required
 def render_user(user_id = None):
     '''user page'''
-    return render_template('group_members.html', user = current_user)
+    return render_template('profile.html', user = current_user)
 
 @main_app.route('/b/<path:board_id>')
 @login_required

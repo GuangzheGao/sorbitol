@@ -30,9 +30,9 @@
       </div>
       <div class="members-content-group">
         <ul class="list-group">
-          <li class="list-group-item">Sicheng Liu</li>
-          <li class="list-group-item">Guangzhe Gao</li>
-          <li class="list-group-item">Jackie</li>
+          {% for user in board.get_users() %}
+          <li class="list-group-item">{{user.username}}</li>
+          {% endfor %}
         </ul>
       </div>
     </div>
@@ -131,6 +131,18 @@
     </div>
     <!-- End To Do List -->
     {% endfor %}  
+    <div class="add-new-list">
+      <a class="js-add-new-list" href="#"><div class="list-board trans-btn">Add a list...</div></a>
+      <div class="list-board list-list-add-form">
+        <form name='create_list'>
+          <textarea name='list-title' class="list-cards-add-textarea"></textarea>
+          <div class="list-cards-add-form-control">
+            <input type="submit" class="btn btn-success" value="Add" />
+            <a class="list-cards-add-form-control close"><span class="glyphicon glyphicon-remove"></span></a>
+          </div>
+        </form> 
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

@@ -35,11 +35,13 @@ class Board(Base):
         board_id = long(board_id)
         board = mysql_session.query(cls).filter_by(id = board_id).first()
         return board
+
     @classmethod
     def get_multi(cls, ids):
         return [cls.get(id) for id in ids]
 
     def get_user_ids(self):
+        print "users for board %d" % self.id, r_server.lrange('/board/%d/users' % self.id, 0, -1)
         return r_server.lrange('/board/%d/users' % self.id, 0, -1)
 
     def get_users(self):

@@ -23,6 +23,10 @@ class User(Base):
         return user
 
     @classmethod
+    def get_multi(cls, ids):
+        return [cls.get(id) for id in ids]
+
+    @classmethod
     def get_validate_user(cls, user_email, user_unsafe_password):
         user = mysql_session.query(cls).filter_by(email=user_email).first()
         
@@ -79,8 +83,12 @@ class User(Base):
     def check_password(self, password):
         return check_password_hash(self.password, password)
    
-    def get_boards(self):
+    def get_board_ids(self):
         return r_server.lrange('/user/%d/boards' % self.id, 0 , -1)
+    
+    def get_boards(self):
+        from models.board import Board
+        return Board.get_multi(self.get_board_ids())
 
     def add_board(self, board):
         return r_server.rpush('/user/%d/boards' % self.id, board.id)

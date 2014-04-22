@@ -26,9 +26,9 @@
       <ul aria-labelledby="board-menu" class="board-menu dropdown-menu" role="menu">
         <li class="board-menu-title"><span class="glyphicon glyphicon-tasks"></span> My Boards</li>
         <!-- for board in boards -->
-        <li class="btn board-menu-list">{board.name}</li>
-        <li class="btn board-menu-list">{board.name}</li>
-        <li class="btn board-menu-list">{board.name}</li>
+        {% for board in user.get_boards() %}
+        <a href="/b/{{board.id}}"><li class="btn board-menu-list">{{board.title}}</li></a>
+        {% endfor %}
         <!--end for-->
       </ul>
     </div>
@@ -74,9 +74,9 @@
         <ul aria-labelledby="user-menu" class="header-dropdown-menu dropdown-menu" role="menu">
           <li class="board-menu-title">{{user.username}}</li>
           <!-- for board in boards -->
-          <a class="list-group-item head-dropdown-menu-heading" href="#">Profile</a>
-          <a class="list-group-item head-dropdown-menu-heading" href="#">Cards</a>
-          <a class="list-group-item head-dropdown-menu-heading" href="#">Settings</a>
+          <a class="list-group-item head-dropdown-menu-heading" href="/u/{{user.id}}">Profile</a>
+          <a class="list-group-item head-dropdown-menu-heading" href="/u/{{user.id}}/cards">Cards</a>
+          <a class="list-group-item head-dropdown-menu-heading" href="/u/{{user.id}}/account">Settings</a>
           <a class="list-group-item head-dropdown-menu-heading" href="/logout">Logout</a>       
           <!--end for-->
         </ul>

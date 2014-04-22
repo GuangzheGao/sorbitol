@@ -238,15 +238,10 @@ div.input-login, div.input-signup{
     overflow-y: auto;
     overflow-x: hidden;
 }
-
-.board-menu-title {
-    color: #939393;
-    display: block;
-    font-weight: bold;
-    line-height: 21px;
-    text-align: center;
+.board-menu > a{
+    color: #444;
+    cursor: pointer;
 }
-
 .header-dropdown-menu  > .list-group-item {
     border: 0px;
     font-size: 14px;
@@ -535,4 +530,8 @@ div.input-login, div.input-signup{
     cursor: pointer;
     color: #fff;
     text-decoration: none;
+}
+
+.header-dropdown-menu > .board-menu-title{
+    text-align: center;
 }
