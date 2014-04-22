@@ -45,13 +45,13 @@ user1.add_board(board1)
 user2.add_board(board0)
 
 
-lid0 = List.add(bid0, "To Do")
-lid1 = List.add(bid0, "Doing")
-lid2 = List.add(bid0, "Done")
+lid0 = List.add("To Do", bid0)
+lid1 = List.add("Doing", bid0)
+lid2 = List.add("Done", bid0)
 
-caid0 = Card.add("card1", lid0)
-caid1 = Card.add("card2", lid0)
-caid2 = Card.add("card3", lid1)
+caid0 = Card.add("card1", lid0, uid0)
+caid1 = Card.add("card2", lid0, uid0)
+caid2 = Card.add("card3", lid1, uid0)
 
 coid0 = Comment.add(caid0, uid0, "comment1")
 coid1 = Comment.add(caid0, uid1, "comment2")

@@ -3,7 +3,8 @@ from flask import request, redirect, url_for, Blueprint, render_template, jsonif
 from models.user import User
 from models.forms.login_form import LoginForm
 from models.forms.signup_form import SignupForm
-
+from models.forms.ajax.add_card_form import AddCardForm
+from models.forms.ajax.add_list_form import AddListForm
 from models.board import Board
 from models.list import List
 from models.card import Card
@@ -75,7 +76,12 @@ def render_board(board_id = None):
     if board == None:
         return render_template('404.html');
     else:
-        return render_template('board.html', user=current_user, board=board, lists = board.get_lists())
+        return render_template('board.html', 
+                                user=current_user, 
+                                board=board, 
+                                lists = board.get_lists(),
+                                add_card_form = AddCardForm(),
+                                add_list_form = AddListForm())
 
 ''' AJAX endpoints, retrieve kids using parent '''
 @main_app.route('/l', methods=['GET', 'POST'])
@@ -86,30 +92,32 @@ def api_list(board_id = None):
         if lists != None:
             return jsonify(json_list=[i.serialize() for i in lists])
         else:
-            return jsonify(None)
+            return jsonify({'code': 404, 'message': 'List ID not valid.'})
     else:
-        board_id = request.json['board_id']
-        title = request.json['title']
-        if board_id == None or title == None:
-            return -1
+        try:
+            board_id = long(request.form['board_id'])
+            title = request.form['title']
+        except KeyError:
+            return jsonify({'code': 400, 'message': 'Bad Request'})
         else:
-            return jsonify({"list_id": List.add(board_id, title)})
+            return jsonify({"list_id": List.add(title, board_id)})
 
 @main_app.route('/c', methods=['GET', 'POST'])
+@login_required
 def api_card(list_id = None):
     if request.method == 'GET':
         list_id = request.args.get('list_id')
         if list_id != None:
-            cards = Card.get_all(list_id)
-            return jsonify(json_list=[i.serialize() for i in cards])
+            cards = Card.get_cards_by_list_id(list_id)
+            return jsonify(json_list=[card.serialize() for card in cards])
         else:
-            return jsonify(None)
+            return jsonify({'code': 404, 'message': 'Card ID not valid.'})
     else:
-        list_id = request.json['list_id']
-        title = request.json['title']
-        label = request.json['label']
-        if list_id == None or title == None or label == None:
-            return -1
-        else:
-            return jsonify({"card_id": Card.add(title, list_id, label)})
+        try:
+            list_id = long(request.form['list_id'])
+            title = request.form['title']
+        except KeyError:
+            return jsonify({'code': 400, 'message': 'Bad Request'})
+
+        return jsonify({"card_id": Card.add(title, list_id, current_user.id)})
 

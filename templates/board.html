@@ -66,7 +66,7 @@
       <div class="list-cards">
         {% for card in list.get_cards() %}
         <div class="list-card panel">
-          <a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{{card.title}}</div>
+          <a class="list-card-hover" data-toggle="modal" data-target="#card-modal-{{card.id}}"><div class="list-card-title">{{card.title}}</div>
             <div class="list-card-badgets">
               <div class="list-card-badget list-card-badgets-comments">
                 <span class="glyphicon glyphicon-comment"></span> {{card.get_comment_count()}}
@@ -85,7 +85,7 @@
             </div>
           </a> 
           <!-- Modal -->
-          <div id="card-modal-0" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
+          <div id="card-modal-{{card.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -112,20 +112,22 @@
         </div><!-- /.list-card panel -->
         {% endfor %}
         <div  class="js-list-cards-add">
-          <a href="#">
+          <a href="#" name="{{list.id}}">
             <div class="list-cards-add">
               Add a card...
             </div>
           </a>
         </div>
         <div class="list-cards-add-form">
-          <form name='create_card'>
-            <textarea name='card-title' class="list-cards-add-textarea"></textarea>
+          <form name="create_card">
+            {{ add_card_form.csrf_token }}
+            {{ add_card_form.title(class="list-cards-add-textarea") }}
+            {{ add_card_form.list_id(type="hidden", value=list.id)}}
             <div class="list-cards-add-form-control">
               <input type="submit" class="btn btn-success" value="Add" />
               <a class="close"><span class="glyphicon glyphicon-remove"></span></a>
             </div>
-          </form>    
+          </form>  
         </div> 
       </div>
     </div>
@@ -135,7 +137,9 @@
       <a class="js-add-new-list" href="#"><div class="list-board trans-btn">Add a list...</div></a>
       <div class="list-board list-list-add-form">
         <form name='create_list'>
-          <textarea name='list-title' class="list-cards-add-textarea"></textarea>
+          {{ add_list_form.csrf_token }}
+          {{ add_list_form.title(class="list-cards-add-textarea") }}
+          {{ add_list_form.board_id(type="hidden", value=board.id)}}
           <div class="list-cards-add-form-control">
             <input type="submit" class="btn btn-success" value="Add" />
             <a class="list-cards-add-form-control close"><span class="glyphicon glyphicon-remove"></span></a>
@@ -150,22 +154,31 @@
 <script type='text/javascript'>
   //async post thread
 $(document).ready(function(){
+  //prevent csrf attack
+  $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+              xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token() }}")
+          }
+      }
+  })
+
   $("form[name='create_card']").submit(function(e){
     e.preventDefault();
-    var title = $(this).find("textarea[name='card-title']").val();
+    var title = $(this).find("textarea[name='title']").val()
+    var list_id = $(this).find("input[name='list_id']").val()
     var div_list_cards = $(this).parent().parent()
-    console.log(title)
     if($('div[name=server-error]').length > 0){
       $('div[name=server-error]').remove()
     }
     $.ajax({
       type: "POST",
       url: '/c',
-      data: {title: title, user_id: {{ user.id }}},
+      data: {title: title,
+             list_id: list_id},
       success: function(result) {
-        $(this).find("textarea[name='card_title']").val('');
         div_list_cards.find('.list-cards-add-form').hide()
-        var card_div = $('<div class="list-card panel"><a class="list-card-hover"><a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{card.title}</div><div class="list-card-badgets"><div class="list-card-badget list-card-badgets-comments"><span class="glyphicon glyphicon-comment"></span> 0</div><div class="list-card-badget list-card-badgets-attachments"><span class="glyphicon glyphicon-paperclip"></span> 0</div></div><div class="list-card-members"><div class="list-card-member">{member.name}</div></div></a></div>')
+        var card_div = $('<div class="list-card panel"><a class="list-card-hover"><a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{card.title}</div><div class="list-card-badgets"><div class="list-card-badget list-card-badgets-comments"><span class="glyphicon glyphicon-comment"></span> 0</div><div class="list-card-badget list-card-badgets-attachments"><span class="glyphicon glyphicon-paperclip"></span> 0</div></div><div class="list-card-members"><div class="list-card-member">{{title}}</div></div></a></div>')
         div_list_cards.find('.js-list-cards-add').before(card_div);
         div_list_cards.find('.js-list-cards-add').show()
         card_div.find('.list-card-title').html(title);
@@ -179,15 +192,17 @@ $(document).ready(function(){
   });
   $("form[name='create_list']").submit(function(e){
       e.preventDefault();
-      var title = $(this).find("textarea[name='list-title']").val();
+      var title = $(this).find("textarea[name='title']").val();
+      var board_id = $(this).find("input[name='board_id']").val();
       var div_lists = $(document).find('.add-new-list')
       if($('div[name=server-error]').length > 0){
         $('div[name=server-error]').remove()
       }
+
       $.ajax({
         type: "POST",
         url: '/l',
-        data: {title: title, user_id: {{ user.id }}},
+        data: {title: title, board_id: board_id},
         success: function(result) {
           $(this).find("textarea[name='list_title']").val('');
           var list_div = $('<div class="list-board"><div class="list-header-board"></div><div class="list-cards"></div><div class="js-list-cards-add"><a href="#"><div class="list-cards-add">Add a card...</div></a></div><div class="list-cards-add-form"><form name="create_card"> <textarea name="card-title" class="list-cards-add-textarea"></textarea><div class="list-cards-add-form-control"><input type="submit" class="btn btn-success" value="Add" /><a class="close"><span class="glyphicon glyphicon-remove"></span></a></div></form></div></div>')

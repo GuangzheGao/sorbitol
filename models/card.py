@@ -28,7 +28,7 @@ class Card(Base):
        }
 
     @classmethod
-    def add(cls, title,  list_id):
+    def add(cls, title, list_id, user_id):
         card = cls(title = title, list_id = list_id)
         try:
             mysql_session.add(card)
@@ -39,7 +39,9 @@ class Card(Base):
             raise
         finally:
             mysql_session.close()
-
+        
+        user = User.get(user_id)
+        card.add_user(user)
         return card.id
 
     @classmethod

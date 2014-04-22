@@ -25,7 +25,7 @@ class List(Base):
        }
 
     @classmethod
-    def add(cls, board_id, title):
+    def add(cls, title, board_id):
         _list = cls(board_id = board_id, title = title)
         try:
             mysql_session.add(_list)
