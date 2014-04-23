@@ -30,8 +30,8 @@
       </div>
       <div class="members-content-group">
         <ul class="list-group">
-          {% for user in board.get_users() %}
-          <li class="list-group-item">{{user.username}}</li>
+          {% for group_user in board.get_users() %}
+          <li class="list-group-item">{{group_user.username}}</li>
           {% endfor %}
         </ul>
       </div>
@@ -183,6 +183,9 @@ $(document).ready(function(){
         div_list_cards.find('.js-list-cards-add').show()
         card_div.find('.list-card-title').html(title);
 
+        {% for group_user in board.get_users() %}
+          notify_users({{ user.id }}, '{{ user.username }}', {{ group_user.id }}, "created card of name " + title); //is defined in base.html
+        {% endfor %}
       },
       error: function(msg) {
         var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
@@ -226,6 +229,9 @@ $(document).ready(function(){
             $('.js-list-cards-add').show()
           })
 
+          {% for group_user in board.get_users() %}
+            notify_users({{ user.id }}, '{{ user.username }}', {{ group_user.id }}, "created list of name " + title ) //is defined in base.html
+          {% endfor %}
         },
         error: function(msg) {
           var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"

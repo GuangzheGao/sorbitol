@@ -1,7 +1,8 @@
 DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
     `id` int(12) NOT NULL AUTO_INCREMENT,
-    `name` varchar(512) NOT NULL,
+    `title` varchar(512) NOT NULL,
+    `description` varchar(512) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -22,6 +23,7 @@ CREATE TABLE `users` (
 DROP TABLE IF EXISTS `boards`;
 CREATE TABLE `boards` (
     `id` int(12) NOT NULL AUTO_INCREMENT,
+    `group_id` int(12) NOT NULL,
     `title` varchar(512) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `visibility` char(1),
@@ -65,3 +67,7 @@ CREATE TABLE `comments` (
     `content` varchar(512) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+/* user_group, user_board, user_card relation are in redis */

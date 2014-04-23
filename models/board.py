@@ -11,13 +11,14 @@ class Board(Base):
     __tablename__ = 'boards'
 
     id = Column(Integer, primary_key = True)
+    group_id = Column(Integer, primary_key = True)
     title = Column(String(512))
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
     visibility = Column(String(1))
 
     @classmethod
-    def add(cls, title, visibility):
-        board = cls(title = title, visibility = visibility)
+    def add(cls, title, visibility, group_id):
+        board = cls(title = title, visibility = visibility, group_id = group_id)
         try:
             mysql_session.add(board)
             mysql_session.commit()
@@ -35,6 +36,12 @@ class Board(Base):
         board_id = long(board_id)
         board = mysql_session.query(cls).filter_by(id = board_id).first()
         return board
+
+    @classmethod
+    def get_boards_by_group_id(cls, group_id):
+        group_id = long(group_id)
+        boards = mysql_session.query(cls).filter_by(group_id = group_id).all()
+        return boards
 
     @classmethod
     def get_multi(cls, ids):

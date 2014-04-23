@@ -3,13 +3,14 @@
 {% block content %}
 <div class="container-fluid">
   <!-- for group in groups -->
+  {% for group in user.get_groups() %}
   <div class="board-group-widget">
     <div class="board-group-title">
-       <h3><span class="glyphicon glyphicon-user"></span> My Boards</h3>
+       <h3><span class="glyphicon glyphicon-user"></span> {{ group.title}} <!--My Boards--> </h3>
     </div>
     <ul class="board-group-list">
       <!-- for board in boards-->
-      {% for board in boards %}
+      {% for board in user.get_boards(group.id) %}
       <li>
         <a href="/b/{{board.id}}">
         <div class="board-detail-panel panel panel-default active">
@@ -23,7 +24,13 @@
       <!-- end for board -->
     </ul>
   </div>
+  {% endfor %}
   <!-- end for group -->
 </div>
+
+
+
+
+
 {% endblock %}
 

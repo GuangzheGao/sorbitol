@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+  {% if user %}
+  <!-- Firebase -->
+  <script src='https://cdn.firebase.com/js/client/1.0.11/firebase.js'></script>
+  <script type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.3.2/firebase-simple-login.js'></script>
+  {% endif %}
+
   <!-- Bootstrap core CSS -->
   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
   <!-- self defin css-->
@@ -9,8 +16,8 @@
   <!-- jquery -->
   <script type="text/javascript" src="/static/js/jquery-1.11.0.js"></script>
   <script src="/static/js/bootstrap.js"></script>
-  <script type="text/javascript" src="/static/js/custom.js"></script>
-  <script type="text/javascript" src="/static/js/jquery.udraggable.js"></script>  
+  <script type="text/javascript" src="/static/js/custom.js"></script> <!-- contains content manipulation-->
+  <script type="text/javascript" src="/static/js/jquery.udraggable.js"></script>
   {% block javascript %}{% endblock %}
   <title>{% block title %}{% endblock %} - sorbitol</title>
 </head>
@@ -24,21 +31,27 @@
         <span class="glyphicon glyphicon-tasks header-btn-icon"></span> Boards
       </a>
       <ul aria-labelledby="board-menu" class="board-menu dropdown-menu" role="menu">
-        <li class="board-menu-title"><span class="glyphicon glyphicon-tasks"></span> My Boards</li>
-        <!-- for board in boards -->
-        {% for board in user.get_boards() %}
-        <a href="/b/{{board.id}}"><li class="btn board-menu-list">{{board.title}}</li></a>
+        <!-- for group in groups -->
+        {% for group in user.get_groups() %}
+            <li class="board-menu-title board-container" id="{{ group.id }}">
+                <span class="glyphicon glyphicon-tasks"></span> {{group.title}} <!--My Boards -->
+                <!-- for board in boards -->
+                {% for board in user.get_boards(group.id) %}
+                    <a href="/b/{{board.id}}"><li class="btn board-menu-list">{{board.title}}</li></a>
+                {% endfor %}
+                <!--end for-->
+            </li>
         {% endfor %}
         <!--end for-->
       </ul>
     </div>
-    
+
     <div class="header-user">
       <div class="js-open-header-menu header-user-add">
         <a id="add-menu" type="button" data-toggle="dropdown" class="btn btn-header btn-default btn-sm header-btn js-open-add-menu" data-target="#">
             <span class="glyphicon glyphicon-plus header-btn-icon"></span>
         </a>
-     
+
         <ul aria-labelledby="add-menu" class="header-dropdown-menu-add header-dropdown-menu dropdown-menu list-group" role="menu">
           <li class="add-entry board-menu-title">Add...</li>
           <!-- for board in boards -->
@@ -46,27 +59,31 @@
           <a class="add-entry js-new-group list-group-item" href="#"><h4 class="head-dropdown-menu-heading list-group-item-heading">New Group...</h4><p class="list-group-item-text">An organization is a group of boards and people. Use it to group boards in your company, team, or family.</p></a>
           <!--end for-->
 
-          <li class="add-board-detail">Create Board</li>
+          <li class="add-board-detail" >Create Board</li>
           <form class="add-board-detail">
             <label for="boardNewTitle">Title</label>
             <input id="boardNewTitle" type="text" name="name" class="js-stop-propagation" placeholder="Untitled Board">
             <label class="left" style="margin-right: 8px;">Organization</label>
-            <select class="js-stop-propagation" name="org-id">
-              <option class="js-stop-propagation" value="534d94e01c278a4c68bba5b4">Sorbital</option>
+            <select class="js-stop-propagation group-option" name="group_id">
+                <!-- for group in groups -->
+                {% for group in user.get_groups() %}
+                <option class="js-stop-propagation" id="{{ group.id }}">{{ group.title }}</option>
+                {% endfor %}
+                <!--end for-->
             </select>
             <input type="submit" class="primary wide js-submit" value="Create">
           </form>
 
-          <li class="add-board-detail">Create Group</li>
+          <li class="add-group-detail">Create Group</li>
           <form class="add-group-detail">
             <label for="boardNewTitle">Name</label>
-            <input id="boardNewTitle" type="text" name="name" class="js-stop-propagation" placeholder="Untitled Board">
+            <input id="boardNewTitle" type="text" name="name" class="js-stop-propagation" placeholder="Untitled Group">
             <label class="left" style="margin-right: 8px;">Description</label>
             <textarea id="org-desc" class="js-stop-propagation" name="desc" type="text"></textarea>
             <input type="submit" class="" value="Create">
           </form>
         </ul>
-      </div> 
+      </div>
       <div class="js-open-header-menu header-user-user">
         <a id="user-menu" type="button" data-toggle="dropdown" class="btn btn-header btn-default btn-sm header-btn header-member js-open-header-member-menu header-btn-text" data-target="#">
             {{user.username}}
@@ -77,7 +94,7 @@
           <a class="list-group-item head-dropdown-menu-heading" href="/u/{{user.id}}">Profile</a>
           <a class="list-group-item head-dropdown-menu-heading" href="/u/{{user.id}}/cards">Cards</a>
           <a class="list-group-item head-dropdown-menu-heading" href="/u/{{user.id}}/account">Settings</a>
-          <a class="list-group-item head-dropdown-menu-heading" href="/logout">Logout</a>       
+          <a class="list-group-item head-dropdown-menu-heading" href="/logout">Logout</a>
           <!--end for-->
         </ul>
       </div>
@@ -85,13 +102,16 @@
         <a id="notification-menu" data-toggle="dropdown" class="btn btn-header btn-default btn-sm header-btn header-notifications dropdown-toggle" data-target="#">
           <span class="glyphicon glyphicon-bell header-btn-icon"></span>
         </a>
-        <ul aria-labelledby="notification-menu" class="header-dropdown-menu dropdown-menu" role="menu">
+        <ul aria-labelledby="notification-menu" class="header-dropdown-menu dropdown-menu notification-list" role="menu">
+          <a class="list-group-item head-dropdown-menu-heading notification-ack" href="#">Acknowledge</a>
           <li class="board-menu-title">Notifications</li>
           <!-- for board in boards -->
-          <a class="list-group-item head-dropdown-menu-heading" href="#">Notification 1</a>
-          <a class="list-group-item head-dropdown-menu-heading" href="#">Notification 2</a>
-          <a class="list-group-item head-dropdown-menu-heading" href="#">Notification 3</a>
-          <a class="list-group-item head-dropdown-menu-heading" href="#">See all Notifications</a>
+          <!--
+          <a class="list-group-item head-dropdown-menu-heading notification-item" href="#">Notification 1</a>
+          <a class="list-group-item head-dropdown-menu-heading notification-item" href="#">Notification 2</a>
+          <a class="list-group-item head-dropdown-menu-heading notification-item" href="#">Notification 3</a>
+          <a class="list-group-item head-dropdown-menu-heading notification-item" href="#">See all Notifications</a>
+          -->
           <!--end for-->
         </ul>
       </div>
@@ -99,6 +119,111 @@
   </div>
   {% endif %}
   <!-- Navbar Ends -->
+
+
   {% block content %}{% endblock %}
+
+
+  {% if user %}
+  <script type='text/javascript'>
+    var myDataRef = new Firebase('https://dazzling-fire-9098.firebaseio.com/');
+    var auth = new FirebaseSimpleLogin(myDataRef, function(error, user) {
+        if (!error) {
+        // Success!
+        }
+        else{
+            console.log("FIREBASE ERROR: " + error + " " + user);
+        }
+    });
+
+    auth.login('password', {
+      email: 'guangzhegao@gmail.com',
+      password: 'root'
+    });
+
+    // listen other user sends
+    myDataRef.child( {{ user.id }} + "/msg_recv").on("child_added",
+    function(newMessageSnapshot) {
+        //renderNotification(newMessageSnapshot.val());
+        //newMessageSnapshot.ref().remove();
+        incomeMSG = newMessageSnapshot.val()
+        console.log(typeof incomeMSG.id_sender);
+        $("ul.notification-list").append('<a class="list-group-item head-dropdown-menu-heading notification-item" href="#" id="'+ incomeMSG.id_sender +'">'+
+            incomeMSG.sender+ ": " + incomeMSG.info_sender + '</a>');
+    });
+
+
+    //Send a message to another user, should be be called by places necessary(new stuff is done)
+    var notify_users = function (initiator_id, initiator, user_affected, information){
+        myDataRef.child(user_affected).child("msg_recv").push({id_sender: initiator_id, sender: initiator, info_sender: information });
+    }
+
+    //remove the notification when be read
+    $(document).ready(function() {
+        $(document.body).on("click", "a.notification-ack", function(e){
+            e.preventDefault();
+            myDataRef.child( {{ user.id }} + "/msg_recv").remove(); //remove all acknowledgements in firebase
+            $("ul.notification-list").html('<a class="list-group-item head-dropdown-menu-heading notification-ack" href="#">Acknowledge</a>'); //remove all acknowledgements in html
+        });
+    });
+  </script>
+  {% endif %}
+
+
+
+
+   <script type='text/javascript'> //TODO: NOT WORK
+    $(document).ready(function() {
+
+        $("form.add-board-detail").submit(function(e){
+            e.preventDefault();
+            title = $(this).find("input[name='name']").val()
+            group_id = $(this).find("select[name='group_id'] option:selected").attr("id")
+            //group_name = $(this).find("select[name='group_id'] option:selected").val()
+            alert(JSON.stringify({title: title, group_id: group_id}))
+            $.ajax({
+                type: "POST",
+                url: "/b",
+                data: JSON.stringify({title: title, group_id: group_id}),//JSON.stringify({title: title, group_id: group_id}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    //put the board back to group
+                    $("li.board-container").append('<a href="/b/' + response.board_id +'"><li class="btn board-menu-list">' + title + '</li></a>');
+                },
+                error: function (errormessage) {
+                    console.log(errormessage);
+                }
+            });
+        });
+
+
+        $("form.add-group-detail").submit(function(e){
+            e.preventDefault();
+            title = $(this).find("input[name='name']").val()
+            desc = $(this).find("select[name='desc']").val()
+            $.ajax({
+                type: "POST",
+                url: '/g',
+                data: {title: title, desc : desc},
+                success: function(result) {
+
+                    //put group to option list
+                    $("select.group-option").append('<option class="js-stop-propagation" id="'+ result.group_id +'">'+ title +'</option>');
+
+                    //put group to the panel
+                    $("ul.board-menu.dropdown-menu").append('<li class="board-menu-title" id="'+ result.group_id +'><span class="glyphicon glyphicon-tasks"></span>' + title + '</li>');
+                },
+                error: function(msg) {
+                  console.log(msg);
+                }
+            });
+        });
+
+    });
+    </script>
+
+
+
 </body>
 </html>

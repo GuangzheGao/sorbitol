@@ -82,15 +82,27 @@ class User(Base):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-   
-    def get_board_ids(self):
-        return r_server.lrange('/user/%d/boards' % self.id, 0 , -1)
-    
-    def get_boards(self):
+
+
+    def get_group_ids(self):
+        return r_server.lrange('/user/%d/groups' % self.id, 0 , -1)
+
+    def get_groups(self):
+        from models.group import Group
+        return Group.get_multi(self.get_group_ids())
+
+    def add_group(self, group):
+        return r_server.rpush('/user/%d/groups' % self.id, group.id)
+
+    #for cases where group is observable but not the board in group for the current user
+    def get_board_ids(self, group_id):
+        return r_server.lrange('/user/%d/group/%d/boards' % (self.id, group_id), 0 , -1)
+
+    def get_boards(self, group_id):
         from models.board import Board
-        return Board.get_multi(self.get_board_ids())
+        return Board.get_multi(self.get_board_ids(group_id))
 
     def add_board(self, board):
-        return r_server.rpush('/user/%d/boards' % self.id, board.id)
+        return r_server.rpush('/user/%d/group/%d/boards' % (self.id, board.group_id), board.id)
 
 User.query = mysql_session.query(User)
