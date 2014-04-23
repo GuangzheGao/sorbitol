@@ -649,3 +649,7 @@ div.input-login, div.input-signup{
     min-height: 30px;
     margin-bottom: 8px;
 }
+
+.add-board {
+    height: 100%;
+}

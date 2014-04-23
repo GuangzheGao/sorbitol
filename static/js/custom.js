@@ -14,10 +14,12 @@ $(document).ready(function(){
 		})
 	})
 
+	$('.add-board-detail').show()
+	$('.add-board').hide()
 	$('.js-new-board').click(function(e){
 		console.log("clicked")
 		e.stopPropagation();
-		$('.add-board-detail').show()
+		$('.add-board').show()
 		$('.add-entry').hide()
 	})
 
@@ -25,17 +27,9 @@ $(document).ready(function(){
 		e.stopPropagation();
 	})
 
-	$('.js-new-group').click(function(e){
-		console.log("clicked")
-		e.stopPropagation();
-		$('.add-group-detail').show()
-		$('.add-entry').hide()
-	})
-
 	$('.js-open-header-menu').on('hidden.bs.dropdown', function () {
-  		$('.add-board-detail').hide()
+  		$('.add-board').hide()
 		$('.add-entry').show()
-		$('.add-group-detail').hide()
 	})
 
 	var width = $(window).width(); 
