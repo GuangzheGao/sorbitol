@@ -616,3 +616,20 @@ div.input-login, div.input-signup{
     cursor: pointer;
 }
 
+.comment-author > a{
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 18px;
+    color: #444;
+    cursor: pointer;
+}
+
+.comment-content {
+    padding-left: 10px;
+}
+
+.comment-meta {
+    padding-left: 10px;
+    color: #939393;
+    font-size: 12px;
+}

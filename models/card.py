@@ -90,3 +90,7 @@ class Card(Base):
 
     def set_description(self, desc):
         r_server.set('/card/%d/desc' % self.id, desc)
+
+    def get_comments(self):
+        from models.comment import Comment
+        return Comment.get_comments_by_card_id(self.id)

@@ -122,6 +122,11 @@
                       <a class="close" style="padding-right:440px; padding-top:5px;"><span class="glyphicon glyphicon-remove"></span></a>
                     </div>
                   </form>
+                  {% for comment in card.get_comments() %}
+                  <div class="comment-author"> <a href="/u/{{ comment.get_user().id }}">{{ comment.get_user().username }}</a> </div>
+                  <div class="comment-content"> {{ comment.content }} </div>
+                  <div class="comment-meta"> {{ comment.created_at | timesince }} </div>
+                  {% endfor %}
                   <!-- for activity -->
                   <!-- endfor -->    
                 </div>
@@ -267,6 +272,31 @@ $(document).ready(function(){
         }
     })
   })  
+  $(document).on("submit", "form[name='add-comment']", function(e){
+    e.preventDefault();
+    var comment = $(this).find("textarea[name='comment']").val();
+    var card_id = $(this).find("input[name='card_id']").val();
+    console.log(comment, card_id)
+    if($('div[name=server-error]').length > 0){
+      $('div[name=server-error]').remove()
+    }
+    $.ajax({
+      type: "POST",
+      url: '/c/'+card_id+'/comments',
+      data: {comment: comment, card_id: card_id},
+      success: function(result) {
+        var comment_div = "<div class='comment-author'><a href='/u/{{current_user.id}}'>{{current_user.username }}</a></div><div class='comment-content'>"+ comment +"</div><div class='comment-meta'>1 second ago</div>"
+        $("form[name='add-comment']").after(comment_div)
+        $(".edit-card-comment-form-control").hide()
+        $(".js-card-comment-expand").animate({
+          height:36
+        }, 30)
+      },
+      error: function(msg) {
+
+      }
+    })
+  })
 })
 </script>
 

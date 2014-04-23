@@ -8,6 +8,8 @@ from flask_wtf.csrf import CsrfProtect
 from models.user import User
 from models.board import Board
 
+from utils.utils import timesince
+
 csrf = CsrfProtect()
 app = Flask(__name__)
 csrf.init_app(app)
@@ -16,6 +18,8 @@ app.register_blueprint(main_app)
 app.secret_key = 's3cr3t'
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+app.jinja_env.filters['timesince'] = timesince
 
 @login_manager.user_loader
 def get_user(user_id):

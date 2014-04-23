@@ -10,6 +10,7 @@ from models.forms.ajax.add_comment_form import AddCommentForm
 from models.board import Board
 from models.list import List
 from models.card import Card
+from models.comment import Comment
 
 from flask.ext.login import login_user, logout_user, current_user, login_required
 
@@ -133,7 +134,7 @@ def api_edit_card(card_id = None):
     else:
         card = Card.get(long(card_id))
         if card == None:
-            return jsonify({'code': 400, 'message': 'Bad Request'})
+            return jsonify({'code': 404, 'message': 'Page Not Found'})
 
     try:
         desc = request.form['desc']
@@ -141,3 +142,21 @@ def api_edit_card(card_id = None):
     except KeyError:
         return jsonify({'code': 400, 'message': 'Bad Request'})
     return jsonify({'code': 200, 'card_id':card_id}) 
+@main_app.route('/c/<path:card_id>/comments', methods=['POST',])
+@login_required
+def api_add_comment(card_id=None):
+    print "====================", card_id
+    if card_id == None:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+    else:
+        card = Card.get(long(card_id))
+        if card == None:
+            return jsonify({'code': 404, 'message': 'Page Not Found'})
+    
+    try:
+        content = request.form['comment']
+    except:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+
+    comment = Comment.add(long(card_id), current_user.id, content)
+    return jsonify({'card_id': card_id})

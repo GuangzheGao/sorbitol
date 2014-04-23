@@ -139,6 +139,10 @@ $(document).ready(function(){
 	$('.modal').on('hidden.bs.modal', function (e) {
   		$("form[name='edit-card-desc']").hide()
 		$('.card-description').show()
+		$(".edit-card-comment-form-control").hide()
+		$(".js-card-comment-expand").animate({
+			height:36
+		}, 30)
 	})
 	$(".edit-card-comment-form-control").hide()
 	$(".js-card-comment-expand").height(20)
