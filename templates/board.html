@@ -88,23 +88,35 @@
           <div id="card-modal-{{card.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <div class="modal-header">
+                <div class="custom-modal-header modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title" id="myModalLabel">Modal Heading</h4>
+                  <span class="card-title"><span class="glyphicon glyphicon-th-list"></span> {{card.title}}</span><span class="header-inline">in list <span style="font-weight: bold">{{list.title}}</span></span>            
+                  <div class="card-description">
+                    {% if card.get_description() %}
+                      <div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div>
+                      <div>{{card.get_description()}}</div>
+                    {% else %}
+                      <span class="glyphicon glyphicon-pencil" style="padding-right:4px;"></span><a class="js-show-edit-card-desc-form" href="#">Edit the desciption...</a>
+                    {% endif %}
+                  </div>
+
+                  <form name="edit-card-desc">
+                    <div class="card-description-title">Description</div>
+                    {{ edit_card_desc_form.csrf_token }}
+                    <textarea class="list-cards-add-textarea" id="desc" name="desc">{% if card.get_description() %}{{card.get_description()}}{% endif %}</textarea>
+                    {{ edit_card_desc_form.card_id(type="hidden", value=card.id)}}
+                    <div class="edit-card-desc-form-control">
+                      <input type="submit" class="btn btn-success" value="Save" />
+                      <a class="close"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                  </form> 
                 </div>
                 <div class="modal-body">
-                  <h4>Text in a modal</h4>
-                  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-                  <h4>Popover in a modal</h4>
-                  <p>This <a href="#" role="button" class="btn btn-default popover-test" title="" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on click.</p>
-                  <h4>Tooltips in a modal</h4>
-                  <p><a href="#" class="tooltip-test" title="" data-original-title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
-                  <h4>Overflowing text to show scroll behavior</h4>
-                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
+                  <form name="add-comment">
+                  </form>
+                  <!-- for activity -->
+                  <!-- endfor -->    
                 </div>
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -163,11 +175,12 @@ $(document).ready(function(){
       }
   })
 
-  $("form[name='create_card']").submit(function(e){
+  $(document).on("submit", "form[name='create_card']", function(e){
     e.preventDefault();
     var title = $(this).find("textarea[name='title']").val()
     var list_id = $(this).find("input[name='list_id']").val()
     var div_list_cards = $(this).parent().parent()
+    console.log(div_list_cards)
     if($('div[name=server-error]').length > 0){
       $('div[name=server-error]').remove()
     }
@@ -194,7 +207,6 @@ $(document).ready(function(){
       e.preventDefault();
       var title = $(this).find("textarea[name='title']").val();
       var board_id = $(this).find("input[name='board_id']").val();
-      var div_lists = $(document).find('.add-new-list')
       if($('div[name=server-error]').length > 0){
         $('div[name=server-error]').remove()
       }
@@ -204,27 +216,14 @@ $(document).ready(function(){
         url: '/l',
         data: {title: title, board_id: board_id},
         success: function(result) {
+          var list_id = result['list_id']
           $(this).find("textarea[name='list_title']").val('');
-          var list_div = $('<div class="list-board"><div class="list-header-board"></div><div class="list-cards"></div><div class="js-list-cards-add"><a href="#"><div class="list-cards-add">Add a card...</div></a></div><div class="list-cards-add-form"><form name="create_card"> <textarea name="card-title" class="list-cards-add-textarea"></textarea><div class="list-cards-add-form-control"><input type="submit" class="btn btn-success" value="Add" /><a class="close"><span class="glyphicon glyphicon-remove"></span></a></div></form></div></div>')
-          div_lists.before(list_div);
+          var list_div = $('<div class="list-board"><div class="list-header-board"></div><div class="list-cards"><div class="js-list-cards-add"><a href="#"><div class="list-cards-add">Add a card...</div></a></div><div class="list-cards-add-form"><form name="create_card">{{ add_card_form.csrf_token }}{{ add_card_form.title(class="list-cards-add-textarea") }}<input id="list_id" name="list_id" type="hidden" value='+list_id+'><div class="list-cards-add-form-control"><input type="submit" class="btn btn-success" value="Add" /><a class="close"><span class="glyphicon glyphicon-remove"></span></a></div></form></div></div></div>')
+          $('.add-new-list').before(list_div);
           list_div.find('.list-cards-add-form').hide()
           list_div.find('.list-header-board').html(title);
-          div_lists.find('.list-list-add-form').hide()
-          div_lists.find('.js-add-new-list').show()
-
-          list_div.find('.js-list-cards-add').on("click", '>a', function(e){
-            var div_list_cards = $(this).parent().parent()
-            $('.list-cards-add-form').hide()
-            $('.js-list-cards-add').show()
-            div_list_cards.find('.list-cards-add-form').show()
-            div_list_cards.find('.js-list-cards-add').hide()
-          })
-
-          list_div.find('.list-cards-add-form .close').click(function(e){
-            console.log("clicked")
-            $('.list-cards-add-form').hide()
-            $('.js-list-cards-add').show()
-          })
+          $('.list-list-add-form').hide()
+          $('.js-add-new-list').show()
 
         },
         error: function(msg) {
@@ -233,7 +232,34 @@ $(document).ready(function(){
         }
     })
   })
-  
+  $("form[name='edit-card-desc']").submit(function(e){
+      e.preventDefault();
+      var desc = $(this).find("textarea[name='desc']").val();
+      var card_id = $(this).find("input[name='card_id']").val();
+      var div_lists = $(document).find('.add-new-list')
+      if($('div[name=server-error]').length > 0){
+        $('div[name=server-error]').remove()
+      }
+      $.ajax({
+        type: "POST",
+        url: '/c/'+card_id,
+        data: {desc: desc, card_id: card_id},
+        success: function(result) {
+          if (desc == ''){
+            var desc_inner = '<span class="glyphicon glyphicon-pencil" style="padding-right:4px;"></span><a class="js-show-edit-card-desc-form" href="#">Edit the desciption...</a>'
+          }else{
+            var desc_inner = '<div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div><div>' + desc + '</div>'
+          }
+          $('.card-description').html(desc_inner)
+          $("form[name='edit-card-desc']").hide()
+          $('.card-description').show()
+        },
+        error: function(msg) {
+          var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
+          $('div[name="comment-panel"]').append(msg_div);
+        }
+    })
+  })  
 })
 </script>
 

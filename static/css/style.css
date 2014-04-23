@@ -535,3 +535,51 @@ div.input-login, div.input-signup{
 .header-dropdown-menu > .board-menu-title{
     text-align: center;
 }
+
+.custom-modal-header > .card-title{
+    font: 18px "Helvetica Neue",Arial,Helvetica,sans-serif;
+    line-height: 18px;
+    color: #393939;
+    word-wrap: break-word;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+.custom-modal-header > .header-inline{
+    color: #939393;
+    font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
+
+.card-edit-description {
+    text-decoration: underline;
+    color: #939393;
+    font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+    line-height: 18px;
+    padding-top: 15px;
+    padding-left: 25px;
+}
+
+.card-description > a{
+    text-decoration: underline;
+    color: #939393;
+    font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
+
+.edit-card-desc-form-control a{
+    padding-right: 480px;
+    padding-top: 10px;
+}
+.card-description-title {
+    color: #939393;
+    display: inline-block;
+    font-weight: normal;
+    font-size: 14px;
+}
+.card-description-title a{
+    padding-top: 5px;
+    color: #939393;
+    display: inline-block;
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: underline;
+}

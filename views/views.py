@@ -5,6 +5,7 @@ from models.forms.login_form import LoginForm
 from models.forms.signup_form import SignupForm
 from models.forms.ajax.add_card_form import AddCardForm
 from models.forms.ajax.add_list_form import AddListForm
+from models.forms.ajax.edit_card_desc_form import EditCardDescForm
 from models.board import Board
 from models.list import List
 from models.card import Card
@@ -81,7 +82,8 @@ def render_board(board_id = None):
                                 board=board, 
                                 lists = board.get_lists(),
                                 add_card_form = AddCardForm(),
-                                add_list_form = AddListForm())
+                                add_list_form = AddListForm(),
+                                edit_card_desc_form = EditCardDescForm())
 
 ''' AJAX endpoints, retrieve kids using parent '''
 @main_app.route('/l', methods=['GET', 'POST'])
@@ -121,3 +123,19 @@ def api_card(list_id = None):
 
         return jsonify({"card_id": Card.add(title, list_id, current_user.id)})
 
+@main_app.route('/c/<path:card_id>', methods=['POST',])
+@login_required
+def api_edit_card(card_id = None):
+    if card_id == None:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+    else:
+        card = Card.get(long(card_id))
+        if card == None:
+            return jsonify({'code': 400, 'message': 'Bad Request'})
+
+    try:
+        desc = request.form['desc']
+        card.set_description(desc)
+    except KeyError:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+    return jsonify({'code': 200, 'card_id':card_id}) 

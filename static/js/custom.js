@@ -74,7 +74,8 @@ $(document).ready(function(){
 		$('.side-bar').hide()
 	})
 
-	$('.js-list-cards-add').on("click", function(e){
+	$(document).on("click",'.js-list-cards-add', function(e){
+		console.log('clicked')
 		var div_list_cards = $(this).parent().parent()
 		$('.list-cards-add-form').hide()
 		$('.js-list-cards-add').show()
@@ -83,7 +84,7 @@ $(document).ready(function(){
 	})
 
 	$('.list-cards-add-form').hide()
-	$('.list-cards-add-form .close').click(function(e){
+	$(document).on('click', '.list-cards-add-form .close', function(e){
 		console.log("clicked")
 		$('.list-cards-add-form').hide()
 		$('.js-list-cards-add').show()
@@ -123,5 +124,20 @@ $(document).ready(function(){
 		console.log("clicked")
 		$('.js-add-new-list').show()
 		$('.list-list-add-form').hide()
+	})
+	$("form[name='edit-card-desc']").hide()
+	$(document).on('click', '.js-show-edit-card-desc-form', function(e){
+		console.log("clicked")
+		$("form[name='edit-card-desc']").show()
+		$('.card-description').hide()
+	})
+	$('.edit-card-desc-form-control > .close').click(function(e){
+		console.log("clicked")
+		$("form[name='edit-card-desc']").hide()
+		$('.card-description').show()
+	})
+	$('.modal').on('hidden.bs.modal', function (e) {
+  		$("form[name='edit-card-desc']").hide()
+		$('.card-description').show()
 	})
 })
