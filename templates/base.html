@@ -11,7 +11,36 @@
   <script src="/static/js/bootstrap.js"></script>
   <script type="text/javascript" src="/static/js/custom.js"></script>
   <script type="text/javascript" src="/static/js/jquery.udraggable.js"></script>  
-  {% block javascript %}{% endblock %}
+
+    <script type='text/javascript'>
+      $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+              xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token() }}")
+          }
+        }
+      })
+
+      $(document).on("submit", "form[name='add-board-detail']", function(e){
+        e.preventDefault();
+        console.log("submited")
+        var title = $(this).find("input[name='title']").val();
+        if($('div[name=server-error]').length > 0){
+          $('div[name=server-error]').remove()
+        }
+        $.ajax({
+          type: "POST",
+          url: '/b',
+          data: {title: title},
+          success: function(result) {
+          },
+          error: function(msg) {
+          }
+        })
+      })
+    </script>
+      {% block javascript %}
+  {% endblock %}
   <title>{% block title %}{% endblock %} - sorbitol</title>
 </head>
 
@@ -46,24 +75,12 @@
           <a class="add-entry js-new-group list-group-item" href="#"><h4 class="head-dropdown-menu-heading list-group-item-heading">New Group...</h4><p class="list-group-item-text">An organization is a group of boards and people. Use it to group boards in your company, team, or family.</p></a>
           <!--end for-->
 
-          <li class="add-board-detail">Create Board</li>
-          <form class="add-board-detail">
-            <label for="boardNewTitle">Title</label>
-            <input id="boardNewTitle" type="text" name="name" class="js-stop-propagation" placeholder="Untitled Board">
-            <label class="left" style="margin-right: 8px;">Organization</label>
-            <select class="js-stop-propagation" name="org-id">
-              <option class="js-stop-propagation" value="534d94e01c278a4c68bba5b4">Sorbital</option>
-            </select>
-            <input type="submit" class="primary wide js-submit" value="Create">
-          </form>
-
-          <li class="add-board-detail">Create Group</li>
-          <form class="add-group-detail">
-            <label for="boardNewTitle">Name</label>
-            <input id="boardNewTitle" type="text" name="name" class="js-stop-propagation" placeholder="Untitled Board">
-            <label class="left" style="margin-right: 8px;">Description</label>
-            <textarea id="org-desc" class="js-stop-propagation" name="desc" type="text"></textarea>
-            <input type="submit" class="" value="Create">
+          <li class="board-menu-title">Create Board</li>
+          <form class="add-board-detail" name='add-board-detail'>
+            {{ add_board_form.csrf_token }}
+            <div class="add-board-title-label">Title</div>
+            {{ add_board_form.title(class="add-board-form-title js-stop-propagation", placeholder="Untitled Board") }}
+            <input type="submit" class="btn btn-success primary wide js-submit" value="Create" />
           </form>
         </ul>
       </div> 

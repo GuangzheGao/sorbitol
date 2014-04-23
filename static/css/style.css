@@ -633,3 +633,19 @@ div.input-login, div.input-signup{
     color: #939393;
     font-size: 12px;
 }
+
+.add-board-title-label {
+    font-weight: bold;
+}
+.add-board-detail {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.add-board-form-title {
+    background-color: #e9e9e9;
+    border: 1px solid #bfbfbf;
+    border-radius: 3px;
+    width: 100%;
+    min-height: 30px;
+    margin-bottom: 8px;
+}

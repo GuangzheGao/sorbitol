@@ -7,6 +7,7 @@ from models.forms.ajax.add_card_form import AddCardForm
 from models.forms.ajax.add_list_form import AddListForm
 from models.forms.ajax.edit_card_desc_form import EditCardDescForm
 from models.forms.ajax.add_comment_form import AddCommentForm
+from models.forms.ajax.add_board_form import AddBoardForm
 from models.board import Board
 from models.list import List
 from models.card import Card
@@ -71,6 +72,24 @@ def render_user(user_id = None):
     '''user page'''
     return render_template('profile.html', user = current_user)
 
+@main_app.route('/b', methods=['POST', ])
+@login_required
+def api_board(board_id=None):
+    print "=======", request.form
+    try:
+        title = request.form['title']
+    except:
+        return jsonify({'code':400, 'message':'Invalid Request'})
+
+    board_id = Board.add(title,'A')
+    board = Board.get(board_id)
+    board.add_user(current_user)
+    current_user.add_board(board)
+    List.add("To Do", board_id)
+    List.add("Doing", board_id)
+    List.add("Done", board_id)
+    return jsonify({'board_id':board_id})
+
 @main_app.route('/b/<path:board_id>')
 @login_required
 def render_board(board_id = None):
@@ -86,7 +105,8 @@ def render_board(board_id = None):
                                 add_card_form = AddCardForm(),
                                 add_list_form = AddListForm(),
                                 edit_card_desc_form = EditCardDescForm(),
-                                add_comment_form = AddCommentForm())
+                                add_comment_form = AddCommentForm(),
+                                add_board_form = AddBoardForm())
 
 ''' AJAX endpoints, retrieve kids using parent '''
 @main_app.route('/l', methods=['GET', 'POST'])
@@ -142,6 +162,7 @@ def api_edit_card(card_id = None):
     except KeyError:
         return jsonify({'code': 400, 'message': 'Bad Request'})
     return jsonify({'code': 200, 'card_id':card_id}) 
+
 @main_app.route('/c/<path:card_id>/comments', methods=['POST',])
 @login_required
 def api_add_comment(card_id=None):
