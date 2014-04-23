@@ -140,4 +140,26 @@ $(document).ready(function(){
   		$("form[name='edit-card-desc']").hide()
 		$('.card-description').show()
 	})
+	$(".edit-card-comment-form-control").hide()
+	$(".js-card-comment-expand").height(20)
+	$(document).on('click', '.js-card-comment-expand', function(e){
+		e.stopPropagation();
+				$(".edit-card-comment-form-control").show()
+		if($(this).height()<50){
+			$(this).animate({
+				height:"+=50px"
+			}, 30)
+		}
+
+	})
+	$(document).on('click', '.edit-card-comment-form-control > .close', function(e){
+		e.stopPropagation();
+		console.log("clicked")
+		console.log($(".js-card-comment-expand").height())
+		$(".edit-card-comment-form-control").hide()
+		$(".js-card-comment-expand").animate({
+			height:36
+		}, 30)
+
+	})
 })

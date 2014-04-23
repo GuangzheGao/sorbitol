@@ -114,6 +114,13 @@
                 <div class="modal-body">
                   <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
                   <form name="add-comment">
+                    {{ add_comment_form.csrf_token }}
+                    {{ add_comment_form.comment(class="add-comment-textarea js-card-comment-expand", placeholder="Write a comment...")}}
+                    {{ add_comment_form.card_id(type="hidden", value=card.id)}}
+                    <div class="edit-card-comment-form-control">
+                      <input type="submit" class="btn btn-success" value="Comment" />
+                      <a class="close" style="padding-right:440px; padding-top:5px;"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
                   </form>
                   <!-- for activity -->
                   <!-- endfor -->    

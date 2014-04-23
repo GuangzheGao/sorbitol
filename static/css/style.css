@@ -583,3 +583,36 @@ div.input-login, div.input-signup{
     font-size: 14px;
     text-decoration: underline;
 }
+
+.add-comment-textarea {
+    background-color: #fff;
+    border: 0;
+    -webkit-box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.23);
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.23);
+    color: #939393;
+    height: 34px;
+    margin: 4px 4px 6px 0;
+    padding: 8px 10px;
+    transition: height ease-in-out 85ms;
+    width: 100%;
+    font-weight: normal;
+}
+
+.add-comment-textarea:focus {
+    border-color: #777;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.33);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.33);
+    border: 0;
+    cursor: pointer;
+}
+
+.add-comment-textarea:hover {
+    border-color: #777;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.33);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.33);
+    border: 0;
+    cursor: pointer;
+}
+

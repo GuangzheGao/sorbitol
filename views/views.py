@@ -6,6 +6,7 @@ from models.forms.signup_form import SignupForm
 from models.forms.ajax.add_card_form import AddCardForm
 from models.forms.ajax.add_list_form import AddListForm
 from models.forms.ajax.edit_card_desc_form import EditCardDescForm
+from models.forms.ajax.add_comment_form import AddCommentForm
 from models.board import Board
 from models.list import List
 from models.card import Card
@@ -83,7 +84,8 @@ def render_board(board_id = None):
                                 lists = board.get_lists(),
                                 add_card_form = AddCardForm(),
                                 add_list_form = AddListForm(),
-                                edit_card_desc_form = EditCardDescForm())
+                                edit_card_desc_form = EditCardDescForm(),
+                                add_comment_form = AddCommentForm())
 
 ''' AJAX endpoints, retrieve kids using parent '''
 @main_app.route('/l', methods=['GET', 'POST'])
