@@ -2,17 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c293164-7897-4ecd-a79e-2a347f34a731" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/forms/ajax/.edit_card_desc_form.py.swp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/forms/ajax/add_board_form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/forms/ajax/add_comment_form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/forms/ajax/edit_card_desc_form.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/.comment.py.swp" afterPath="$PROJECT_DIR$/models/.comment.py.swp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/.views.py.swp" afterPath="$PROJECT_DIR$/views/.views.py.swp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/board.html" afterPath="$PROJECT_DIR$/templates/board.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/board.py" afterPath="$PROJECT_DIR$/models/board.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/db.py" afterPath="$PROJECT_DIR$/utils/db.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/firebase_function_def.js" afterPath="$PROJECT_DIR$/static/js/firebase_function_def.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/group.py" afterPath="$PROJECT_DIR$/models/group.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/card.py" afterPath="$PROJECT_DIR$/models/card.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/comment.py" afterPath="$PROJECT_DIR$/models/comment.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/custom.js" afterPath="$PROJECT_DIR$/static/js/custom.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.py" afterPath="$PROJECT_DIR$/run.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schema.sql" afterPath="$PROJECT_DIR$/schema.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/self_define_style.css" afterPath="$PROJECT_DIR$/static/css/self_define_style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/style.css" afterPath="$PROJECT_DIR$/static/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_data.py" afterPath="$PROJECT_DIR$/test_data.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/user.py" afterPath="$PROJECT_DIR$/models/user.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/utils.py" afterPath="$PROJECT_DIR$/utils/utils.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/views.py" afterPath="$PROJECT_DIR$/views/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -21,27 +30,28 @@
     <file path="/Dummy.txt" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398216985099" ignored="false" />
     <file path="/views.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398241359969" ignored="false" />
     <file path="/layout.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397084651140" ignored="false" />
-    <file path="/run.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398220273421" ignored="false" />
-    <file path="/base.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398251209354" ignored="false" />
+    <file path="/run.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398291736702" ignored="false" />
+    <file path="/base.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398312137188" ignored="false" />
     <file path="/404.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397085433217" ignored="false" />
     <file path="/index.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398221481666" ignored="false" />
-    <file path="/self_define_style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397249520554" ignored="false" />
+    <file path="/self_define_style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398323954602" ignored="false" />
     <file path="/login_sign_up.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397180804575" ignored="false" />
     <file path="/group.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397245121869" ignored="false" />
-    <file path="/board.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398250014290" ignored="false" />
+    <file path="/board.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398327247559" ignored="false" />
     <file path="/signup.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397244322940" ignored="false" />
     <file path="/login.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397243774548" ignored="false" />
     <file path="/db.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398217127383" ignored="false" />
     <file path="/list.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397845296387" ignored="false" />
     <file path="/schema.sql" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397791839989" ignored="false" />
-    <file path="/board.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397854676874" ignored="false" />
+    <file path="/board.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398291946943" ignored="false" />
     <file path="/card.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397806302277" ignored="false" />
     <file path="/comment.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397792291257" ignored="false" />
     <file path="/activity.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397792477390" ignored="false" />
     <file path="/test_card.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397858378178" ignored="false" />
     <file path="/test_data.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398218525461" ignored="false" />
     <file path="/firebase_function_def.js" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398247822347" ignored="false" />
-    <file path="/user.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398248622544" ignored="false" />
+    <file path="/user.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398292329336" ignored="false" />
+    <file path="/style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398324316133" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,8 +74,10 @@
       <file leaf-file-name="test_data.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="0" selection-start="1497" selection-end="1497" vertical-scroll-proportion="-0.88">
-              <folding />
+            <state line="37" column="0" selection-start="1229" selection-end="1229" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#24#62#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,18 +85,49 @@
       <file leaf-file-name="board.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/board.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0">
+            <state line="64" column="0" selection-start="2015" selection-end="2015" vertical-scroll-proportion="-27.64">
+              <folding>
+                <element signature="e#24#101#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_board_form.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/forms/ajax/add_board_form.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="0" selection-start="249" selection-end="249" vertical-scroll-proportion="-5.28">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/views.py">
+      <file leaf-file-name="run.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="27" selection-start="3754" selection-end="3754" vertical-scroll-proportion="-32.04">
+            <state line="34" column="92" selection-start="953" selection-end="985" vertical-scroll-proportion="-18.84">
               <folding>
-                <element signature="e#24#105#0" expanded="true" />
+                <element signature="e#25#95#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="board.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/board.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="451" column="79" selection-start="19939" selection-end="19939" vertical-scroll-proportion="0.69863015">
+              <folding>
+                <element signature="e#1081#1102#0" expanded="true" />
+                <element signature="e#1144#1164#0" expanded="true" />
+                <element signature="e#3963#3988#0" expanded="true" />
+                <element signature="e#4418#4444#0" expanded="true" />
+                <element signature="e#5426#5452#0" expanded="true" />
+                <element signature="e#5974#6019#0" expanded="true" />
+                <marker date="1398327250732" expanded="true" signature="10159:10171" placeholder="{...}" />
+                <marker date="1398327250732" expanded="true" signature="10509:10516" placeholder="{...}" />
+                <marker date="1398327250732" expanded="true" signature="12832:12844" placeholder="{...}" />
+                <marker date="1398327250732" expanded="true" signature="13182:13189" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -93,16 +136,7 @@
       <file leaf-file-name="custom.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/custom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="firebase_function_def.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/firebase_function_def.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="45" selection-start="1980" selection-end="1989" vertical-scroll-proportion="-23.72">
+            <state line="49" column="29" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -111,40 +145,27 @@
       <file leaf-file-name="user.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/user.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="0" selection-start="3308" selection-end="3308" vertical-scroll-proportion="-28.52">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="1.0">
+              <folding>
+                <element signature="e#24#81#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="210" column="58" selection-start="9795" selection-end="9801" vertical-scroll-proportion="-12.222222">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="20" selection-start="9216" selection-end="9216" vertical-scroll-proportion="0.31506848">
-              <folding>
-                <element signature="n#style#0;n#label#1;n#form#0;n#ul#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#label#1;n#form#1;n#ul#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="board.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/board.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="196" column="25" selection-start="9030" selection-end="9030" vertical-scroll-proportion="-10.185185">
-              <folding>
-                <marker date="1398250309102" expanded="true" signature="7930:7942" placeholder="{...}" />
-                <marker date="1398250309102" expanded="true" signature="8280:8287" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="10" selection-start="456" selection-end="456" vertical-scroll-proportion="-9.862069">
+            <state line="678" column="13" selection-start="12085" selection-end="12085" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -168,22 +189,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/models/activity.py" />
-        <option value="$PROJECT_DIR$/models/list.py" />
-        <option value="$PROJECT_DIR$/models/card.py" />
         <option value="$PROJECT_DIR$/tests/test_card.py" />
         <option value="$PROJECT_DIR$/utils/db.py" />
         <option value="$PROJECT_DIR$/models/group.py" />
-        <option value="$PROJECT_DIR$/schema.sql" />
-        <option value="$PROJECT_DIR$/models/board.py" />
-        <option value="$PROJECT_DIR$/test_data.py" />
-        <option value="$PROJECT_DIR$/run.py" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/static/js/firebase_function_def.js" />
         <option value="$PROJECT_DIR$/views/views.py" />
-        <option value="$PROJECT_DIR$/templates/board.html" />
+        <option value="$PROJECT_DIR$/test_data.py" />
+        <option value="$PROJECT_DIR$/run.py" />
+        <option value="$PROJECT_DIR$/schema.sql" />
+        <option value="$PROJECT_DIR$/models/board.py" />
         <option value="$PROJECT_DIR$/models/user.py" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/static/js/custom.js" />
+        <option value="$PROJECT_DIR$/static/css/self_define_style.css" />
+        <option value="$PROJECT_DIR$/static/css/style.css" />
+        <option value="$PROJECT_DIR$/templates/board.html" />
       </list>
     </option>
   </component>
@@ -631,53 +652,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/schema.sql">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="55" selection-end="55" vertical-scroll-proportion="-0.57894737">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="58" selection-start="748" selection-end="748" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/forms/ajax/add_list_form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="25" selection-end="25" vertical-scroll-proportion="0.050574712">
-          <folding>
-            <element signature="e#25#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/forms/ajax/add_card_form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1497" selection-end="1497" vertical-scroll-proportion="-0.88">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/jquery.udraggable.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -696,36 +670,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/board.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="23" selection-start="23" selection-end="23" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="27" selection-start="3754" selection-end="3754" vertical-scroll-proportion="-32.04">
-          <folding>
-            <element signature="e#24#105#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/custom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="10" selection-start="456" selection-end="456" vertical-scroll-proportion="-9.862069">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/firebase_function_def.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="45" selection-start="1980" selection-end="1989" vertical-scroll-proportion="-23.72">
@@ -733,29 +677,117 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="13" selection-start="2954" selection-end="2959" vertical-scroll-proportion="-27.96">
+          <folding>
+            <element signature="e#24#105#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schema.sql">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="31" selection-start="363" selection-end="363" vertical-scroll-proportion="-4.4814816">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="0" selection-start="2015" selection-end="2015" vertical-scroll-proportion="-27.64">
+          <folding>
+            <element signature="e#24#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="1229" selection-end="1229" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#24#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/self_define_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="20" selection-start="1556" selection-end="1556" vertical-scroll-proportion="0.94792897">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/models/user.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="0" selection-start="3308" selection-end="3308" vertical-scroll-proportion="-28.52">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="1.0">
+          <folding>
+            <element signature="e#24#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="29" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="92" selection-start="953" selection-end="985" vertical-scroll-proportion="-18.84">
+          <folding>
+            <element signature="e#25#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/forms/ajax/add_board_form.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="249" selection-end="249" vertical-scroll-proportion="-5.28">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="678" column="13" selection-start="12085" selection-end="12085" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="210" column="58" selection-start="9795" selection-end="9801" vertical-scroll-proportion="-12.222222">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/board.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="196" column="25" selection-start="9030" selection-end="9030" vertical-scroll-proportion="-10.185185">
+        <state line="451" column="79" selection-start="19939" selection-end="19939" vertical-scroll-proportion="0.69863015">
           <folding>
-            <marker date="1398250309102" expanded="true" signature="7930:7942" placeholder="{...}" />
-            <marker date="1398250309102" expanded="true" signature="8280:8287" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="20" selection-start="9216" selection-end="9216" vertical-scroll-proportion="0.31506848">
-          <folding>
-            <element signature="n#style#0;n#label#1;n#form#0;n#ul#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#1;n#form#1;n#ul#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#1081#1102#0" expanded="true" />
+            <element signature="e#1144#1164#0" expanded="true" />
+            <element signature="e#3963#3988#0" expanded="true" />
+            <element signature="e#4418#4444#0" expanded="true" />
+            <element signature="e#5426#5452#0" expanded="true" />
+            <element signature="e#5974#6019#0" expanded="true" />
+            <marker date="1398327250732" expanded="true" signature="10159:10171" placeholder="{...}" />
+            <marker date="1398327250732" expanded="true" signature="10509:10516" placeholder="{...}" />
+            <marker date="1398327250732" expanded="true" signature="12832:12844" placeholder="{...}" />
+            <marker date="1398327250732" expanded="true" signature="13182:13189" placeholder="{...}" />
           </folding>
         </state>
       </provider>

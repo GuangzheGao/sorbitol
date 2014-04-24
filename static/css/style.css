@@ -535,3 +535,151 @@ div.input-login, div.input-signup{
 .header-dropdown-menu > .board-menu-title{
     text-align: center;
 }
+
+.custom-modal-header > .card-title{
+    font: 18px "Helvetica Neue",Arial,Helvetica,sans-serif;
+    line-height: 18px;
+    color: #393939;
+    word-wrap: break-word;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+.custom-modal-header > .header-inline{
+    color: #939393;
+    font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
+
+.card-edit-description {
+    text-decoration: underline;
+    color: #939393;
+    font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+    line-height: 18px;
+    padding-top: 15px;
+    padding-left: 25px;
+}
+
+.card-description > a{
+    text-decoration: underline;
+    color: #939393;
+    font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
+
+.edit-card-desc-form-control a{
+    padding-right: 480px;
+    padding-top: 10px;
+}
+.card-description-title {
+    color: #939393;
+    display: inline-block;
+    font-weight: normal;
+    font-size: 14px;
+}
+.card-description-title a{
+    padding-top: 5px;
+    color: #939393;
+    display: inline-block;
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.add-comment-textarea {
+    background-color: #fff;
+    border: 0;
+    -webkit-box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.23);
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.23);
+    color: #939393;
+    height: 34px;
+    margin: 4px 4px 6px 0;
+    padding: 8px 10px;
+    transition: height ease-in-out 85ms;
+    width: 100%;
+    font-weight: normal;
+}
+
+.add-comment-textarea:focus {
+    border-color: #777;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.33);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.33);
+    border: 0;
+    cursor: pointer;
+}
+
+.add-comment-textarea:hover {
+    border-color: #777;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.33);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.33);
+    border: 0;
+    cursor: pointer;
+}
+
+.comment-author > a{
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 18px;
+    color: #444;
+    cursor: pointer;
+}
+
+.comment-content {
+    padding-left: 10px;
+}
+
+.comment-meta {
+    padding-left: 10px;
+    color: #939393;
+    font-size: 12px;
+}
+
+.add-board-title-label {
+    font-weight: bold;
+}
+.add-board-detail {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.add-board-form-title {
+    background-color: #e9e9e9;
+    border: 1px solid #bfbfbf;
+    border-radius: 3px;
+    width: 100%;
+    min-height: 30px;
+    margin-bottom: 8px;
+}
+
+.add-board {
+    height: 100%;
+}
+
+
+
+
+
+
+
+li.list-group-item.board-member-names{
+    cursor: pointer;
+    cursor: hand;
+}
+
+/* conversation panel, css not work*/
+div.conversation-detail-board{
+    weight: 20%;
+    min-height: 50px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+div.conversation-content-board{
+    margin: 5px 5px 5px 5px;
+    width: 100%;
+}
+
+div.conversation-input-board{
+    margin: 5px 5px 5px 5px;
+    width: 100%;
+}

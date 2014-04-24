@@ -31,7 +31,7 @@
       <div class="members-content-group">
         <ul class="list-group">
           {% for group_user in board.get_users() %}
-          <li class="list-group-item">{{group_user.username}}</li>
+          <li class="list-group-item board-member-names" id="{{group_user.id}}"> {{group_user.username}}</li>
           {% endfor %}
         </ul>
       </div>
@@ -88,23 +88,47 @@
           <div id="card-modal-{{card.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <div class="modal-header">
+                <div class="custom-modal-header modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h4 class="modal-title" id="myModalLabel">Modal Heading</h4>
+                  <span class="card-title"><span class="glyphicon glyphicon-th-list"></span> {{card.title}}</span><span class="header-inline">in list <span style="font-weight: bold">{{list.title}}</span></span>            
+                  <div class="card-description">
+                    {% if card.get_description() %}
+                      <div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div>
+                      <div>{{card.get_description()}}</div>
+                    {% else %}
+                      <span class="glyphicon glyphicon-pencil" style="padding-right:4px;"></span><a class="js-show-edit-card-desc-form" href="#">Edit the desciption...</a>
+                    {% endif %}
+                  </div>
+
+                  <form name="edit-card-desc">
+                    <div class="card-description-title">Description</div>
+                    {{ edit_card_desc_form.csrf_token }}
+                    <textarea class="list-cards-add-textarea" id="desc" name="desc">{% if card.get_description() %}{{card.get_description()}}{% endif %}</textarea>
+                    {{ edit_card_desc_form.card_id(type="hidden", value=card.id)}}
+                    <div class="edit-card-desc-form-control">
+                      <input type="submit" class="btn btn-success" value="Save" />
+                      <a class="close"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                  </form> 
                 </div>
                 <div class="modal-body">
-                  <h4>Text in a modal</h4>
-                  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-                  <h4>Popover in a modal</h4>
-                  <p>This <a href="#" role="button" class="btn btn-default popover-test" title="" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on click.</p>
-                  <h4>Tooltips in a modal</h4>
-                  <p><a href="#" class="tooltip-test" title="" data-original-title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
-                  <h4>Overflowing text to show scroll behavior</h4>
-                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
+                  <form name="add-comment">
+                    {{ add_comment_form.csrf_token }}
+                    {{ add_comment_form.comment(class="add-comment-textarea js-card-comment-expand", placeholder="Write a comment...")}}
+                    {{ add_comment_form.card_id(type="hidden", value=card.id)}}
+                    <div class="edit-card-comment-form-control">
+                      <input type="submit" class="btn btn-success" value="Comment" />
+                      <a class="close" style="padding-right:440px; padding-top:5px;"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                  </form>
+                  {% for comment in card.get_comments() %}
+                  <div class="comment-author"> <a href="/u/{{ comment.get_user().id }}">{{ comment.get_user().username }}</a> </div>
+                  <div class="comment-content"> {{ comment.content }} </div>
+                  <div class="comment-meta"> {{ comment.created_at | timesince }} </div>
+                  {% endfor %}
+                  <!-- for activity -->
+                  <!-- endfor -->    
                 </div>
               </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -149,7 +173,32 @@
     </div>
   </div>
 </div>
+
+<!-- the conversation paenl -->
+<div class="dropup navbar navbar-fixed-bottom conversation-bar">
+  <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown">
+    Conversation
+    <span class="caret"></span>
+  </button>
+  <div class="dropdown-menu conversation-detail-board">
+    <!-- chat items -->
+    <div class="conversation-content-board">
+
+    </div>
+
+     <div class="conversation-input-board">
+      <form id="conversation-text-submit" data-receiver_id="-1"> <!-- don't let submit initially-->
+        <input type="text" name="conversation-send" placeholder="type something"><br>
+        <input type="submit" value="Send">
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
 {% endblock %}
+
 {% block javascript %}
 <script type='text/javascript'>
   //async post thread
@@ -163,11 +212,12 @@ $(document).ready(function(){
       }
   })
 
-  $("form[name='create_card']").submit(function(e){
+  $(document).on("submit", "form[name='create_card']", function(e){
     e.preventDefault();
     var title = $(this).find("textarea[name='title']").val()
     var list_id = $(this).find("input[name='list_id']").val()
     var div_list_cards = $(this).parent().parent()
+    console.log(div_list_cards)
     if($('div[name=server-error]').length > 0){
       $('div[name=server-error]').remove()
     }
@@ -183,8 +233,8 @@ $(document).ready(function(){
         div_list_cards.find('.js-list-cards-add').show()
         card_div.find('.list-card-title').html(title);
 
-        {% for group_user in board.get_users() %}
-          notify_users({{ user.id }}, '{{ user.username }}', {{ group_user.id }}, "created card of name " + title); //is defined in base.html
+        {% for users in board.get_users() %}
+          notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, "created card of name " + title); //is defined in base.html
         {% endfor %}
       },
       error: function(msg) {
@@ -197,7 +247,6 @@ $(document).ready(function(){
       e.preventDefault();
       var title = $(this).find("textarea[name='title']").val();
       var board_id = $(this).find("input[name='board_id']").val();
-      var div_lists = $(document).find('.add-new-list')
       if($('div[name=server-error]').length > 0){
         $('div[name=server-error]').remove()
       }
@@ -207,30 +256,17 @@ $(document).ready(function(){
         url: '/l',
         data: {title: title, board_id: board_id},
         success: function(result) {
+          var list_id = result['list_id']
           $(this).find("textarea[name='list_title']").val('');
-          var list_div = $('<div class="list-board"><div class="list-header-board"></div><div class="list-cards"></div><div class="js-list-cards-add"><a href="#"><div class="list-cards-add">Add a card...</div></a></div><div class="list-cards-add-form"><form name="create_card"> <textarea name="card-title" class="list-cards-add-textarea"></textarea><div class="list-cards-add-form-control"><input type="submit" class="btn btn-success" value="Add" /><a class="close"><span class="glyphicon glyphicon-remove"></span></a></div></form></div></div>')
-          div_lists.before(list_div);
+          var list_div = $('<div class="list-board"><div class="list-header-board"></div><div class="list-cards"><div class="js-list-cards-add"><a href="#"><div class="list-cards-add">Add a card...</div></a></div><div class="list-cards-add-form"><form name="create_card">{{ add_card_form.csrf_token }}{{ add_card_form.title(class="list-cards-add-textarea") }}<input id="list_id" name="list_id" type="hidden" value='+list_id+'><div class="list-cards-add-form-control"><input type="submit" class="btn btn-success" value="Add" /><a class="close"><span class="glyphicon glyphicon-remove"></span></a></div></form></div></div></div>')
+          $('.add-new-list').before(list_div);
           list_div.find('.list-cards-add-form').hide()
           list_div.find('.list-header-board').html(title);
-          div_lists.find('.list-list-add-form').hide()
-          div_lists.find('.js-add-new-list').show()
+          $('.list-list-add-form').hide()
+          $('.js-add-new-list').show()
 
-          list_div.find('.js-list-cards-add').on("click", '>a', function(e){
-            var div_list_cards = $(this).parent().parent()
-            $('.list-cards-add-form').hide()
-            $('.js-list-cards-add').show()
-            div_list_cards.find('.list-cards-add-form').show()
-            div_list_cards.find('.js-list-cards-add').hide()
-          })
-
-          list_div.find('.list-cards-add-form .close').click(function(e){
-            console.log("clicked")
-            $('.list-cards-add-form').hide()
-            $('.js-list-cards-add').show()
-          })
-
-          {% for group_user in board.get_users() %}
-            notify_users({{ user.id }}, '{{ user.username }}', {{ group_user.id }}, "created list of name " + title ) //is defined in base.html
+          {% for users in board.get_users() %}
+            notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, "created list of name " + title ) //is defined in base.html
           {% endfor %}
         },
         error: function(msg) {
@@ -239,8 +275,190 @@ $(document).ready(function(){
         }
     })
   })
-  
+  $("form[name='edit-card-desc']").submit(function(e){
+      e.preventDefault();
+      var desc = $(this).find("textarea[name='desc']").val();
+      var card_id = $(this).find("input[name='card_id']").val();
+      var div_lists = $(document).find('.add-new-list')
+      if($('div[name=server-error]').length > 0){
+        $('div[name=server-error]').remove()
+      }
+      $.ajax({
+        type: "POST",
+        url: '/c/'+card_id,
+        data: {desc: desc, card_id: card_id},
+        success: function(result) {
+          if (desc == ''){
+            var desc_inner = '<span class="glyphicon glyphicon-pencil" style="padding-right:4px;"></span><a class="js-show-edit-card-desc-form" href="#">Edit the desciption...</a>'
+          }else{
+            var desc_inner = '<div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div><div>' + desc + '</div>'
+          }
+          $('.card-description').html(desc_inner)
+          $("form[name='edit-card-desc']").hide()
+          $('.card-description').show()
+        },
+        error: function(msg) {
+          var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
+          $('div[name="comment-panel"]').append(msg_div);
+        }
+    })
+  })  
+  $(document).on("submit", "form[name='add-comment']", function(e){
+    e.preventDefault();
+    var comment = $(this).find("textarea[name='comment']").val();
+    var card_id = $(this).find("input[name='card_id']").val();
+    console.log(comment, card_id)
+    if($('div[name=server-error]').length > 0){
+      $('div[name=server-error]').remove()
+    }
+    $.ajax({
+      type: "POST",
+      url: '/c/'+card_id+'/comments',
+      data: {comment: comment, card_id: card_id},
+      success: function(result) {
+        var comment_div = "<div class='comment-author'><a href='/u/{{current_user.id}}'>{{current_user.username }}</a></div><div class='comment-content'>"+ comment +"</div><div class='comment-meta'>1 second ago</div>"
+        $("form[name='add-comment']").after(comment_div)
+        $(".edit-card-comment-form-control").hide()
+        $(".js-card-comment-expand").animate({
+          height:36
+        }, 30)
+      },
+      error: function(msg) {
+
+      }
+    })
+  })
+
 })
+</script>
+
+<!-- control chatting -->
+<script type='text/javascript'>
+
+
+   $(document).ready(function() {
+       //prevent close of content
+       $(document).on('click', 'div.dropdown-menu', function (e) {
+            e.stopPropagation();
+        });
+
+       //send new data
+        $(document.body).on("submit", "form#conversation-text-submit", function(e){
+            e.preventDefault();
+
+            //(id1, id2, sendername, sender text)
+            id1 = "{{ user.id }}";
+            id2 =  $(this).data("receiver_id");
+            sender_name = "{{ user.username }}"
+
+            if(id2 == "-1"){ //don't let send to nobody
+                return;
+            }
+
+            sender_input_element = $(this).children("input[name='conversation-send']").eq(0);
+            sender_text = sender_input_element.val();
+            sender_input_element.val(""); //set input to empty
+
+            send_chat_users(id1, id2, sender_name, sender_text);
+            //$("div.conversation-content-board").append(sender_name + ": " + sender_text + " " + getDateTime()); //append the chat to list
+        });
+
+
+          //open the chat panel when member is clicked, (meaning the user wants to check chat)
+          $(document).on("click", "li.board-member-names", function(e){
+            id_first = $(this).attr("id");
+            id_second = "{{ user.id }}";
+            //alert(id_first + " " + id_second)
+            if( id_first != id_second ){    //only open bar if not same id
+                if(!$("div.conversation-bar").hasClass("open")){
+                    $("div.conversation-bar").addClass("open");
+                    $("form#conversation-text-submit").data("receiver_id", id_first);
+                    load_chat_users(id_first, id_second);
+                }
+            }
+            e.stopPropagation(); //prevent conversation-bar close
+          })
+
+    });
+
+   var current_chat_with = "NO"; //update reference of who is chatting with to close old chat event and open new one
+
+   function getDateTime() {
+        var now     = new Date();
+        var year    = now.getFullYear();
+        var month   = now.getMonth()+1;
+        var day     = now.getDate();
+        var hour    = now.getHours();
+        var minute  = now.getMinutes();
+        var second  = now.getSeconds();
+        if(month.toString().length == 1) {
+            var month = '0'+month;
+        }
+        if(day.toString().length == 1) {
+            var day = '0'+day;
+        }
+        if(hour.toString().length == 1) {
+            var hour = '0'+hour;
+        }
+        if(minute.toString().length == 1) {
+            var minute = '0'+minute;
+        }
+        if(second.toString().length == 1) {
+            var second = '0'+second;
+        }
+        var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+        return dateTime;
+    }
+
+    //send chat between users
+    var send_chat_users = function(id_first, id_second, sender_name, sender_text){
+        if(id_first == id_second){
+            return; //no chat with self
+        }
+        concatenated_id = "";
+        if(parseInt(id_first,10) < parseInt(id_second, 10)){
+            concatenated_id = id_first + " " + id_second;
+        }
+        else{
+            concatenated_id = id_second + " " + id_first;
+        }
+        myDataRef.child( concatenated_id + "/chat_recv").push({info_detail: sender_name + ": " + sender_text + " " + getDateTime()});
+    }
+
+    //load chat between users
+    var load_chat_users = function(id_first, id_second){
+        if(id_first == id_second){
+            return; //can not chat with self
+        }
+        concatenated_id = "";
+        if(parseInt(id_first,10) < parseInt(id_second, 10)){ //convention, smaller first
+            concatenated_id = id_first + " " + id_second;
+        }
+        else{
+            concatenated_id = id_second + " " + id_first;
+        }
+
+        if(current_chat_with != "NO" ){ //has a connection event
+            current_chat_with.off("child_added", update_chat_firebase); //cut connection with previous talker
+        }
+        //get all values of chat, do once, not keep listening
+        $("div.conversation-content-board").empty(); //remove entries with previous talker
+        current_chat_with = myDataRef.child( concatenated_id + "/chat_recv"); //renew reference
+        current_chat_with.on("child_added", update_chat_firebase); //attach new refence
+      }
+
+      //helper that works on data firebase returns for html
+      var update_chat_firebase = function(snapshot){
+            $("div.conversation-content-board").append("<div>" + snapshot.val()["info_detail"] + "</div>");
+            /* originally use once listener, not real time, so we use on
+            snapVal = snapshot.val()
+            alert(JSON.stringify(snapVal));
+            for (var key in snapVal) { //key is "hashcode of firebase"
+                alert(key + " -> " + snapVal[key]["info_detail"]);
+                $("div.conversation-content-board").append("<div>" + snapVal[key]["info_detail"] + "</div>");
+            }
+            */
+      }
 </script>
 
 {% endblock %}

@@ -14,10 +14,12 @@ $(document).ready(function(){
 		})
 	})
 
+	$('.add-board-detail').show()
+	$('.add-board').hide()
 	$('.js-new-board').click(function(e){
 		console.log("clicked")
 		e.stopPropagation();
-		$('.add-board-detail').show()
+		$('.add-board').show()
 		$('.add-entry').hide()
 	})
 
@@ -25,17 +27,9 @@ $(document).ready(function(){
 		e.stopPropagation();
 	})
 
-	$('.js-new-group').click(function(e){
-		console.log("clicked")
-		e.stopPropagation();
-		$('.add-group-detail').show()
-		$('.add-entry').hide()
-	})
-
 	$('.js-open-header-menu').on('hidden.bs.dropdown', function () {
-  		$('.add-board-detail').hide()
+  		$('.add-board').hide()
 		$('.add-entry').show()
-		$('.add-group-detail').hide()
 	})
 
 	var width = $(window).width(); 
@@ -53,7 +47,7 @@ $(document).ready(function(){
 	})
 
 	$('.js-resize-overflow').css({
-		width: 270*list_count,
+		width: 270*list_count
 	})
 	$('.side-bar').hide()
 	$('.js-show-side-bar').click(function(e){
@@ -74,7 +68,8 @@ $(document).ready(function(){
 		$('.side-bar').hide()
 	})
 
-	$('.js-list-cards-add').on("click", function(e){
+	$(document).on("click",'.js-list-cards-add', function(e){
+		console.log('clicked')
 		var div_list_cards = $(this).parent().parent()
 		$('.list-cards-add-form').hide()
 		$('.js-list-cards-add').show()
@@ -83,7 +78,7 @@ $(document).ready(function(){
 	})
 
 	$('.list-cards-add-form').hide()
-	$('.list-cards-add-form .close').click(function(e){
+	$(document).on('click', '.list-cards-add-form .close', function(e){
 		console.log("clicked")
 		$('.list-cards-add-form').hide()
 		$('.js-list-cards-add').show()
@@ -123,5 +118,46 @@ $(document).ready(function(){
 		console.log("clicked")
 		$('.js-add-new-list').show()
 		$('.list-list-add-form').hide()
+	})
+	$("form[name='edit-card-desc']").hide()
+	$(document).on('click', '.js-show-edit-card-desc-form', function(e){
+		console.log("clicked")
+		$("form[name='edit-card-desc']").show()
+		$('.card-description').hide()
+	})
+	$('.edit-card-desc-form-control > .close').click(function(e){
+		console.log("clicked")
+		$("form[name='edit-card-desc']").hide()
+		$('.card-description').show()
+	})
+	$('.modal').on('hidden.bs.modal', function (e) {
+  		$("form[name='edit-card-desc']").hide()
+		$('.card-description').show()
+		$(".edit-card-comment-form-control").hide()
+		$(".js-card-comment-expand").animate({
+			height:36
+		}, 30)
+	})
+	$(".edit-card-comment-form-control").hide()
+	$(".js-card-comment-expand").height(20)
+	$(document).on('click', '.js-card-comment-expand', function(e){
+		e.stopPropagation();
+				$(".edit-card-comment-form-control").show()
+		if($(this).height()<50){
+			$(this).animate({
+				height:"+=50px"
+			}, 30)
+		}
+
+	})
+	$(document).on('click', '.edit-card-comment-form-control > .close', function(e){
+		e.stopPropagation();
+		console.log("clicked")
+		console.log($(".js-card-comment-expand").height())
+		$(".edit-card-comment-form-control").hide()
+		$(".js-card-comment-expand").animate({
+			height:36
+		}, 30)
+
 	})
 })

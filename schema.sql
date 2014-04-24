@@ -23,7 +23,7 @@ CREATE TABLE `users` (
 DROP TABLE IF EXISTS `boards`;
 CREATE TABLE `boards` (
     `id` int(12) NOT NULL AUTO_INCREMENT,
-    `group_id` int(12) NOT NULL,
+    --`group_id` int(12) NOT NULL,
     `title` varchar(512) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `visibility` char(1),

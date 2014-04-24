@@ -43,4 +43,8 @@ class Comment(Base):
     def get_comments_by_card_id(cls, card_id):
         card_id = long(card_id)
         comments = mysql_session.query(cls).filter_by(card_id = card_id)
-        return comments
+
+        return sorted(comments, key=lambda x:x.created_at, reverse=True)
+
+    def get_user(self):
+        return User.get(self.user_id)

@@ -16,9 +16,42 @@
   <!-- jquery -->
   <script type="text/javascript" src="/static/js/jquery-1.11.0.js"></script>
   <script src="/static/js/bootstrap.js"></script>
-  <script type="text/javascript" src="/static/js/custom.js"></script> <!-- contains content manipulation-->
-  <script type="text/javascript" src="/static/js/jquery.udraggable.js"></script>
-  {% block javascript %}{% endblock %}
+
+  <script type="text/javascript" src="/static/js/custom.js"></script>
+  <script type="text/javascript" src="/static/js/jquery.udraggable.js"></script>  
+
+    <script type='text/javascript'>
+      $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+              xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token() }}")
+          }
+        }
+      })
+
+      $(document).on("submit", "form[name='add-board-detail']", function(e){
+        e.preventDefault();
+        console.log("submited")
+        var title = $(this).find("input[name='title']").val();
+        if($('div[name=server-error]').length > 0){
+          $('div[name=server-error]').remove()
+        }
+        $.ajax({
+          type: "POST",
+          url: '/b',
+          data: {title: title},
+          success: function(result) {
+            board_id = result['board_id']
+            window.location.href = "/b/"+board_id;
+          },
+          error: function(msg) {
+          }
+        })
+      })
+    </script>
+
+    {% block javascript %}{% endblock %}
+
   <title>{% block title %}{% endblock %} - sorbitol</title>
 </head>
 
@@ -31,18 +64,24 @@
         <span class="glyphicon glyphicon-tasks header-btn-icon"></span> Boards
       </a>
       <ul aria-labelledby="board-menu" class="board-menu dropdown-menu" role="menu">
-        <!-- for group in groups -->
-        {% for group in user.get_groups() %}
-            <li class="board-menu-title board-container" id="{{ group.id }}">
-                <span class="glyphicon glyphicon-tasks"></span> {{group.title}} <!--My Boards -->
-                <!-- for board in boards -->
-                {% for board in user.get_boards(group.id) %}
-                    <a href="/b/{{board.id}}"><li class="btn board-menu-list">{{board.title}}</li></a>
-                {% endfor %}
-                <!--end for-->
+        <!-- for group in groups
+        for group in user.get_groups()
+            <li class="board-menu-title board-container" id="group.id ">
+                <span class="glyphicon glyphicon-tasks"></span> group.title
+                for board in user.get_boards()
+                    <a href="/b/board.id"><li class="btn board-menu-list">board.title</li></a>
+                endfor
             </li>
-        {% endfor %}
-        <!--end for-->
+        endfor
+        -->
+        <li class="board-menu-title board-container">
+            <span class="glyphicon glyphicon-tasks"></span> My Boards
+            <!-- for board in boards -->
+            {% for board in user.get_boards() %}
+                <a href="/b/{{board.id}}"><li class="btn board-menu-list">{{board.title}}</li></a>
+            {% endfor %}
+            <!--end for-->
+        </li>
       </ul>
     </div>
 
@@ -54,10 +93,11 @@
 
         <ul aria-labelledby="add-menu" class="header-dropdown-menu-add header-dropdown-menu dropdown-menu list-group" role="menu">
           <li class="add-entry board-menu-title">Add...</li>
-          <!-- for board in boards -->
+<!--
+
           <a class="add-entry js-new-board list-group-item" href="#"><h4 class="head-dropdown-menu-heading list-group-item-heading">New Board...</h4><p class="list-group-item-text">A board is a collection of cards ordered in a list of lists. Use it to manage a project, track a collection, or organize anything.</p></a>
           <a class="add-entry js-new-group list-group-item" href="#"><h4 class="head-dropdown-menu-heading list-group-item-heading">New Group...</h4><p class="list-group-item-text">An organization is a group of boards and people. Use it to group boards in your company, team, or family.</p></a>
-          <!--end for-->
+
 
           <li class="add-board-detail" >Create Board</li>
           <form class="add-board-detail">
@@ -65,11 +105,9 @@
             <input id="boardNewTitle" type="text" name="name" class="js-stop-propagation" placeholder="Untitled Board">
             <label class="left" style="margin-right: 8px;">Organization</label>
             <select class="js-stop-propagation group-option" name="group_id">
-                <!-- for group in groups -->
-                {% for group in user.get_groups() %}
-                <option class="js-stop-propagation" id="{{ group.id }}">{{ group.title }}</option>
-                {% endfor %}
-                <!--end for-->
+                { for group in user.get_groups() }
+                <option class="js-stop-propagation" id="{ group.id }">{ group.title }</option>
+                { endfor }
             </select>
             <input type="submit" class="primary wide js-submit" value="Create">
           </form>
@@ -82,6 +120,21 @@
             <textarea id="org-desc" class="js-stop-propagation" name="desc" type="text"></textarea>
             <input type="submit" class="" value="Create">
           </form>
+-->
+
+          <!-- no new group for now -->
+          <a class="add-entry js-new-board list-group-item" href="#"><h4 class="head-dropdown-menu-heading list-group-item-heading">New Board...</h4><p class="list-group-item-text">A board is a collection of cards ordered in a list of lists. Use it to manage a project, track a collection, or organize anything.</p></a>
+          <div class="add-board">
+            <li class="board-menu-title">Create Board</li>
+            <form class="add-board-detail" name='add-board-detail'>
+              {{ add_board_form.csrf_token }}
+              <div class="add-board-title-label">Title</div>
+              {{ add_board_form.title(class="add-board-form-title js-stop-propagation", placeholder="Untitled Board") }}
+              <input type="submit" class="btn btn-success primary wide js-submit" value="Create" />
+            </form>
+          </div>
+
+
         </ul>
       </div>
       <div class="js-open-header-menu header-user-user">
@@ -117,6 +170,7 @@
       </div>
     </div>
   </div>
+
   {% endif %}
   <!-- Navbar Ends -->
 
@@ -125,6 +179,7 @@
 
 
   {% if user %}
+  <!--firebase notification on ACTIVITY & CHAT-->
   <script type='text/javascript'>
     var myDataRef = new Firebase('https://dazzling-fire-9098.firebaseio.com/');
     var auth = new FirebaseSimpleLogin(myDataRef, function(error, user) {
@@ -141,19 +196,19 @@
       password: 'root'
     });
 
-    // listen other user sends
+    // listen activity other user sends
     myDataRef.child( {{ user.id }} + "/msg_recv").on("child_added",
     function(newMessageSnapshot) {
         //renderNotification(newMessageSnapshot.val());
         //newMessageSnapshot.ref().remove();
         incomeMSG = newMessageSnapshot.val()
-        console.log(typeof incomeMSG.id_sender);
+        //console.log(typeof incomeMSG.id_sender);
         $("ul.notification-list").append('<a class="list-group-item head-dropdown-menu-heading notification-item" href="#" id="'+ incomeMSG.id_sender +'">'+
             incomeMSG.sender+ ": " + incomeMSG.info_sender + '</a>');
     });
 
 
-    //Send a message to another user, should be be called by places necessary(new stuff is done)
+    //Send a message to another user when activity, should be be called by places necessary(new stuff is done)
     var notify_users = function (initiator_id, initiator, user_affected, information){
         myDataRef.child(user_affected).child("msg_recv").push({id_sender: initiator_id, sender: initiator, info_sender: information });
     }
@@ -166,12 +221,15 @@
             $("ul.notification-list").html('<a class="list-group-item head-dropdown-menu-heading notification-ack" href="#">Acknowledge</a>'); //remove all acknowledgements in html
         });
     });
+
+
   </script>
   {% endif %}
 
 
 
 
+    <!--
    <script type='text/javascript'> //TODO: NOT WORK
     $(document).ready(function() {
 
@@ -222,7 +280,7 @@
 
     });
     </script>
-
+    -->
 
 
 </body>

@@ -48,7 +48,7 @@ class Card(Base):
     def get(cls, card_id):
         card_id = long(card_id)
         card = mysql_session.query(cls).filter_by(id = card_id).first()
-        return card.id
+        return card
 
     @classmethod
     def get_cards_by_list_id(cls, list_id):
@@ -84,3 +84,13 @@ class Card(Base):
             return 0
         else:
             return count
+
+    def get_description(self):
+        return r_server.get('/card/%d/desc' % self.id)
+
+    def set_description(self, desc):
+        r_server.set('/card/%d/desc' % self.id, desc)
+
+    def get_comments(self):
+        from models.comment import Comment
+        return Comment.get_comments_by_card_id(self.id)
