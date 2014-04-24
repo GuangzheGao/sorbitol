@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid" style="padding-left:0px; padding-right:0px;">
+  <div class="profile-header">
+    <div class="profile-name">{{profile_owner.username}}</div> 
+    <div class="profile-tabs">
+      <ul class="nav nav-tabs">
+        {% if tag == 'profile' %}
+        <li class="active"><a href="#">Profile</a></li>
+        <li><a href="/u/{{profile_owner.id}}/cards">Cards</a></li>
+        <li><a href="/u/{{profile_owner.id}}/settings">Settings</a></li>
+        {% elif tag == 'cards' %}
+        <li><a href="/u/{{profile_owner.id}}">Profile</a></li>
+        <li class="active"><a href="#">Cards</a></li>
+        <li><a href="/u/{{profile_owner.id}}/settings">Settings</a></li>
+        {% elif tag == 'settings' %}
+        <li><a href="/u/{{profile_owner.id}}">Profile</a></li>
+        <li><a href="/u/{{profile_owner.id}}/cards">Cards</a></li>
+        <li class="active"><a href="#">Settings</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  <div class="profile-main">
+    <div class="profile-detail">
+      <div class="profile-detail-title">
+        {% if tag == 'profile' %}
+        <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
+        {% elif tag == 'cards' %}
+        <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Cards
+        {% elif tag == 'settings' %}
+        <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Settings
+        {% endif %}
+      </div>
+      <!-- for activity in activity -->
+      <div class="profile-detail-entry">
+        {% if tag == 'cards' %}
+        {% for card in cards %}
+        <div class="profile-card list-card panel" >
+          <a class="list-card-hover" href="/b/{{card.get_board_id()}}?show_card={{card.id}}"><div class="list-card-title">{{card.title}}</div>
+            <div class="list-card-badgets">
+              <div class="list-card-badget list-card-badgets-comments">
+                <span class="glyphicon glyphicon-comment"></span> {{card.get_comment_count()}}
+              </div>
+              <div class="list-card-badget list-card-badgets-attachments">
+                <span class="glyphicon glyphicon-paperclip"></span> 0
+              </div>  
+            </div>
+
+            <div class="list-card-members">
+              <!--for member in card.members-->
+              <div class="list-card-member">
+                {member.name}
+              </div> 
+              <!--end for-->
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>  
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

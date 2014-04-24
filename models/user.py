@@ -92,5 +92,15 @@ class User(Base):
 
     def add_board(self, board):
         return r_server.rpush('/user/%d/boards' % self.id, board.id)
+    
+    def get_card_ids(self):
+        return r_server.lrange('/user/%d/cards' % self.id, 0, -1)
+
+    def get_cards(self):
+        from models.card import Card
+        return Card.get_multi(self.get_card_ids())
+
+    def add_card(self, card):
+        r_server.rpush('/user/%d/cards' % self.id, card.id)
 
 User.query = mysql_session.query(User)

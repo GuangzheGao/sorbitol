@@ -187,6 +187,10 @@ $(document).ready(function(){
       }
   })
 
+  {% if show_card_id > 0 %}
+    $('#card-modal-{{show_card_id}}').modal()
+  {% endif %}
+
   $(document).on("submit", "form[name='create_card']", function(e){
     e.preventDefault();
     var title = $(this).find("textarea[name='title']").val()

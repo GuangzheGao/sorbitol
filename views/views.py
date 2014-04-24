@@ -70,8 +70,42 @@ def render_signup():
 @login_required
 def render_user(user_id = None):
     '''user page'''
-    return render_template('profile.html', user = current_user)
+    user = User.get(long(user_id))
+    if not user:
+        return jsonify({'code':404, 'message':'Page Not Found'})
+    return render_template('profile.html', 
+                            tag = 'profile',
+                            user = current_user,
+                            profile_owner = user,
+                            add_board_form = AddBoardForm())
 
+@main_app.route('/u/<path:user_id>/cards')
+@login_required
+def render_user_cards(user_id = None):
+    if long(user_id) != current_user.id:
+        return redirect(url_for('index'))
+
+    user = User.get(long(user_id))
+    cards = user.get_cards()
+    return render_template('profile.html',
+                            tag = 'cards',
+                            user = current_user,
+                            profile_owner = user,
+                            add_board_form = AddBoardForm(),
+                            cards = user.get_cards())
+
+@main_app.route('/u/<path:user_id>/settings')
+@login_required
+def render_user_settings(user_id = None):
+    if long(user_id) != current_user.id:
+        return redirect(url_for('index'))
+
+    user = User.get(long(user_id))
+    return render_template('profile.html',
+                            tag = 'settings',
+                            user = current_user,
+                            profile_owner = user,
+                            add_board_form = AddBoardForm())
 @main_app.route('/b', methods=['POST', ])
 @login_required
 def api_board(board_id=None):
@@ -95,12 +129,18 @@ def api_board(board_id=None):
 def render_board(board_id = None):
     '''board page'''
     board=Board.get(board_id)
+    try:
+        show_card_id = request.args['show_card']
+    except:
+        show_card_id = -1
+
     if board == None:
         return render_template('404.html');
     else:
         return render_template('board.html', 
                                 user=current_user, 
                                 board=board, 
+                                show_card_id=show_card_id,
                                 lists = board.get_lists(),
                                 add_card_form = AddCardForm(),
                                 add_list_form = AddListForm(),

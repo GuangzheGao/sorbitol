@@ -42,6 +42,7 @@ class Card(Base):
         
         user = User.get(user_id)
         card.add_user(user)
+        user.add_card(card)
         return card.id
 
     @classmethod
@@ -49,6 +50,10 @@ class Card(Base):
         card_id = long(card_id)
         card = mysql_session.query(cls).filter_by(id = card_id).first()
         return card
+
+    @classmethod
+    def get_multi(cls, ids):
+        return [cls.get(id) for id in ids]
 
     @classmethod
     def get_cards_by_list_id(cls, list_id):
@@ -94,3 +99,8 @@ class Card(Base):
     def get_comments(self):
         from models.comment import Comment
         return Comment.get_comments_by_card_id(self.id)
+
+    def get_board_id(self):
+        from models.list import List
+        _list = List.get(self.list_id)
+        return _list.board_id

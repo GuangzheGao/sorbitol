@@ -653,3 +653,65 @@ div.input-login, div.input-signup{
 .add-board {
     height: 100%;
 }
+
+.profile-header {
+    background-color: #f0f0f0;
+    padding-top: 32px;
+    width: 100%;
+}
+
+.profile-name {
+    font-size: 22px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.profile-tabs {
+    width: 100%;
+}
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs>li>a {
+    border-radius: 1px;
+    background-color: #ccc;
+    padding: 8px 20px;
+    font-weight: bold;
+    color: #444;
+    line-height: 18px;
+}
+
+.nav-tabs>li>a:hover {
+    background: #bbb;
+    border-color: #bbb;
+}
+.nav-tabs, .nav-pills {
+    text-align:center;
+}
+.profile-main {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.profile-detail-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+.profile-detail-entry {
+    padding-top: 10px;
+}
+.profile-card {
+    width: 240px;
+    border-top: 1px solid #d4d4d4;
+    border-left: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4;   
+    border-bottom: 1px solid #bdbdbd;
+}
