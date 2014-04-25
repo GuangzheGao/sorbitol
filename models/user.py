@@ -83,40 +83,27 @@ class User(Base):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-
-    '''
-    def get_group_ids(self):
-        return r_server.lrange('/user/%d/groups' % self.id, 0 , -1)
-
-    def get_groups(self):
-        from models.group import Group
-        return Group.get_multi(self.get_group_ids())
-
-    def add_group(self, group):
-        return r_server.rpush('/user/%d/groups' % self.id, group.id)
-    '''
-
     #for cases where group is observable but not the board in group for the current user
     def get_board_ids(self):
         #return r_server.lrange('/user/%d/group/%d/boards' % (self.id, group_id), 0 , -1)
-        return r_server.lrange('/user/%d/boards' % self.id, 0 , -1)
+        return r_server.smembers('/user/%d/boards' % self.id)
 
     def get_boards(self): #group_id
         from models.board import Board
         return Board.get_multi(self.get_board_ids())
 
     def add_board(self, board):
-        return r_server.rpush('/user/%d/boards' % self.id, board.id)
+        return r_server.sadd('/user/%d/boards' % self.id, board.id)
     
     def get_card_ids(self):
-        return r_server.lrange('/user/%d/cards' % self.id, 0, -1)
+        return r_server.smembers('/user/%d/cards' % self.id)
 
     def get_cards(self):
         from models.card import Card
         return Card.get_multi(self.get_card_ids())
 
     def add_card(self, card):
-        r_server.rpush('/user/%d/cards' % self.id, card.id)
+        r_server.sadd('/user/%d/cards' % self.id, card.id)
 
     def get_avatar(self):
         return r_server.get('/user/%d/avatar' % self.id)
