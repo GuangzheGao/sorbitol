@@ -30,7 +30,10 @@ def get_user(user_id):
 def index():
     if not current_user or current_user.is_anonymous():
         return redirect(url_for('main_app.render_login'))
+
+    #return render_template('index.html', user=current_user)
     return render_template('index.html', user=current_user, boards=current_user.get_boards(), add_board_form = AddBoardForm())
+
 
 @app.errorhandler(404)
 def page_not_found(e):

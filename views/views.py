@@ -11,6 +11,7 @@ from models.forms.ajax.add_board_form import AddBoardForm
 from models.board import Board
 from models.list import List
 from models.card import Card
+from models.group import Group
 from models.comment import Comment
 
 from flask.ext.login import login_user, logout_user, current_user, login_required
@@ -221,3 +222,36 @@ def api_add_comment(card_id=None):
 
     comment = Comment.add(long(card_id), current_user.id, content)
     return jsonify({'card_id': card_id})
+
+
+''' form request to create new group or board '''
+'''
+@main_app.route('/g', methods=['POST'])
+@login_required
+def api_group():
+    try:
+        print "start"
+        title = request.form['name']
+        description = request.form['desc']
+        print "end"
+    except KeyError:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+    else:
+        return jsonify({"group_id": Group.add(title, description)})
+
+@main_app.route('/b', methods=['GET', 'POST'])
+def api_board():
+    if request.method == 'GET':
+        return jsonify(None)
+    else:
+        try:
+            print "start"
+            title = request.form['title']
+            print "mid"
+            group_id = request.form['group_id']
+            print "end"
+        except KeyError:
+            return jsonify({'code': 400, 'message': 'Bad Request'})
+        else:
+            return jsonify({"board_id": Board.add(title, "A", group_id)})
+'''

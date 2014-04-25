@@ -30,8 +30,8 @@
       </div>
       <div class="members-content-group">
         <ul class="list-group">
-          {% for user in board.get_users() %}
-          <li class="list-group-item">{{user.username}}</li>
+          {% for group_user in board.get_users() %}
+          <li class="list-group-item board-member-names" id="{{group_user.id}}"> {{group_user.username}}</li>
           {% endfor %}
         </ul>
       </div>
@@ -173,7 +173,32 @@
     </div>
   </div>
 </div>
+
+<!-- the conversation paenl -->
+<div class="dropup navbar navbar-fixed-bottom conversation-bar">
+  <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown">
+    Conversation
+    <span class="caret"></span>
+  </button>
+  <div class="dropdown-menu conversation-detail-board">
+    <!-- chat items -->
+    <div class="conversation-content-board">
+
+    </div>
+
+     <div class="conversation-input-board">
+      <form id="conversation-text-submit" data-receiver_id="-1"> <!-- don't let submit initially-->
+        <input type="text" name="conversation-send" placeholder="type something"><br>
+        <input type="submit" value="Send">
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
 {% endblock %}
+
 {% block javascript %}
 <script type='text/javascript'>
   //async post thread
@@ -212,6 +237,9 @@ $(document).ready(function(){
         div_list_cards.find('.js-list-cards-add').show()
         card_div.find('.list-card-title').html(title);
 
+        {% for users in board.get_users() %}
+          notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, "created card of name " + title); //is defined in base.html
+        {% endfor %}
       },
       error: function(msg) {
         var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
@@ -241,6 +269,9 @@ $(document).ready(function(){
           $('.list-list-add-form').hide()
           $('.js-add-new-list').show()
 
+          {% for users in board.get_users() %}
+            notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, "created list of name " + title ) //is defined in base.html
+          {% endfor %}
         },
         error: function(msg) {
           var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
@@ -301,7 +332,137 @@ $(document).ready(function(){
       }
     })
   })
+
 })
+</script>
+
+<!-- control chatting -->
+<script type='text/javascript'>
+
+
+   $(document).ready(function() {
+       //prevent close of content
+       $(document).on('click', 'div.dropdown-menu', function (e) {
+            e.stopPropagation();
+        });
+
+       //send new data
+        $(document.body).on("submit", "form#conversation-text-submit", function(e){
+            e.preventDefault();
+
+            //(id1, id2, sendername, sender text)
+            id1 = "{{ user.id }}";
+            id2 =  $(this).data("receiver_id");
+            sender_name = "{{ user.username }}"
+
+            if(id2 == "-1"){ //don't let send to nobody
+                return;
+            }
+
+            sender_input_element = $(this).children("input[name='conversation-send']").eq(0);
+            sender_text = sender_input_element.val();
+            sender_input_element.val(""); //set input to empty
+
+            send_chat_users(id1, id2, sender_name, sender_text);
+            //$("div.conversation-content-board").append(sender_name + ": " + sender_text + " " + getDateTime()); //append the chat to list
+        });
+
+
+          //open the chat panel when member is clicked, (meaning the user wants to check chat)
+          $(document).on("click", "li.board-member-names", function(e){
+            id_first = $(this).attr("id");
+            id_second = "{{ user.id }}";
+            //alert(id_first + " " + id_second)
+            if( id_first != id_second ){    //only open bar if not same id
+                if(!$("div.conversation-bar").hasClass("open")){
+                    $("div.conversation-bar").addClass("open");
+                    $("form#conversation-text-submit").data("receiver_id", id_first);
+                    load_chat_users(id_first, id_second);
+                }
+            }
+            e.stopPropagation(); //prevent conversation-bar close
+          })
+
+    });
+
+   var current_chat_with = "NO"; //update reference of who is chatting with to close old chat event and open new one
+
+   function getDateTime() {
+        var now     = new Date();
+        var year    = now.getFullYear();
+        var month   = now.getMonth()+1;
+        var day     = now.getDate();
+        var hour    = now.getHours();
+        var minute  = now.getMinutes();
+        var second  = now.getSeconds();
+        if(month.toString().length == 1) {
+            var month = '0'+month;
+        }
+        if(day.toString().length == 1) {
+            var day = '0'+day;
+        }
+        if(hour.toString().length == 1) {
+            var hour = '0'+hour;
+        }
+        if(minute.toString().length == 1) {
+            var minute = '0'+minute;
+        }
+        if(second.toString().length == 1) {
+            var second = '0'+second;
+        }
+        var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+        return dateTime;
+    }
+
+    //send chat between users
+    var send_chat_users = function(id_first, id_second, sender_name, sender_text){
+        if(id_first == id_second){
+            return; //no chat with self
+        }
+        concatenated_id = "";
+        if(parseInt(id_first,10) < parseInt(id_second, 10)){
+            concatenated_id = id_first + " " + id_second;
+        }
+        else{
+            concatenated_id = id_second + " " + id_first;
+        }
+        myDataRef.child( concatenated_id + "/chat_recv").push({info_detail: sender_name + ": " + sender_text + " " + getDateTime()});
+    }
+
+    //load chat between users
+    var load_chat_users = function(id_first, id_second){
+        if(id_first == id_second){
+            return; //can not chat with self
+        }
+        concatenated_id = "";
+        if(parseInt(id_first,10) < parseInt(id_second, 10)){ //convention, smaller first
+            concatenated_id = id_first + " " + id_second;
+        }
+        else{
+            concatenated_id = id_second + " " + id_first;
+        }
+
+        if(current_chat_with != "NO" ){ //has a connection event
+            current_chat_with.off("child_added", update_chat_firebase); //cut connection with previous talker
+        }
+        //get all values of chat, do once, not keep listening
+        $("div.conversation-content-board").empty(); //remove entries with previous talker
+        current_chat_with = myDataRef.child( concatenated_id + "/chat_recv"); //renew reference
+        current_chat_with.on("child_added", update_chat_firebase); //attach new refence
+      }
+
+      //helper that works on data firebase returns for html
+      var update_chat_firebase = function(snapshot){
+            $("div.conversation-content-board").append("<div>" + snapshot.val()["info_detail"] + "</div>");
+            /* originally use once listener, not real time, so we use on
+            snapVal = snapshot.val()
+            alert(JSON.stringify(snapVal));
+            for (var key in snapVal) { //key is "hashcode of firebase"
+                alert(key + " -> " + snapVal[key]["info_detail"]);
+                $("div.conversation-content-board").append("<div>" + snapVal[key]["info_detail"] + "</div>");
+            }
+            */
+      }
 </script>
 
 {% endblock %}

@@ -47,7 +47,7 @@ $(document).ready(function(){
 	})
 
 	$('.js-resize-overflow').css({
-		width: 270*list_count,
+		width: 270*list_count
 	})
 	$('.side-bar').hide()
 	$('.js-show-side-bar').click(function(e){

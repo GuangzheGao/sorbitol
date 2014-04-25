@@ -654,6 +654,7 @@ div.input-login, div.input-signup{
     height: 100%;
 }
 
+<<<<<<< HEAD
 .profile-header {
     background-color: #f0f0f0;
     padding-top: 32px;
@@ -714,4 +715,27 @@ div.input-login, div.input-signup{
     border-left: 1px solid #d4d4d4;
     border-right: 1px solid #d4d4d4;   
     border-bottom: 1px solid #bdbdbd;
+}
+
+li.list-group-item.board-member-names{
+    cursor: pointer;
+    cursor: hand;
+}
+
+/* conversation panel, css not work*/
+div.conversation-detail-board{
+    min-height: 50px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+div.conversation-content-board{
+    margin: 5px 5px 5px 5px;
+    width: 100%;
+}
+
+div.conversation-input-board{
+    margin: 5px 5px 5px 5px;
+    width: 100%;
 }
