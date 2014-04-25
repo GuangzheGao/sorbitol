@@ -24,3 +24,6 @@ def timesince(dt, default="just now"):
         if period:
             return "%d %s ago" % (period, singular if period == 1 else plural)
     return default
+
+def initial(username):
+    return username[0].upper()

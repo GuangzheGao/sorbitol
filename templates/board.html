@@ -66,7 +66,8 @@
       <div class="list-cards">
         {% for card in list.get_cards() %}
         <div class="list-card panel">
-          <a class="list-card-hover" data-toggle="modal" data-target="#card-modal-{{card.id}}"><div class="list-card-title">{{card.title}}</div>
+          <a class="list-card-hover" data-toggle="modal" data-target="#card-modal-{{card.id}}">
+            <div class="list-card-title">{{card.title}}</div>
             <div class="list-card-badgets">
               <div class="list-card-badget list-card-badgets-comments">
                 <span class="glyphicon glyphicon-comment"></span> {{card.get_comment_count()}}
@@ -75,15 +76,20 @@
                 <span class="glyphicon glyphicon-paperclip"></span> 0
               </div>  
             </div>
-
             <div class="list-card-members">
-              <!--for member in card.members-->
+              {% for member in card.get_users(5)%}
               <div class="list-card-member">
-                {member.name}
+                {% if member.get_avatar() %}
+                <img src="{{member.get_avatar()}}" height="30" width="30">
+                {% else %}
+                <div class="member-avatar"><span class="member-initials">{{ member.username | initial }}</span></div>
+                {% endif %}
               </div> 
+              {% endfor %}
               <!--end for-->
             </div>
           </a> 
+          
           <!-- Modal -->
           <div id="card-modal-{{card.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
             <div class="modal-dialog">
@@ -376,10 +382,10 @@ $(document).ready(function(){
             if( id_first != id_second ){    //only open bar if not same id
                 if(!$("div.conversation-bar").hasClass("open")){
                     $("div.conversation-bar").addClass("open");
-                    $("form#conversation-text-submit").data("receiver_id", id_first);
-                    load_chat_users(id_first, id_second);
                 }
             }
+            $("form#conversation-text-submit").data("receiver_id", id_first);
+            load_chat_users(id_first, id_second);
             e.stopPropagation(); //prevent conversation-bar close
           })
 

@@ -8,6 +8,7 @@ from models.forms.ajax.add_list_form import AddListForm
 from models.forms.ajax.edit_card_desc_form import EditCardDescForm
 from models.forms.ajax.add_comment_form import AddCommentForm
 from models.forms.ajax.add_board_form import AddBoardForm
+from models.forms.ajax.upload_photo_form import UploadPhoto
 from models.board import Board
 from models.list import List
 from models.card import Card
@@ -78,6 +79,7 @@ def render_user(user_id = None):
                             tag = 'profile',
                             user = current_user,
                             profile_owner = user,
+                            avatar_image = None,
                             add_board_form = AddBoardForm())
 
 @main_app.route('/u/<path:user_id>/cards')
@@ -93,20 +95,29 @@ def render_user_cards(user_id = None):
                             user = current_user,
                             profile_owner = user,
                             add_board_form = AddBoardForm(),
+                            avatar_image = None,
                             cards = user.get_cards())
 
-@main_app.route('/u/<path:user_id>/settings')
+@main_app.route('/u/<user_id>/account')
 @login_required
 def render_user_settings(user_id = None):
     if long(user_id) != current_user.id:
         return redirect(url_for('index'))
 
     user = User.get(long(user_id))
+    if not user:
+        abort(404)
+
+    avatar_image = user.get_avatar()
+
     return render_template('profile.html',
                             tag = 'settings',
                             user = current_user,
                             profile_owner = user,
+                            upload_photo_form = UploadPhoto(),
+                            avatar_image = avatar_image,
                             add_board_form = AddBoardForm())
+
 @main_app.route('/b', methods=['POST', ])
 @login_required
 def api_board(board_id=None):
@@ -207,7 +218,6 @@ def api_edit_card(card_id = None):
 @main_app.route('/c/<path:card_id>/comments', methods=['POST',])
 @login_required
 def api_add_comment(card_id=None):
-    print "====================", card_id
     if card_id == None:
         return jsonify({'code': 400, 'message': 'Bad Request'})
     else:
@@ -223,35 +233,3 @@ def api_add_comment(card_id=None):
     comment = Comment.add(long(card_id), current_user.id, content)
     return jsonify({'card_id': card_id})
 
-
-''' form request to create new group or board '''
-'''
-@main_app.route('/g', methods=['POST'])
-@login_required
-def api_group():
-    try:
-        print "start"
-        title = request.form['name']
-        description = request.form['desc']
-        print "end"
-    except KeyError:
-        return jsonify({'code': 400, 'message': 'Bad Request'})
-    else:
-        return jsonify({"group_id": Group.add(title, description)})
-
-@main_app.route('/b', methods=['GET', 'POST'])
-def api_board():
-    if request.method == 'GET':
-        return jsonify(None)
-    else:
-        try:
-            print "start"
-            title = request.form['title']
-            print "mid"
-            group_id = request.form['group_id']
-            print "end"
-        except KeyError:
-            return jsonify({'code': 400, 'message': 'Bad Request'})
-        else:
-            return jsonify({"board_id": Board.add(title, "A", group_id)})
-'''

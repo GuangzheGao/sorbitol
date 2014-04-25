@@ -470,7 +470,7 @@ div.input-login, div.input-signup{
     color: #b3b3b3;
 }
 
-.list-card-members {
+.list-card-member {
     float: right;
 }
 
@@ -738,4 +738,27 @@ div.conversation-content-board{
 div.conversation-input-board{
     margin: 5px 5px 5px 5px;
     width: 100%;
+}
+
+.profile-detail-settings-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.member-avatar {
+    background-color: #c7c7c7;
+    border-radius: 3px;  
+    width: 30px;
+    height: 30px; 
+}
+
+.member-initials {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 30px;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    margin-left: 12px;
 }

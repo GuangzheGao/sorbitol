@@ -9,11 +9,11 @@
         {% if tag == 'profile' %}
         <li class="active"><a href="#">Profile</a></li>
         <li><a href="/u/{{profile_owner.id}}/cards">Cards</a></li>
-        <li><a href="/u/{{profile_owner.id}}/settings">Settings</a></li>
+        <li><a href="/u/{{profile_owner.id}}/account">Settings</a></li>
         {% elif tag == 'cards' %}
         <li><a href="/u/{{profile_owner.id}}">Profile</a></li>
         <li class="active"><a href="#">Cards</a></li>
-        <li><a href="/u/{{profile_owner.id}}/settings">Settings</a></li>
+        <li><a href="/u/{{profile_owner.id}}/account">Settings</a></li>
         {% elif tag == 'settings' %}
         <li><a href="/u/{{profile_owner.id}}">Profile</a></li>
         <li><a href="/u/{{profile_owner.id}}/cards">Cards</a></li>
@@ -49,22 +49,34 @@
             </div>
 
             <div class="list-card-members">
-              <!--for member in card.members-->
+              {% for member in card.get_users(5)%}
               <div class="list-card-member">
-                {member.name}
+                {% if member.get_avatar() %}
+                <img src="{{member.get_avatar()}}" height="30" width="30">
+                {% else %}
+                <div class="member-avatar"><span class="member-initials">{{ member.username | initial }}</span></div>
+                {% endif %}
               </div> 
+              {% endfor %}
               <!--end for-->
             </div>
           </a>
         </div>
         {% endfor %}
         {% endif %}
+        {% if tag == 'settings' %}
+        <div class="profile-detail-settings-title">Avatar</div>
+        {% if avatar_image %}
+        <img src="{{avatar_image}}" height="50" width="50">
+        {% endif %}
+        <form name='upload-avatar' action="{{ url_for('upload') }}" method=POST enctype=multipart/form-data>
+          {{ upload_photo_form.csrf_token }}
+          {{ upload_photo_form.upload() }}
+          {{ upload_photo_form.user_id(type="hidden", value=current_user.id)}}
+          <input class="btn btn-success" style="margin-top:5px;" type=submit value=Upload>
+        </form>
+        {% endif %}
       </div>  
     </div>
   </div>
-
-{% endblock %}
-
-{% block javascript %}
-
 {% endblock %}

@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	// Navbar menu JS
-	$('.js-draggable').udraggable();
 	$('.js-open-header-menu').on('show.bs.dropdown', function () {
 		var overhead = $(document).width(); 
 		/* fix the 1px off bug */

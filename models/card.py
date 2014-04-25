@@ -63,17 +63,23 @@ class Card(Base):
 
     def get_user_ids(self):
         '''return a list of user objs'''
-        return r_server.lrange('/card/%d/users' % self.id, 0, -1)
+        return r_server.smembers('/card/%d/users' % self.id)
+
+    def get_users(self, length=None):
+        if not length:
+            return User.get_multi(self.get_user_ids())
+        else:
+            return User.get_multi(self.get_user_ids())[0:length]
 
     def add_user(self, user):
-        r_server.rpush('/card/%d/users' % self.id, user.id)
+        r_server.sadd('/card/%d/users' % self.id, user.id)
 
     def get_labels(self):
         '''return a list of label string'''
-        return r_server.lrange('/card/%d/labels' % self.id, 0, -1)
+        return r_server.smembers('/card/%d/labels' % self.id)
 
     def add_label(self, label_id, label_str):
-        r_server.rpush('/card/%d/labels/%d' % (self.id, label_id), label_str)
+        r_server.sadd('/card/%d/labels/%d' % (self.id, label_id), label_str)
     
     @classmethod
     def incr_comment(cls, card_id):

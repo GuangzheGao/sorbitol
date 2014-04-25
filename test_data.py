@@ -45,6 +45,8 @@ user1.add_board(board0)
 user1.add_board(board1)
 user2.add_board(board0)
 
+user0.set_avatar('http://127.0.0.1:5000/_uploads/images/avatar_1.png')
+user1.set_avatar('http://127.0.0.1:5000/_uploads/images/avatar_2.png')
 
 lid0 = List.add("To Do", bid0)
 lid1 = List.add("Doing", bid0)
@@ -53,6 +55,10 @@ lid2 = List.add("Done", bid0)
 caid0 = Card.add("card1", lid0, uid0)
 caid1 = Card.add("card2", lid0, uid0)
 caid2 = Card.add("card3", lid1, uid0)
+
+card0 = Card.get(caid0)
+card0.add_user(user1)
+card0.add_user(user2)
 
 coid0 = Comment.add(caid0, uid0, "comment1")
 coid1 = Comment.add(caid0, uid1, "comment2")

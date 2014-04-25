@@ -118,4 +118,10 @@ class User(Base):
     def add_card(self, card):
         r_server.rpush('/user/%d/cards' % self.id, card.id)
 
+    def get_avatar(self):
+        return r_server.get('/user/%d/avatar' % self.id)
+
+    def set_avatar(self, filename):
+        r_server.set('/user/%d/avatar' % self.id, filename)
+
 User.query = mysql_session.query(User)
