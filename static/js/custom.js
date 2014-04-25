@@ -124,7 +124,7 @@ $(document).ready(function(){
 		$("form[name='edit-card-desc']").show()
 		$('.card-description').hide()
 	})
-	$('.edit-card-desc-form-control > .close').click(function(e){
+	$(document).on('click', '.edit-card-desc-form-control > .close', function(e){
 		console.log("clicked")
 		$("form[name='edit-card-desc']").hide()
 		$('.card-description').show()

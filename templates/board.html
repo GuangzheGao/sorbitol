@@ -66,7 +66,7 @@
       <div class="list-cards">
         {% for card in list.get_cards() %}
         <div class="list-card panel">
-          <a class="list-card-hover" data-toggle="modal" data-target="#card-modal-{{card.id}}">
+          <a class="list-card-hover js-open-modal" data-toggle="modal" data-target="#card-modal-{{card.id}}" name="{{card.id}}">
             <div class="list-card-title">{{card.title}}</div>
             <div class="list-card-badgets">
               <div class="list-card-badget list-card-badgets-comments">
@@ -89,56 +89,6 @@
               <!--end for-->
             </div>
           </a> 
-          
-          <!-- Modal -->
-          <div id="card-modal-{{card.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="custom-modal-header modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <span class="card-title"><span class="glyphicon glyphicon-th-list"></span> {{card.title}}</span><span class="header-inline">in list <span style="font-weight: bold">{{list.title}}</span></span>            
-                  <div class="card-description">
-                    {% if card.get_description() %}
-                      <div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div>
-                      <div>{{card.get_description()}}</div>
-                    {% else %}
-                      <span class="glyphicon glyphicon-pencil" style="padding-right:4px;"></span><a class="js-show-edit-card-desc-form" href="#">Edit the desciption...</a>
-                    {% endif %}
-                  </div>
-
-                  <form name="edit-card-desc">
-                    <div class="card-description-title">Description</div>
-                    {{ edit_card_desc_form.csrf_token }}
-                    <textarea class="list-cards-add-textarea" id="desc" name="desc">{% if card.get_description() %}{{card.get_description()}}{% endif %}</textarea>
-                    {{ edit_card_desc_form.card_id(type="hidden", value=card.id)}}
-                    <div class="edit-card-desc-form-control">
-                      <input type="submit" class="btn btn-success" value="Save" />
-                      <a class="close"><span class="glyphicon glyphicon-remove"></span></a>
-                    </div>
-                  </form> 
-                </div>
-                <div class="modal-body">
-                  <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
-                  <form name="add-comment">
-                    {{ add_comment_form.csrf_token }}
-                    {{ add_comment_form.comment(class="add-comment-textarea js-card-comment-expand", placeholder="Write a comment...")}}
-                    {{ add_comment_form.card_id(type="hidden", value=card.id)}}
-                    <div class="edit-card-comment-form-control">
-                      <input type="submit" class="btn btn-success" value="Comment" />
-                      <a class="close" style="padding-right:440px; padding-top:5px;"><span class="glyphicon glyphicon-remove"></span></a>
-                    </div>
-                  </form>
-                  {% for comment in card.get_comments() %}
-                  <div class="comment-author"> <a href="/u/{{ comment.get_user().id }}">{{ comment.get_user().username }}</a> </div>
-                  <div class="comment-content"> {{ comment.content }} </div>
-                  <div class="comment-meta"> {{ comment.created_at | timesince }} </div>
-                  {% endfor %}
-                  <!-- for activity -->
-                  <!-- endfor -->    
-                </div>
-              </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-          </div><!-- /.modal -->
         </div><!-- /.list-card panel -->
         {% endfor %}
         <div  class="js-list-cards-add">
@@ -209,6 +159,7 @@
 <script type='text/javascript'>
   //async post thread
 $(document).ready(function(){
+
   //prevent csrf attack
   $.ajaxSetup({
       beforeSend: function(xhr, settings) {
@@ -221,13 +172,38 @@ $(document).ready(function(){
   {% if show_card_id > 0 %}
     $('#card-modal-{{show_card_id}}').modal()
   {% endif %}
-
+  $(document).on("click", ".js-open-modal", function(e){
+    e.stopPropagation()
+    var card_id = $(this).prop('name')
+    $.ajax({
+      type: "GET",
+      url: '/c/'+card_id,
+      success: function(result) {
+          //$(this).find().result
+          console.log($('#card-modal-'+card_id).length)
+          if($('#card-modal-'+card_id).length == 0){
+            console.log("add elem")
+            $(document).find('a[name="'+card_id+'"]').after(result)
+          }else{
+            $('#card-modal-'+card_id).replaceWith(result)
+          }
+          $(".edit-card-comment-form-control").hide()
+          $("form[name='edit-card-desc']").hide()
+          $('#card-modal-'+card_id).modal()
+          $('#card-modal-'+card_id).on('hidden.bs.modal', function (e) {
+            console.log("remove")
+            $(this).remove()
+          })
+      }
+    })
+  })
   $(document).on("submit", "form[name='create_card']", function(e){
     e.preventDefault();
     var title = $(this).find("textarea[name='title']").val()
     var list_id = $(this).find("input[name='list_id']").val()
     var div_list_cards = $(this).parent().parent()
-    console.log(div_list_cards)
+    var list_card_html = $(document).find('.list-card.panel')[0]
+
     if($('div[name=server-error]').length > 0){
       $('div[name=server-error]').remove()
     }
@@ -238,7 +214,8 @@ $(document).ready(function(){
              list_id: list_id},
       success: function(result) {
         div_list_cards.find('.list-cards-add-form').hide()
-        var card_div = $('<div class="list-card panel"><a class="list-card-hover"><a class="list-card-hover" data-toggle="modal" data-target="#card-modal-0"><div class="list-card-title">{card.title}</div><div class="list-card-badgets"><div class="list-card-badget list-card-badgets-comments"><span class="glyphicon glyphicon-comment"></span> 0</div><div class="list-card-badget list-card-badgets-attachments"><span class="glyphicon glyphicon-paperclip"></span> 0</div></div><div class="list-card-members"><div class="list-card-member">{{title}}</div></div></a></div>')
+        var card_id = result['card_id']
+        var card_div = $('<div class="list-card panel"><a class="list-card-hover"><a class="js-open-modal list-card-hover" data-toggle="modal" data-target="#card-modal-'+card_id+'" name="' + result['card_id'] + '"><div class="list-card-title">{card.title}</div><div class="list-card-badgets"><div class="list-card-badget list-card-badgets-comments"><span class="glyphicon glyphicon-comment"></span> 0</div><div class="list-card-badget list-card-badgets-attachments"><span class="glyphicon glyphicon-paperclip"></span> 0</div></div><div class="list-card-members"><div class="list-card-member">{{title}}</div></div></a></div>')
         div_list_cards.find('.js-list-cards-add').before(card_div);
         div_list_cards.find('.js-list-cards-add').show()
         card_div.find('.list-card-title').html(title);

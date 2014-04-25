@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div id="card-modal-{{card.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="custom-modal-header modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <span class="card-title"><span class="glyphicon glyphicon-th-list"></span> {{card.title}}</span><span class="header-inline">in list <span style="font-weight: bold">{{list.title}}</span></span>            
+        <div class="card-description">
+          {% if card.get_description() %}
+            <div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div>
+            <div>{{card.get_description()}}</div>
+          {% else %}
+            <span class="glyphicon glyphicon-pencil" style="padding-right:4px;"></span><a class="js-show-edit-card-desc-form" href="#">Edit the description...</a>
+          {% endif %}
+        </div>
+
+        <form name="edit-card-desc">
+          <div class="card-description-title">Description</div>
+          {{ edit_card_desc_form.csrf_token }}
+          <textarea class="list-cards-add-textarea" id="desc" name="desc">{% if card.get_description() %}{{card.get_description()}}{% endif %}</textarea>
+          {{ edit_card_desc_form.card_id(type="hidden", value=card.id)}}
+          <div class="edit-card-desc-form-control">
+            <input type="submit" class="btn btn-success" value="Save" />
+            <a class="close"><span class="glyphicon glyphicon-remove"></span></a>
+          </div>
+        </form> 
+      </div>
+      <div class="modal-body">
+        <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
+        <form name="add-comment">
+          {{ add_comment_form.csrf_token }}
+          {{ add_comment_form.comment(class="add-comment-textarea js-card-comment-expand", placeholder="Write a comment...")}}
+          {{ add_comment_form.card_id(type="hidden", value=card.id)}}
+          <div class="edit-card-comment-form-control">
+            <input type="submit" class="btn btn-success" value="Comment" />
+            <a class="close" style="padding-right:440px; padding-top:5px;"><span class="glyphicon glyphicon-remove"></span></a>
+          </div>
+        </form>
+        {% for comment in card.get_comments() %}
+        <div class="comment-author"> <a href="/u/{{ comment.get_user().id }}">{{ comment.get_user().username }}</a> </div>
+        <div class="comment-content"> {{ comment.content }} </div>
+        <div class="comment-meta"> {{ comment.created_at | timesince }} </div>
+        {% endfor %}
+        <!-- for activity -->
+        <!-- endfor -->    
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -215,6 +215,22 @@ def api_edit_card(card_id = None):
         return jsonify({'code': 400, 'message': 'Bad Request'})
     return jsonify({'code': 200, 'card_id':card_id}) 
 
+@main_app.route('/c/<path:card_id>', methods=['GET',])
+@login_required
+def api_get_card(card_id = None):
+    if card_id == None:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+    else:
+        card = Card.get(long(card_id))
+        if card == None:
+            return jsonify({'code': 404, 'message': 'Page Not Found'})
+        _list = List.get(card.list_id)
+        return render_template('card.html',
+                                card=card,
+                                list=_list,
+                                edit_card_desc_form=EditCardDescForm(),
+                                add_comment_form=AddCommentForm());
+
 @main_app.route('/c/<path:card_id>/comments', methods=['POST',])
 @login_required
 def api_add_comment(card_id=None):
