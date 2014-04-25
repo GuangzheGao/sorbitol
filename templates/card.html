@@ -4,7 +4,8 @@
     <div class="modal-content">
       <div class="custom-modal-header modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <span class="card-title"><span class="glyphicon glyphicon-th-list"></span> {{card.title}}</span><span class="header-inline">in list <span style="font-weight: bold">{{list.title}}</span></span>            
+        <span class="card-title"><span class="glyphicon glyphicon-th-list"></span> {{card.title}}</span><span class="header-inline">in list <span style="font-weight: bold">{{list.title}}</span></span> <a href="#" style="text-decoration: underline;"> Add Members </a>
+
         <div class="card-description">
           {% if card.get_description() %}
             <div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div>
@@ -26,6 +27,7 @@
         </form> 
       </div>
       <div class="modal-body">
+        <div class="modal-panel">
         <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
         <form name="add-comment">
           {{ add_comment_form.csrf_token }}
@@ -42,7 +44,8 @@
         <div class="comment-meta"> {{ comment.created_at | timesince }} </div>
         {% endfor %}
         <!-- for activity -->
-        <!-- endfor -->    
+        <!-- endfor --> 
+        </div> 
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

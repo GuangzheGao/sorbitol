@@ -131,21 +131,23 @@
 </div>
 
 <!-- the conversation paenl -->
-<div class="dropup navbar navbar-fixed-bottom conversation-bar">
+<div class="conversation-bar dropup navbar navbar-fixed-bottom">
   <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown">
     Conversation
     <span class="caret"></span>
   </button>
   <div class="dropdown-menu conversation-detail-board">
     <!-- chat items -->
+    <div class="conversation-user-title">
+      
+    </div>
     <div class="conversation-content-board">
 
     </div>
 
      <div class="conversation-input-board">
       <form id="conversation-text-submit" data-receiver_id="-1"> <!-- don't let submit initially-->
-        <input type="text" name="conversation-send" placeholder="type something"><br>
-        <input type="submit" value="Send">
+        <input type="text" name="conversation-send" class="conversation-send" placeholder="type something">
       </form>
     </div>
 
@@ -168,6 +170,13 @@ $(document).ready(function(){
           }
       }
   })
+  
+  $("input[name='conversation-send']").keypress(function(event) {
+    if (event.which == 13) {
+        event.preventDefault();
+        $("#conversation-text-submit").submit();
+    }
+  });
 
   {% if show_card_id > 0 %}
     $('#card-modal-{{show_card_id}}').modal()
@@ -321,50 +330,51 @@ $(document).ready(function(){
 
 <!-- control chatting -->
 <script type='text/javascript'>
+  $(document).ready(function() {
+    $('.conversation-bar').hide()
+    //prevent close of content
+    $(document).on('click', 'div.dropdown-menu', function (e) {
+        e.stopPropagation();
+  });
+
+  //send new data
+  $(document.body).on("submit", "form#conversation-text-submit", function(e){
+    e.preventDefault();
+
+    //(id1, id2, sendername, sender text)
+    id1 = "{{ user.id }}";
+    id2 =  $(this).data("receiver_id");
+    sender_name = "{{ user.username }}"
+
+    if(id2 == "-1"){ //don't let send to nobody
+        return;
+    }
+
+    sender_input_element = $(this).children("input[name='conversation-send']").eq(0);
+    sender_text = sender_input_element.val();
+    sender_input_element.val(""); //set input to empty
+
+    send_chat_users(id1, id2, sender_name, sender_text);
+    //$("div.conversation-content-board").append(sender_name + ": " + sender_text + " " + getDateTime()); //append the chat to list
+  });
 
 
-   $(document).ready(function() {
-       //prevent close of content
-       $(document).on('click', 'div.dropdown-menu', function (e) {
-            e.stopPropagation();
-        });
-
-       //send new data
-        $(document.body).on("submit", "form#conversation-text-submit", function(e){
-            e.preventDefault();
-
-            //(id1, id2, sendername, sender text)
-            id1 = "{{ user.id }}";
-            id2 =  $(this).data("receiver_id");
-            sender_name = "{{ user.username }}"
-
-            if(id2 == "-1"){ //don't let send to nobody
-                return;
-            }
-
-            sender_input_element = $(this).children("input[name='conversation-send']").eq(0);
-            sender_text = sender_input_element.val();
-            sender_input_element.val(""); //set input to empty
-
-            send_chat_users(id1, id2, sender_name, sender_text);
-            //$("div.conversation-content-board").append(sender_name + ": " + sender_text + " " + getDateTime()); //append the chat to list
-        });
-
-
-          //open the chat panel when member is clicked, (meaning the user wants to check chat)
-          $(document).on("click", "li.board-member-names", function(e){
-            id_first = $(this).attr("id");
-            id_second = "{{ user.id }}";
-            //alert(id_first + " " + id_second)
-            if( id_first != id_second ){    //only open bar if not same id
-                if(!$("div.conversation-bar").hasClass("open")){
-                    $("div.conversation-bar").addClass("open");
-                }
-            }
-            $("form#conversation-text-submit").data("receiver_id", id_first);
-            load_chat_users(id_first, id_second);
-            e.stopPropagation(); //prevent conversation-bar close
-          })
+        //open the chat panel when member is clicked, (meaning the user wants to check chat)
+        $(document).on("click", "li.board-member-names", function(e){
+          other_name = $(this).html()
+          id_first = $(this).attr("id");
+          id_second = "{{ user.id }}";
+          $('.conversation-bar').show()
+          //alert(id_first + " " + id_second)
+          if( id_first != id_second ){    //only open bar if not same id
+              if(!$("div.conversation-bar").hasClass("open")){
+                  $("div.conversation-bar").addClass("open");
+              }
+          }
+          $("form#conversation-text-submit").data("receiver_id", id_first);
+          load_chat_users(id_first, id_second);
+          e.stopPropagation(); //prevent conversation-bar close
+        })
 
     });
 
@@ -417,7 +427,7 @@ $(document).ready(function(){
         if(id_first == id_second){
             return; //can not chat with self
         }
-        concatenated_id = "";
+        var concatenated_id = "";
         if(parseInt(id_first,10) < parseInt(id_second, 10)){ //convention, smaller first
             concatenated_id = id_first + " " + id_second;
         }
@@ -430,6 +440,8 @@ $(document).ready(function(){
         }
         //get all values of chat, do once, not keep listening
         $("div.conversation-content-board").empty(); //remove entries with previous talker
+
+        $(".conversation-user-title").html(other_name)
         current_chat_with = myDataRef.child( concatenated_id + "/chat_recv"); //renew reference
         current_chat_with.on("child_added", update_chat_firebase); //attach new refence
       }
