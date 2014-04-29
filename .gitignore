@@ -1,0 +1,11 @@
+*~
+*.lock
+*.DS_Store
+*.swo
+*.swp
+
+.idea/
+*.pyc
+*.orig
+
+

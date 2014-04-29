@@ -138,6 +138,33 @@
   {% if user %}
   <!--firebase notification on ACTIVITY & CHAT-->
   <script type='text/javascript'>
+    function getDateTime() {
+        var now     = new Date();
+        var year    = now.getFullYear();
+        var month   = now.getMonth()+1;
+        var day     = now.getDate();
+        var hour    = now.getHours();
+        var minute  = now.getMinutes();
+        var second  = now.getSeconds();
+        if(month.toString().length == 1) {
+            var month = '0'+month;
+        }
+        if(day.toString().length == 1) {
+            var day = '0'+day;
+        }
+        if(hour.toString().length == 1) {
+            var hour = '0'+hour;
+        }
+        if(minute.toString().length == 1) {
+            var minute = '0'+minute;
+        }
+        if(second.toString().length == 1) {
+            var second = '0'+second;
+        }
+        var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+        return dateTime;
+    }
+
     var myDataRef = new Firebase('https://dazzling-fire-9098.firebaseio.com/');
     var auth = new FirebaseSimpleLogin(myDataRef, function(error, user) {
         if (!error) {
@@ -161,13 +188,13 @@
         incomeMSG = newMessageSnapshot.val()
         //console.log(typeof incomeMSG.id_sender);
         $("ul.notification-list").append('<a class="list-group-item head-dropdown-menu-heading notification-item" href="#" id="'+ incomeMSG.id_sender +'">'+
-            incomeMSG.sender+ ": " + incomeMSG.info_sender + '</a>');
+            incomeMSG.sender+ ": " + incomeMSG.info_sender + '<div>' + incomeMSG.time + '</div></a>');
     });
 
 
     //Send a message to another user when activity, should be be called by places necessary(new stuff is done)
     var notify_users = function (initiator_id, initiator, user_affected, information){
-        myDataRef.child(user_affected).child("msg_recv").push({id_sender: initiator_id, sender: initiator, info_sender: information });
+        myDataRef.child(user_affected).child("msg_recv").push({id_sender: initiator_id, sender: initiator, info_sender: information, time:getDateTime() });
     }
 
     //remove the notification when be read

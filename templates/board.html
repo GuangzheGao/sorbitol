@@ -181,6 +181,8 @@ $(document).ready(function(){
   {% if show_card_id > 0 %}
     $('#card-modal-{{show_card_id}}').modal()
   {% endif %}
+
+  //listen the click on card body
   $(document).on("click", ".js-open-modal", function(e){
     e.stopPropagation()
     var card_id = $(this).prop('name')
@@ -192,20 +194,29 @@ $(document).ready(function(){
           console.log($('#card-modal-'+card_id).length)
           if($('#card-modal-'+card_id).length == 0){
             console.log("add elem")
-            $(document).find('a[name="'+card_id+'"]').after(result)
+            $('a[name="'+card_id+'"]:first').after(result)
           }else{
-            $('#card-modal-'+card_id).replaceWith(result)
+            $('#card-modal-'+card_id).replaceWith(result) //swap the popped out content
           }
           $(".edit-card-comment-form-control").hide()
           $("form[name='edit-card-desc']").hide()
           $('#card-modal-'+card_id).modal()
-          $('#card-modal-'+card_id).on('hidden.bs.modal', function (e) {
+          /*
+            $('#card-modal-'+card_id).on('hidden.bs.modal', function (e) {
             console.log("remove")
             $(this).remove()
           })
+           */
       }
     })
   })
+
+  //remove the description of card on close
+  $(document).on('hidden.bs.modal', "div.card-modal", function(e){
+    console.log("remove")
+    $(this).remove()
+  })
+
   $(document).on("submit", "form[name='create_card']", function(e){
     e.preventDefault();
     var title = $(this).find("textarea[name='title']").val()
@@ -227,10 +238,10 @@ $(document).ready(function(){
         var card_div = $('<div class="list-card panel"><a class="list-card-hover"><a class="js-open-modal list-card-hover" data-toggle="modal" data-target="#card-modal-'+card_id+'" name="' + result['card_id'] + '"><div class="list-card-title">{card.title}</div><div class="list-card-badgets"><div class="list-card-badget list-card-badgets-comments"><span class="glyphicon glyphicon-comment"></span> 0</div><div class="list-card-badget list-card-badgets-attachments"><span class="glyphicon glyphicon-paperclip"></span> 0</div></div><div class="list-card-members"><div class="list-card-member">{{title}}</div></div></a></div>')
         div_list_cards.find('.js-list-cards-add').before(card_div);
         div_list_cards.find('.js-list-cards-add').show()
-        card_div.find('.list-card-title').html(title);
+        card_div.find('.list-card-title').html(title)
 
         {% for users in board.get_users() %}
-          notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, "created card of name " + title); //is defined in base.html
+          notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, "created card of name " + title) //is defined in base.html
         {% endfor %}
       },
       error: function(msg) {
@@ -241,8 +252,8 @@ $(document).ready(function(){
   });
   $("form[name='create_list']").submit(function(e){
       e.preventDefault();
-      var title = $(this).find("textarea[name='title']").val();
-      var board_id = $(this).find("input[name='board_id']").val();
+      var title = $(this).find("textarea[name='title']").val()
+      var board_id = $(this).find("input[name='board_id']").val()
       if($('div[name=server-error]').length > 0){
         $('div[name=server-error]').remove()
       }
@@ -253,11 +264,11 @@ $(document).ready(function(){
         data: {title: title, board_id: board_id},
         success: function(result) {
           var list_id = result['list_id']
-          $(this).find("textarea[name='list_title']").val('');
+          $(this).find("textarea[name='list_title']").val('')
           var list_div = $('<div class="list-board"><div class="list-header-board"></div><div class="list-cards"><div class="js-list-cards-add"><a href="#"><div class="list-cards-add">Add a card...</div></a></div><div class="list-cards-add-form"><form name="create_card">{{ add_card_form.csrf_token }}{{ add_card_form.title(class="list-cards-add-textarea") }}<input id="list_id" name="list_id" type="hidden" value='+list_id+'><div class="list-cards-add-form-control"><input type="submit" class="btn btn-success" value="Add" /><a class="close"><span class="glyphicon glyphicon-remove"></span></a></div></form></div></div></div>')
           $('.add-new-list').before(list_div);
           list_div.find('.list-cards-add-form').hide()
-          list_div.find('.list-header-board').html(title);
+          list_div.find('.list-header-board').html(title)
           $('.list-list-add-form').hide()
           $('.js-add-new-list').show()
 
@@ -271,7 +282,7 @@ $(document).ready(function(){
         }
     })
   })
-  $("form[name='edit-card-desc']").submit(function(e){
+  $(document).on("submit", "form[name='edit-card-desc']", function(e){
       e.preventDefault();
       var desc = $(this).find("textarea[name='desc']").val();
       var card_id = $(this).find("input[name='card_id']").val();
@@ -279,6 +290,9 @@ $(document).ready(function(){
       if($('div[name=server-error]').length > 0){
         $('div[name=server-error]').remove()
       }
+      var card_info = $(this).siblings("span.card-title").eq(0).text();
+      var org_word = $(this).siblings("div.card-description").eq(0).children('div.card-description-content').eq(0).text();
+
       $.ajax({
         type: "POST",
         url: '/c/'+card_id,
@@ -287,17 +301,23 @@ $(document).ready(function(){
           if (desc == ''){
             var desc_inner = '<span class="glyphicon glyphicon-pencil" style="padding-right:4px;"></span><a class="js-show-edit-card-desc-form" href="#">Edit the desciption...</a>'
           }else{
-            var desc_inner = '<div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div><div>' + desc + '</div>'
+            var desc_inner = '<div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div><div class="card-description-content">' + desc + '</div>'
           }
+
           $('.card-description').html(desc_inner)
           $("form[name='edit-card-desc']").hide()
           $('.card-description').show()
+
+          {% for users in board.get_users() %}
+            notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, " changed card " + card_info+ " 's description from " + org_word + " to "  + desc); //is defined in base.html
+          {% endfor %}
         },
         error: function(msg) {
           var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
           $('div[name="comment-panel"]').append(msg_div);
         }
     })
+
   })  
   $(document).on("submit", "form[name='add-comment']", function(e){
     e.preventDefault();
@@ -307,6 +327,7 @@ $(document).ready(function(){
     if($('div[name=server-error]').length > 0){
       $('div[name=server-error]').remove()
     }
+    var card_title = $(this).parent().data("card_title")
     $.ajax({
       type: "POST",
       url: '/c/'+card_id+'/comments',
@@ -318,6 +339,10 @@ $(document).ready(function(){
         $(".js-card-comment-expand").animate({
           height:36
         }, 30)
+
+        {% for users in board.get_users() %}
+          notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, " posted comments " + comment + " on card " + card_title ) //is defined in base.html
+        {% endfor %}
       },
       error: function(msg) {
 
@@ -332,80 +357,52 @@ $(document).ready(function(){
 <script type='text/javascript'>
   $(document).ready(function() {
     $('.conversation-bar').hide()
-    //prevent close of content
-    $(document).on('click', 'div.dropdown-menu', function (e) {
-        e.stopPropagation();
-  });
-
-  //send new data
-  $(document.body).on("submit", "form#conversation-text-submit", function(e){
-    e.preventDefault();
-
-    //(id1, id2, sendername, sender text)
-    id1 = "{{ user.id }}";
-    id2 =  $(this).data("receiver_id");
-    sender_name = "{{ user.username }}"
-
-    if(id2 == "-1"){ //don't let send to nobody
-        return;
-    }
-
-    sender_input_element = $(this).children("input[name='conversation-send']").eq(0);
-    sender_text = sender_input_element.val();
-    sender_input_element.val(""); //set input to empty
-
-    send_chat_users(id1, id2, sender_name, sender_text);
-    //$("div.conversation-content-board").append(sender_name + ": " + sender_text + " " + getDateTime()); //append the chat to list
-  });
-
-
-        //open the chat panel when member is clicked, (meaning the user wants to check chat)
-        $(document).on("click", "li.board-member-names", function(e){
-          other_name = $(this).html()
-          id_first = $(this).attr("id");
-          id_second = "{{ user.id }}";
-          $('.conversation-bar').show()
-          //alert(id_first + " " + id_second)
-          if( id_first != id_second ){    //only open bar if not same id
-              if(!$("div.conversation-bar").hasClass("open")){
-                  $("div.conversation-bar").addClass("open");
-              }
-          }
-          $("form#conversation-text-submit").data("receiver_id", id_first);
-          load_chat_users(id_first, id_second);
-          e.stopPropagation(); //prevent conversation-bar close
-        })
-
+        //prevent close of content
+        $(document).on('click', 'div.dropdown-menu', function (e) {
+            e.stopPropagation();
     });
 
-   var current_chat_with = "NO"; //update reference of who is chatting with to close old chat event and open new one
+    //send new data
+    $(document.body).on("submit", "form#conversation-text-submit", function(e){
+        e.preventDefault();
 
-   function getDateTime() {
-        var now     = new Date();
-        var year    = now.getFullYear();
-        var month   = now.getMonth()+1;
-        var day     = now.getDate();
-        var hour    = now.getHours();
-        var minute  = now.getMinutes();
-        var second  = now.getSeconds();
-        if(month.toString().length == 1) {
-            var month = '0'+month;
+        //(id1, id2, sendername, sender text)
+        var id1 = "{{ user.id }}";
+        var id2 =  $(this).data("receiver_id");
+        var sender_name = "{{ user.username }}"
+
+        if(id2 == "-1"){ //don't let send to nobody
+            return;
         }
-        if(day.toString().length == 1) {
-            var day = '0'+day;
-        }
-        if(hour.toString().length == 1) {
-            var hour = '0'+hour;
-        }
-        if(minute.toString().length == 1) {
-            var minute = '0'+minute;
-        }
-        if(second.toString().length == 1) {
-            var second = '0'+second;
-        }
-        var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
-        return dateTime;
-    }
+
+        var sender_input_element = $(this).children("input[name='conversation-send']").eq(0);
+        var sender_text = sender_input_element.val();
+        sender_input_element.val(""); //set input to empty
+
+        send_chat_users(id1, id2, sender_name, sender_text);
+        //$("div.conversation-content-board").append(sender_name + ": " + sender_text + " " + getDateTime()); //append the chat to list
+    });
+
+    //open the chat panel when member is clicked, (meaning the user wants to check chat)
+    $(document).on("click", "li.board-member-names", function(e){
+      var other_name = $(this).html()
+      var id_first = $(this).attr("id");
+      var id_second = "{{ user.id }}";
+      $('.conversation-bar').show()
+      //alert(id_first + " " + id_second)
+      if( id_first != id_second ){    //only open bar if not same id
+          if(!$("div.conversation-bar").hasClass("open")){
+              $("div.conversation-bar").addClass("open");
+          }
+      }
+      $("form#conversation-text-submit").data("receiver_id", id_first);
+      load_chat_users(id_first, id_second);
+      e.stopPropagation(); //prevent conversation-bar close
+    })
+
+  });
+
+   var current_chat_with = "NO"; //update reference of who is chatting with to close old chat event and open new one
 
     //send chat between users
     var send_chat_users = function(id_first, id_second, sender_name, sender_text){

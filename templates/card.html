@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div id="card-modal-{{card.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
+<div id="card-modal-{{card.id}}" class="modal fade in card-modal" tabindex="-1" role="dialog" aria-labelledby="card-modal-0" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="custom-modal-header modal-header">
@@ -9,7 +9,7 @@
         <div class="card-description">
           {% if card.get_description() %}
             <div class="card-description-title">Description <a class="js-show-edit-card-desc-form" href="#">Edit</a></div>
-            <div>{{card.get_description()}}</div>
+            <div class="card-description-content">{{card.get_description()}}</div>
           {% else %}
             <span class="glyphicon glyphicon-pencil" style="padding-right:4px;"></span><a class="js-show-edit-card-desc-form" href="#">Edit the description...</a>
           {% endif %}
@@ -27,24 +27,24 @@
         </form> 
       </div>
       <div class="modal-body">
-        <div class="modal-panel">
-        <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
-        <form name="add-comment">
-          {{ add_comment_form.csrf_token }}
-          {{ add_comment_form.comment(class="add-comment-textarea js-card-comment-expand", placeholder="Write a comment...")}}
-          {{ add_comment_form.card_id(type="hidden", value=card.id)}}
-          <div class="edit-card-comment-form-control">
-            <input type="submit" class="btn btn-success" value="Comment" />
-            <a class="close" style="padding-right:440px; padding-top:5px;"><span class="glyphicon glyphicon-remove"></span></a>
-          </div>
-        </form>
-        {% for comment in card.get_comments() %}
-        <div class="comment-author"> <a href="/u/{{ comment.get_user().id }}">{{ comment.get_user().username }}</a> </div>
-        <div class="comment-content"> {{ comment.content }} </div>
-        <div class="comment-meta"> {{ comment.created_at | timesince }} </div>
-        {% endfor %}
-        <!-- for activity -->
-        <!-- endfor --> 
+        <div class="modal-panel" data-card_title = {{card.title}}> <!-- record title for later referencing -->
+            <span class="glyphicon glyphicon-bullhorn" style="padding-right:4px;"></span>Activity
+            <form name="add-comment">
+              {{ add_comment_form.csrf_token }}
+              {{ add_comment_form.comment(class="add-comment-textarea js-card-comment-expand", placeholder="Write a comment...")}}
+              {{ add_comment_form.card_id(type="hidden", value=card.id)}}
+              <div class="edit-card-comment-form-control">
+                <input type="submit" class="btn btn-success" value="Comment" />
+                <a class="close" style="padding-right:440px; padding-top:5px;"><span class="glyphicon glyphicon-remove"></span></a>
+              </div>
+            </form>
+            {% for comment in card.get_comments() %}
+            <div class="comment-author"> <a href="/u/{{ comment.get_user().id }}">{{ comment.get_user().username }}</a> </div>
+            <div class="comment-content"> {{ comment.content }} </div>
+            <div class="comment-meta"> {{ comment.created_at | timesince }} </div>
+            {% endfor %}
+            <!-- for activity -->
+            <!-- endfor -->
         </div> 
       </div>
     </div><!-- /.modal-content -->
