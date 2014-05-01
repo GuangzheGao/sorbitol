@@ -23,6 +23,7 @@
 
 </div>
 <div class="side-bar panel panel-default rightpanels-board">
+
     <div class="members-board">
       <div class="members-header-board">
           Members 
@@ -35,11 +36,34 @@
           {% endfor %}
         </ul>
       </div>
+
+
+    <div class="dropdown">
+      <a class="button-search-member dropdown-toggle" data-toggle="dropdown" href="#"> Add Members… </a>
+      <div class="dropdown-menu search-members-board">
+        <div id="bloodhound"> <!-- the autocomplete of members -->
+          <input class="typeahead member-query-text" type="text" placeholder="members">
+        </div>
+      </div>
+    </div>
+
     </div>
     <div class="activity-board">
       <div class="activity-header-board">
         Activity
       </div>
+
+      <div class="activity-list-board">
+        {% for activity in activities %}
+             <div class="individual-activity-board">
+              <div class="user-activity-board">{{ user.get(activity.user_id).username }}</div>
+              <div class="activity-content-board">{{ activity.content }}</div>
+              <div class="activity-time-board">{{ activity.created_at }} </div>
+             </div>
+        {% endfor %}
+      </div>
+
+      <!--
       <div class="activity-list-board">
         <div class="individual-activity-board">
           <div class="user-activity-board">Guangzhe Gao</div>
@@ -53,6 +77,8 @@
           <div class="activity-time-board">March 21th 2017 </div>
         </div>
       </div>
+        -->
+
     </div>
   </div>
 <div class="board-container js-auto-resize-to-full-window container-fluid">
@@ -158,7 +184,34 @@
 {% endblock %}
 
 {% block javascript %}
+
 <script type='text/javascript'>
+
+var new_activities = function(content){
+    $.ajax({
+      type: "POST",
+      url: '/a',
+      data: {board_id: {{ board.id }},
+             content: content},
+      success: function(result) {
+          console.log("{{ user.username }}")
+          console.log(content)
+          console.log(result['activity_time'])
+
+          $("div.activity-list-board").append(
+                  '<div class="individual-activity-board">' +
+              '<div class="user-activity-board">' + "{{ user.username }}" + '</div>' +
+              '<div class="activity-content-board">' + content + '</div>' +
+              '<div class="activity-time-board">' + result['activity_time'] + '</div> </div>'
+          )
+      },
+      error: function(msg) {
+        var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
+        $('div[name="comment-panel"]').append(msg_div);
+      }
+    })
+}
+
   //async post thread
 $(document).ready(function(){
 
@@ -243,6 +296,7 @@ $(document).ready(function(){
         {% for users in board.get_users() %}
           notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, "created card of name " + title) //is defined in base.html
         {% endfor %}
+        new_activities("created card of name " + title)
       },
       error: function(msg) {
         var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
@@ -275,6 +329,7 @@ $(document).ready(function(){
           {% for users in board.get_users() %}
             notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, "created list of name " + title ) //is defined in base.html
           {% endfor %}
+          new_activities("created list of name " + title)
         },
         error: function(msg) {
           var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
@@ -311,6 +366,7 @@ $(document).ready(function(){
           {% for users in board.get_users() %}
             notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, " changed card " + card_info+ " 's description from " + org_word + " to "  + desc); //is defined in base.html
           {% endfor %}
+          new_activities("changed card " + card_info+ " 's description from " + org_word + " to "  + desc)
         },
         error: function(msg) {
           var msg_div = "<div name='server-error' class='alert alert-danger'>Server Error: Please try to submit again later.</div>"
@@ -343,9 +399,10 @@ $(document).ready(function(){
         {% for users in board.get_users() %}
           notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, " posted comments " + comment + " on card " + card_title ) //is defined in base.html
         {% endfor %}
+        new_activities("posted comments " + comment + " on card " + card_title)
       },
       error: function(msg) {
-
+        console.log("ERR posting comments: " + msg)
       }
     })
   })
@@ -396,7 +453,7 @@ $(document).ready(function(){
           }
       }
       $("form#conversation-text-submit").data("receiver_id", id_first);
-      load_chat_users(id_first, id_second);
+      load_chat_users(id_first, id_second, other_name);
       e.stopPropagation(); //prevent conversation-bar close
     })
 
@@ -420,7 +477,8 @@ $(document).ready(function(){
     }
 
     //load chat between users
-    var load_chat_users = function(id_first, id_second){
+    var load_chat_users = function(id_first, id_second, other_name){
+        console.log("called")
         if(id_first == id_second){
             return; //can not chat with self
         }
@@ -456,5 +514,96 @@ $(document).ready(function(){
             */
       }
 </script>
+
+
+<!-- four scripts of auto completion library -->
+<script type="text/javascript" src="/static/js/typeahead.bundle.js"></script>
+<script type="text/javascript" src="/static/js/typeahead.bundle.min.js"></script>
+<script type="text/javascript" src="/static/js/typeahead.jquery.js"></script>
+<script type="text/javascript" src="/static/js/bloodhound.js"></script>
+
+
+<!-- add member control-->
+ <script>
+    $(document).ready(function() {
+
+        $('input.member-query-text').on('keyup', function(e) {
+             if(e.keyCode == 13) //enter submit, meaning want to add the member
+             {
+                var member_name = $(this).val()
+                $(this).val('') //clear the text entered
+
+                $.ajax({
+                  type: "GET",
+                  url: '/match_u',
+                  data: {
+                      input: member_name,
+                      board_id: {{ board.id }}
+                  },
+                  success: function(result) {
+                    var user_id = result['find_status']
+                    if(user_id != "NO USER" && $("li#" + user_id).length == 0) //valid user and not already added
+                    {
+                        $("ul.list-group").append('<li class="list-group-item board-member-names" id="'+ user_id +'">'+ member_name +'</li>') //put it back to the member list
+
+                        var information = " added member " + member_name + " to board " + '{{ board.title }}'
+                        {% for users in board.get_users() %}
+                          notify_users({{ user.id }}, '{{ user.username }}', {{ users.id }}, information) //is defined in base.html
+                        {% endfor %}
+                        new_activities(information)
+                    }
+                  },
+                  error: function(msg) {
+                    console.log("ERR adding member: " + msg)
+                  }
+                });
+             }
+        });
+
+        /*
+        $('input.member-query-text').on('keyup change', function() { //for debugging purpose of returned data
+            member_query_text = $(this).val();
+
+            $.ajax({
+              type: "GET",
+              url: '/query_u',
+              data: {input: member_query_text},
+              success: function(result) {
+                console.log(JSON.stringify(result))
+              },
+              error: function(msg) {
+                console.log("ERR requesting usernames based on input: " + msg)
+              }
+            });
+        });
+        */
+
+        //suggestion engine below
+        var suggestion = new Bloodhound({
+          datumTokenizer: function(d) {
+            return Bloodhound.tokenizers.whitespace(d.username);
+          },
+          queryTokenizer: Bloodhound.tokenizers.whitespace,
+          remote: '/query_u?input=%QUERY' //query result members based on input
+        });
+
+        suggestion.initialize();
+
+        $('input.typeahead').typeahead({
+          hint: true,
+          highlight: true,
+          minLength: 1
+        },
+        {
+          name: 'query_names', //class name
+          displayKey: 'username', //key
+          // `ttAdapter` wraps the suggestion engine in an adapter that
+          // is compatible with the typeahead jQuery plugin
+          source: suggestion.ttAdapter()
+        });
+    });
+
+
+ </script>
 
 {% endblock %}

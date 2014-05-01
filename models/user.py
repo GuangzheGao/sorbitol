@@ -15,6 +15,10 @@ class User(Base):
     email = Column(String(200))
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
 
+    #return name in serializable format
+    def serialize_name(self):
+       return { 'username' : str(self.username) }
+
     @classmethod
     def get(cls, user_id):
         '''warning: unsafe method, get user obj deirectly without checking password'''
@@ -25,6 +29,21 @@ class User(Base):
     @classmethod
     def get_multi(cls, ids):
         return [cls.get(id) for id in ids]
+
+    #used for query user names based on input
+    @classmethod
+    def get_based_on_prefix(cls, prefix):
+        return mysql_session.query(cls).filter(cls.username.like(prefix +'%')).all()
+
+    #check existence of username, if exist return its object, else return -1
+    @classmethod
+    def get_whole_match(cls, username):
+        print username
+        result = mysql_session.query(cls).filter_by(username=username).first()
+        if result == None:
+            print "nope!"
+            return -1
+        return result
 
     @classmethod
     def get_validate_user(cls, user_email, user_unsafe_password):

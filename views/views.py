@@ -14,6 +14,8 @@ from models.list import List
 from models.card import Card
 from models.group import Group
 from models.comment import Comment
+from models.activity import Activity
+import json #only used in return query result case: /query_u
 
 from flask.ext.login import login_user, logout_user, current_user, login_required
 
@@ -141,6 +143,7 @@ def api_board(board_id=None):
 def render_board(board_id = None):
     '''board page'''
     board=Board.get(board_id)
+    activity = Activity.get_all(board_id)
     try:
         show_card_id = request.args['show_card']
     except:
@@ -154,6 +157,7 @@ def render_board(board_id = None):
                                 board=board, 
                                 show_card_id=show_card_id,
                                 lists = board.get_lists(),
+                                activities = activity,
                                 add_card_form = AddCardForm(),
                                 add_list_form = AddListForm(),
                                 edit_card_desc_form = EditCardDescForm(),
@@ -161,6 +165,8 @@ def render_board(board_id = None):
                                 add_board_form = AddBoardForm())
 
 ''' AJAX endpoints, retrieve kids using parent '''
+
+#get, post list
 @main_app.route('/l', methods=['GET', 'POST'])
 def api_list(board_id = None):
     if request.method == 'GET':
@@ -179,6 +185,7 @@ def api_list(board_id = None):
         else:
             return jsonify({"list_id": List.add(title, board_id)})
 
+#get, post card
 @main_app.route('/c', methods=['GET', 'POST'])
 @login_required
 def api_card(list_id = None):
@@ -198,6 +205,7 @@ def api_card(list_id = None):
 
         return jsonify({"card_id": Card.add(title, list_id, current_user.id)})
 
+#edit card
 @main_app.route('/c/<path:card_id>', methods=['POST',])
 @login_required
 def api_edit_card(card_id = None):
@@ -215,6 +223,7 @@ def api_edit_card(card_id = None):
         return jsonify({'code': 400, 'message': 'Bad Request'})
     return jsonify({'code': 200, 'card_id':card_id}) 
 
+#get edit card form
 @main_app.route('/c/<path:card_id>', methods=['GET',])
 @login_required
 def api_get_card(card_id = None):
@@ -231,6 +240,7 @@ def api_get_card(card_id = None):
                                 edit_card_desc_form=EditCardDescForm(),
                                 add_comment_form=AddCommentForm());
 
+#post comment
 @main_app.route('/c/<path:card_id>/comments', methods=['POST',])
 @login_required
 def api_add_comment(card_id=None):
@@ -249,3 +259,42 @@ def api_add_comment(card_id=None):
     comment = Comment.add(long(card_id), current_user.id, content)
     return jsonify({'card_id': card_id})
 
+#post activities
+@main_app.route('/a', methods=['POST',])
+@login_required
+def api_add_activity():
+    try:
+        boardid= request.form['board_id']
+        content = request.form['content']
+    except KeyError:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+    return jsonify({'code': 200, 'activity_time': Activity.add(boardid, current_user.id, content)})
+
+#get users based on query string
+@main_app.route('/query_u', methods=['GET',])
+def api_get_queried_users():
+    try:
+        user_input = request.args.get('input')
+    except KeyError:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+    query_users = User.get_based_on_prefix(user_input)
+    return json.dumps([user.serialize_name() for user in query_users])
+
+#get users based on query string
+@main_app.route('/match_u', methods=['GET',])
+def api_check_string_match():
+    try:
+        user_input = request.args.get('input')
+        board_id = request.args.get('board_id')
+    except KeyError:
+        return jsonify({'code': 400, 'message': 'Bad Request'})
+    print "input: " + user_input
+    match_user = User.get_whole_match(user_input)
+    if match_user == -1:    #has no results queried out
+        return jsonify({'code': 200, 'find_status': "NO USER"})
+    else:
+        board_obj = Board.get(board_id)
+        board_obj.add_user(match_user)    #add the user to board
+        match_user.add_board(board_obj)   #add the board to user
+
+        return jsonify({'code': 200, 'find_status' : match_user.id})

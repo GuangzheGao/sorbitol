@@ -2,43 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c293164-7897-4ecd-a79e-2a347f34a731" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/manual_test.docx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/images/avatar_1.png" afterPath="$PROJECT_DIR$/uploads/images/avatar_1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/autocomplete_style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/bloodhound.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test_add_users.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/typeahead.bundle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/typeahead.bundle.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/typeahead.jquery.js" />
+      <change type="DELETED" beforePath="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\gitignore.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\static\js\lecture23 (1).pdf" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\static\js\lecture23.pdf" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/activity.py" afterPath="$PROJECT_DIR$/models/activity.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/board.html" afterPath="$PROJECT_DIR$/templates/board.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/card.html" afterPath="$PROJECT_DIR$/templates/card.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/db.py" afterPath="$PROJECT_DIR$/utils/db.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/board.py" afterPath="$PROJECT_DIR$/models/board.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schema.sql" afterPath="$PROJECT_DIR$/schema.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/style.css" afterPath="$PROJECT_DIR$/static/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/user.py" afterPath="$PROJECT_DIR$/models/user.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/views.py" afterPath="$PROJECT_DIR$/views/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sorbitol.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398747428814" ignored="false" />
-    <file path="/views.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398241359969" ignored="false" />
+    <file path="/Dummy.txt" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398929727254" ignored="false" />
+    <file path="/views.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398930771409" ignored="false" />
     <file path="/layout.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397084651140" ignored="false" />
     <file path="/run.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398291736702" ignored="false" />
-    <file path="/base.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398755201934" ignored="false" />
+    <file path="/base.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398925589722" ignored="false" />
     <file path="/404.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397085433217" ignored="false" />
     <file path="/index.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398221481666" ignored="false" />
     <file path="/self_define_style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398323954602" ignored="false" />
     <file path="/login_sign_up.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397180804575" ignored="false" />
     <file path="/group.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397245121869" ignored="false" />
-    <file path="/board.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398764094068" ignored="false" />
+    <file path="/board.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398931056955" ignored="false" />
     <file path="/signup.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397244322940" ignored="false" />
     <file path="/login.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397243774548" ignored="false" />
     <file path="/db.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398747941379" ignored="false" />
     <file path="/list.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397845296387" ignored="false" />
-    <file path="/schema.sql" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397791839989" ignored="false" />
-    <file path="/board.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398291946943" ignored="false" />
+    <file path="/schema.sql" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398911660321" ignored="false" />
+    <file path="/board.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398931708616" ignored="false" />
     <file path="/card.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397806302277" ignored="false" />
     <file path="/comment.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397792291257" ignored="false" />
-    <file path="/activity.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397792477390" ignored="false" />
+    <file path="/activity.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398846951884" ignored="false" />
     <file path="/test_card.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397858378178" ignored="false" />
     <file path="/test_data.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398218525461" ignored="false" />
     <file path="/firebase_function_def.js" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398247822347" ignored="false" />
-    <file path="/user.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398751720441" ignored="false" />
-    <file path="/style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398324316133" ignored="false" />
+    <file path="/user.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398931386112" ignored="false" />
+    <file path="/style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398890743949" ignored="false" />
     <file path="/card.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398764397213" ignored="false" />
+    <file path="/test_add_users.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398930005346" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,11 +69,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="activity.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/activity.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="33" selection-start="991" selection-end="991" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/list.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="21" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schema.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/schema.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="55" selection-start="446" selection-end="446" vertical-scroll-proportion="-0.28947368">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/db.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="user.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/user.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="0" selection-start="3484" selection-end="3484" vertical-scroll-proportion="-28.44">
+            <state line="117" column="60" selection-start="3652" selection-end="3704" vertical-scroll-proportion="-16.52">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="board.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/board.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="0" selection-start="2198" selection-end="2198" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#24#101#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,89 +131,36 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="219" column="17" selection-start="8072" selection-end="8072" vertical-scroll-proportion="-0.88">
-              <folding>
-                <element signature="e#24#105#0" expanded="true" />
-              </folding>
+            <state line="299" column="68" selection-start="11000" selection-end="11000" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="card.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/card.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="43" selection-start="1849" selection-end="1849" vertical-scroll-proportion="-3.425926">
-              <folding>
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="board.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="board.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/board.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="0" selection-start="4463" selection-end="4463" vertical-scroll-proportion="0.027465668">
+            <state line="544" column="96" selection-start="22263" selection-end="22263" vertical-scroll-proportion="-18.206896">
               <folding>
-                <marker date="1398764400640" expanded="true" signature="6646:6660" placeholder="{...}" />
+                <marker date="1398931127206" expanded="true" signature="8440:8454" placeholder="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_comment_form.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/forms/ajax/add_comment_form.py">
+      <file leaf-file-name="test_data.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="45" column="0" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <file leaf-file-name="test_add_users.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test_add_users.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit_card_desc_form.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/forms/ajax/edit_card_desc_form.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="0" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_card_form.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/forms/ajax/add_card_form.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="25" selection-end="25" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#25#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="card.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/card.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="0" selection-start="3401" selection-end="3401" vertical-scroll-proportion="-28.44">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/activity.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="19" column="44" selection-start="817" selection-end="817" vertical-scroll-proportion="0.48045978">
               <folding />
             </state>
           </provider>
@@ -176,22 +184,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/static/js/firebase_function_def.js" />
-        <option value="$PROJECT_DIR$/views/views.py" />
-        <option value="$PROJECT_DIR$/test_data.py" />
-        <option value="$PROJECT_DIR$/run.py" />
-        <option value="$PROJECT_DIR$/schema.sql" />
-        <option value="$PROJECT_DIR$/models/board.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/static/js/custom.js" />
         <option value="$PROJECT_DIR$/static/css/self_define_style.css" />
-        <option value="$PROJECT_DIR$/static/css/style.css" />
         <option value="$PROJECT_DIR$/utils/db.py" />
-        <option value="$PROJECT_DIR$/models/user.py" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/models/forms/ajax/edit_card_desc_form.py" />
         <option value="$PROJECT_DIR$/templates/card.html" />
+        <option value="$PROJECT_DIR$/models/activity.py" />
+        <option value="$PROJECT_DIR$/static/css/style.css" />
+        <option value="$PROJECT_DIR$/schema.sql" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/static/css/autocomplete_style.css" />
+        <option value="$PROJECT_DIR$/test_add_users.py" />
+        <option value="$PROJECT_DIR$/views/views.py" />
         <option value="$PROJECT_DIR$/templates/board.html" />
+        <option value="$PROJECT_DIR$/models/user.py" />
+        <option value="$PROJECT_DIR$/models/board.py" />
       </list>
     </option>
   </component>
@@ -227,7 +235,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -370,60 +377,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sorbitol" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sorbitol" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sorbitol" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sorbitol" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="forms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ajax" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="preferences.fileTypes" />
     <property name="last_opened_file_path" value="G:/Software/Git/bin/git.exe" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -435,6 +403,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\static\js" />
       <recent name="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\static" />
     </key>
   </component>
@@ -559,9 +528,10 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.178762" sideWeight="0.60045403" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18516542" sideWeight="0.60045403" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -570,7 +540,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39954597" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -635,28 +604,104 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+    <entry file="file://$PROJECT_DIR$/static/js/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="784" column="1" selection-start="14228" selection-end="14228" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/typeahead.bundle.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="791" column="22" selection-start="14339" selection-end="14339" vertical-scroll-proportion="-9.16" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/comment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="128" selection-start="675" selection-end="675" vertical-scroll-proportion="0.41095892">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/autocomplete_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="885" selection-end="885" vertical-scroll-proportion="0.9218935" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="401" selection-end="401" vertical-scroll-proportion="0.0">
+        <state line="1" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/custom.js">
+    <entry file="file://$PROJECT_DIR$/schema.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="0" selection-start="2746" selection-end="2746" vertical-scroll-proportion="0.0">
+        <state line="12" column="55" selection-start="446" selection-end="446" vertical-scroll-proportion="-0.28947368">
           <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="21" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/activity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="33" selection-start="991" selection-end="991" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="299" column="68" selection-start="11000" selection-end="11000" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/board.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="544" column="96" selection-start="22263" selection-end="22263" vertical-scroll-proportion="-18.206896">
+          <folding>
+            <marker date="1398931127206" expanded="true" signature="8440:8454" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="60" selection-start="3652" selection-end="3704" vertical-scroll-proportion="-16.52">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/board.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="0" selection-start="2198" selection-end="2198" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#24#101#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -667,100 +712,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
+    <entry file="file://$PROJECT_DIR$/test_add_users.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="19" column="44" selection-start="817" selection-end="817" vertical-scroll-proportion="0.48045978">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schema.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="21" selection-start="1733" selection-end="1733" vertical-scroll-proportion="-4.631579">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="0" selection-start="3484" selection-end="3484" vertical-scroll-proportion="-28.44">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/card.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="0" selection-start="3401" selection-end="3401" vertical-scroll-proportion="-28.44">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/activity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/forms/ajax/add_card_form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="25" selection-end="25" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#25#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/forms/ajax/edit_card_desc_form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/forms/ajax/add_comment_form.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="219" column="17" selection-start="8072" selection-end="8072" vertical-scroll-proportion="-0.88">
-          <folding>
-            <element signature="e#24#105#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/card.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="43" selection-start="1849" selection-end="1849" vertical-scroll-proportion="-3.425926">
-          <folding>
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#form#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/board.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="0" selection-start="4463" selection-end="4463" vertical-scroll-proportion="0.027465668">
-          <folding>
-            <marker date="1398764400640" expanded="true" signature="6646:6660" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>

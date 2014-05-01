@@ -654,7 +654,6 @@ div.input-login, div.input-signup{
     height: 100%;
 }
 
-<<<<<<< HEAD
 .profile-header {
     background-color: #f0f0f0;
     padding-top: 32px;
@@ -788,4 +787,28 @@ div.conversation-detail-board {
     position: relative;
     height: 25px;
     z-index: 300;
+}
+
+a.button-search-member{
+    background: linear-gradient(to bottom, #fff 0, #f0f0f0 100%);
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #d6d6d6;
+    border-bottom-color: #bdbdbd;
+    cursor: pointer;
+    display: block;
+    font-weight: bold;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    max-width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 6px;
+    position: relative;
+    text-decoration: none;
+    text-overflow: ellipsis;
 }

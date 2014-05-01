@@ -12,25 +12,25 @@ class Activity(Base):
     __tablename__ = 'activities'
 
     id = Column(Integer, primary_key = True)
-    user_id = Column(Integer)
+    user_id = Column(Integer) #who conducted the activity
     board_id = Column(Integer)
     content = Column(String(512))
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
 
     @classmethod
     def add(cls, board_id, user_id, content):
-        comment = cls(board_id = board_id, user_id = user_id, content = content)
+        activity = cls(board_id = board_id, user_id = user_id, content = content)
         try:
-            mysql_session.add(comment)
+            mysql_session.add(activity)
             mysql_session.commit()
         except Exception as e:
             mysql_session.rollback()
+            print "error in mysql commit:", e
             raise
         finally:
             mysql_session.close()
-            print "error in mysql commit:", e
 
-        return comment.id
+        return activity.created_at #note for activity we don't care id, but time!
 
     @classmethod
     def get(cls, activity_id):

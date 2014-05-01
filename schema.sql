@@ -10,7 +10,7 @@ CREATE TABLE `groups` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
-  `username` varchar(200) NOT NULL,
+  `username` varchar(200) NOT NULL, -- should be unique
   `password` varchar(200) NOT NULL,
   `email` varchar(200) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,7 +23,7 @@ CREATE TABLE `users` (
 DROP TABLE IF EXISTS `boards`;
 CREATE TABLE `boards` (
     `id` int(12) NOT NULL AUTO_INCREMENT,
-    --`group_id` int(12) NOT NULL,
+    -- `group_id` int(12) NOT NULL,
     `title` varchar(512) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `visibility` char(1),
@@ -35,6 +35,7 @@ CREATE TABLE `activities` (
     `id` int(12) NOT NULL AUTO_INCREMENT,
     `user_id` int(12) NOT NULL,
     `board_id` int(12) NOT NULL,
+    `content` varchar(512) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

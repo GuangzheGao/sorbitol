@@ -50,15 +50,17 @@ class Board(Base):
         return [cls.get(id) for id in ids]
 
     def get_user_ids(self):
-        print "users for board %d" % self.id, r_server.lrange('/board/%d/users' % self.id, 0, -1)
-        return r_server.lrange('/board/%d/users' % self.id, 0, -1)
+        #print "users for board %d" % self.id, r_server.lrange('/board/%d/users' % self.id, 0, -1)
+        #return r_server.lrange('/board/%d/users' % self.id, 0, -1)
+        return r_server.smembers('/board/%d/users' % self.id)
 
     def get_users(self):
         '''return a list of user objs'''
         return User.get_multi(self.get_user_ids())       
 
     def add_user(self, user):
-        r_server.rpush('/board/%d/users' % self.id, user.id)
+        #r_server.rpush('/board/%d/users' % self.id, user.id)
+        return r_server.sadd('/board/%d/users' % self.id, user.id)
 
     def get_lists(self):
         '''return a list of user objs'''
