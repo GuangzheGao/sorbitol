@@ -35,6 +35,15 @@
       </div>
       <!-- for activity in activity -->
       <div class="profile-detail-entry">
+        {% if tag == 'profile' %}
+        {% for activity in activities %}
+        <div class="activity-user">
+            <div class="activity-detail-user">{{ user.username }}</div>
+            <div class="activity-detail-user">{{ activity.content }}</div>
+            <div class="activity-detail-user">{{ activity.created_at}}</div>
+        </div>
+        {% endfor %}
+        {% endif %}
         {% if tag == 'cards' %}
         {% for card in cards %}
         <div class="profile-card list-card panel" >
@@ -80,3 +89,5 @@
     </div>
   </div>
 {% endblock %}
+
+

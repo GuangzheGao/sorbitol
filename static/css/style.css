@@ -812,3 +812,11 @@ a.button-search-member{
     text-decoration: none;
     text-overflow: ellipsis;
 }
+
+div.activity-user{
+    margin: 10px;
+}
+
+div.activity-detail-user{
+    margin: 5px;
+}

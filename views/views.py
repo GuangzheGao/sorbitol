@@ -82,7 +82,8 @@ def render_user(user_id = None):
                             user = current_user,
                             profile_owner = user,
                             avatar_image = None,
-                            add_board_form = AddBoardForm())
+                            add_board_form = AddBoardForm(),
+                            activities = Activity.get_all_by_user(current_user.id))
 
 @main_app.route('/u/<path:user_id>/cards')
 @login_required
@@ -268,7 +269,8 @@ def api_add_activity():
         content = request.form['content']
     except KeyError:
         return jsonify({'code': 400, 'message': 'Bad Request'})
-    return jsonify({'code': 200, 'activity_time': Activity.add(boardid, current_user.id, content)})
+    activity_id = Activity.add(boardid, current_user.id, content)
+    return jsonify({'code': 200, 'activity_time': Activity.get(activity_id).created_at})
 
 #get users based on query string
 @main_app.route('/query_u', methods=['GET',])

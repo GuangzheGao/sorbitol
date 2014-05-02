@@ -2,29 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c293164-7897-4ecd-a79e-2a347f34a731" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/autocomplete_style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/bloodhound.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test_add_users.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/typeahead.bundle.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/typeahead.bundle.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/js/typeahead.jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_activity.py" />
       <change type="DELETED" beforePath="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\gitignore.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\static\js\lecture23 (1).pdf" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\static\js\lecture23.pdf" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uploads/images/avatar_2.png" afterPath="$PROJECT_DIR$/uploads/images/avatar_2.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/activity.py" afterPath="$PROJECT_DIR$/models/activity.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/board.html" afterPath="$PROJECT_DIR$/templates/board.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/board.py" afterPath="$PROJECT_DIR$/models/board.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schema.sql" afterPath="$PROJECT_DIR$/schema.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/card.html" afterPath="$PROJECT_DIR$/templates/card.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/profile.html" afterPath="$PROJECT_DIR$/templates/profile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/style.css" afterPath="$PROJECT_DIR$/static/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/user.py" afterPath="$PROJECT_DIR$/models/user.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_group.py" afterPath="$PROJECT_DIR$/tests/test_group.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/views.py" afterPath="$PROJECT_DIR$/views/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="sorbitol.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398929727254" ignored="false" />
-    <file path="/views.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398930771409" ignored="false" />
+    <file path="/Dummy.txt" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1399019666062" ignored="false" />
+    <file path="/views.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1399025338986" ignored="false" />
     <file path="/layout.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397084651140" ignored="false" />
     <file path="/run.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398291736702" ignored="false" />
     <file path="/base.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398925589722" ignored="false" />
@@ -33,7 +26,7 @@
     <file path="/self_define_style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398323954602" ignored="false" />
     <file path="/login_sign_up.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397180804575" ignored="false" />
     <file path="/group.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397245121869" ignored="false" />
-    <file path="/board.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398931056955" ignored="false" />
+    <file path="/board.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1399057400225" ignored="false" />
     <file path="/signup.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397244322940" ignored="false" />
     <file path="/login.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397243774548" ignored="false" />
     <file path="/db.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398747941379" ignored="false" />
@@ -42,14 +35,16 @@
     <file path="/board.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398931708616" ignored="false" />
     <file path="/card.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397806302277" ignored="false" />
     <file path="/comment.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397792291257" ignored="false" />
-    <file path="/activity.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398846951884" ignored="false" />
+    <file path="/activity.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1399024904664" ignored="false" />
     <file path="/test_card.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1397858378178" ignored="false" />
     <file path="/test_data.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398218525461" ignored="false" />
     <file path="/firebase_function_def.js" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398247822347" ignored="false" />
     <file path="/user.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398931386112" ignored="false" />
-    <file path="/style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398890743949" ignored="false" />
-    <file path="/card.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398764397213" ignored="false" />
+    <file path="/style.css" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1399026080733" ignored="false" />
+    <file path="/card.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1399024592067" ignored="false" />
     <file path="/test_add_users.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1398930005346" ignored="false" />
+    <file path="/test_activity.py" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1399023369944" ignored="false" />
+    <file path="/profile.html" changelist="9c293164-7897-4ecd-a79e-2a347f34a731" time="1399026003066" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,49 +64,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="activity.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/activity.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="33" selection-start="991" selection-end="991" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/list.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="21" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="schema.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schema.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="55" selection-start="446" selection-end="446" vertical-scroll-proportion="-0.28947368">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/db.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="user.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/user.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="117" column="60" selection-start="3652" selection-end="3704" vertical-scroll-proportion="-16.52">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -120,9 +76,20 @@
       <file leaf-file-name="board.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/board.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="0" selection-start="2198" selection-end="2198" vertical-scroll-proportion="0.0">
+            <state line="46" column="0" selection-start="1447" selection-end="1447" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#24#101#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/activity.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+              <folding>
+                <element signature="e#25#102#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -131,37 +98,74 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="299" column="68" selection-start="11000" selection-end="11000" vertical-scroll-proportion="0.0">
+            <state line="85" column="81" selection-start="3477" selection-end="3477" vertical-scroll-proportion="-15.84">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="board.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/board.html">
+      <file leaf-file-name="profile.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="544" column="96" selection-start="22263" selection-end="22263" vertical-scroll-proportion="-18.206896">
+            <state line="42" column="44" selection-start="1911" selection-end="1911" vertical-scroll-proportion="-11.240741">
               <folding>
-                <marker date="1398931127206" expanded="true" signature="8440:8454" placeholder="{...}" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#form#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_data.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_data.py">
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="0" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.0">
+            <state line="816" column="14" selection-start="14947" selection-end="14947" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_add_users.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="card.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/card.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="0" selection-start="1869" selection-end="1869" vertical-scroll-proportion="-7.92">
+              <folding>
+                <element signature="e#24#101#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_add_users.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_add_users.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="44" selection-start="817" selection-end="817" vertical-scroll-proportion="0.48045978">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="board.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/board.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="615" column="8" selection-start="24623" selection-end="24623" vertical-scroll-proportion="0.84375">
+              <folding>
+                <marker date="1399057400824" expanded="true" signature="8440:8454" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="card.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/card.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="234" selection-start="603" selection-end="603" vertical-scroll-proportion="-2.4444444">
+              <folding>
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -184,22 +188,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/templates/index.html" />
-        <option value="$PROJECT_DIR$/static/js/custom.js" />
-        <option value="$PROJECT_DIR$/static/css/self_define_style.css" />
-        <option value="$PROJECT_DIR$/utils/db.py" />
         <option value="$PROJECT_DIR$/models/forms/ajax/edit_card_desc_form.py" />
-        <option value="$PROJECT_DIR$/templates/card.html" />
-        <option value="$PROJECT_DIR$/models/activity.py" />
-        <option value="$PROJECT_DIR$/static/css/style.css" />
         <option value="$PROJECT_DIR$/schema.sql" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/static/css/autocomplete_style.css" />
         <option value="$PROJECT_DIR$/test_add_users.py" />
-        <option value="$PROJECT_DIR$/views/views.py" />
-        <option value="$PROJECT_DIR$/templates/board.html" />
         <option value="$PROJECT_DIR$/models/user.py" />
         <option value="$PROJECT_DIR$/models/board.py" />
+        <option value="$PROJECT_DIR$/tests/test_comment.py" />
+        <option value="$PROJECT_DIR$/tests/test_activity.py" />
+        <option value="$PROJECT_DIR$/tests/test_group.py" />
+        <option value="$PROJECT_DIR$/models/activity.py" />
+        <option value="$PROJECT_DIR$/views/views.py" />
+        <option value="$PROJECT_DIR$/templates/profile.html" />
+        <option value="$PROJECT_DIR$/static/css/style.css" />
+        <option value="$PROJECT_DIR$/templates/card.html" />
+        <option value="$PROJECT_DIR$/templates/board.html" />
       </list>
     </option>
   </component>
@@ -385,13 +389,13 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="preferences.fileTypes" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="G:/Software/Git/bin/git.exe" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -407,7 +411,132 @@
       <recent name="C:\Users\Guangzhe Gao\Documents\GitHub\sorbitol\static" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.sorbitol">
+  <component name="RunManager" selected="Python tests.Unittests in test_card">
+    <configuration default="false" name="Unittests in test_comment" type="tests" factoryName="Unittests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sorbitol" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_comment.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in test_card" type="tests" factoryName="Unittests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sorbitol" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_card.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in test_group" type="tests" factoryName="Unittests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sorbitol" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_group.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in test_list" type="tests" factoryName="Unittests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sorbitol" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_list.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in test_user" type="tests" factoryName="Unittests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sorbitol" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_user.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -490,11 +619,27 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
       <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.sorbitol" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test_comment" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test_card" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_group" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_list" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittests in test_user" />
     </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_card" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test_user" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test_list" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test_group" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test_comment" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
@@ -528,18 +673,18 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18516542" sideWeight="0.60045403" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18836713" sideWeight="0.8916201" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.108379886" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39954597" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -608,114 +753,133 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/bootstrap.js">
+    <entry file="file://$PROJECT_DIR$/test_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="45" column="0" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.033846155">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/typeahead.bundle.min.js">
+    <entry file="file://$PROJECT_DIR$/tests/test_activity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="18" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.82879376">
+          <folding>
+            <element signature="e#24#54#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_board.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+    <entry file="file://$PROJECT_DIR$/models/group.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="791" column="22" selection-start="14339" selection-end="14339" vertical-scroll-proportion="-9.16" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/comment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="128" selection-start="675" selection-end="675" vertical-scroll-proportion="0.41095892">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/autocomplete_style.css">
+    <entry file="file://$PROJECT_DIR$/static/js/custom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="885" selection-end="885" vertical-scroll-proportion="0.9218935" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/db.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+        <state line="0" column="5" selection-start="4" selection-end="5" vertical-scroll-proportion="-0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schema.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="55" selection-start="446" selection-end="446" vertical-scroll-proportion="-0.28947368">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="21" selection-start="560" selection-end="560" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/activity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="33" selection-start="991" selection-end="991" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="299" column="68" selection-start="11000" selection-end="11000" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/board.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="544" column="96" selection-start="22263" selection-end="22263" vertical-scroll-proportion="-18.206896">
-          <folding>
-            <marker date="1398931127206" expanded="true" signature="8440:8454" placeholder="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/user.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="60" selection-start="3652" selection-end="3704" vertical-scroll-proportion="-16.52">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/board.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="2198" selection-end="2198" vertical-scroll-proportion="0.0">
+        <state line="46" column="0" selection-start="1447" selection-end="1447" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#24#101#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_data.py">
+    <entry file="file://$PROJECT_DIR$/models/activity.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+          <folding>
+            <element signature="e#25#102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="44" selection-start="1911" selection-end="1911" vertical-scroll-proportion="-11.240741">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#form#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="816" column="14" selection-start="14947" selection-end="14947" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="81" selection-start="3477" selection-end="3477" vertical-scroll-proportion="-15.84">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_add_users.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="44" selection-start="817" selection-end="817" vertical-scroll-proportion="0.48045978">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/card.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="0" selection-start="1869" selection-end="1869" vertical-scroll-proportion="-7.92">
+          <folding>
+            <element signature="e#24#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/card.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="234" selection-start="603" selection-end="603" vertical-scroll-proportion="-2.4444444">
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/board.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="615" column="8" selection-start="24623" selection-end="24623" vertical-scroll-proportion="0.84375">
+          <folding>
+            <marker date="1399057400824" expanded="true" signature="8440:8454" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

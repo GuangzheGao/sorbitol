@@ -30,7 +30,8 @@ class Activity(Base):
         finally:
             mysql_session.close()
 
-        return activity.created_at #note for activity we don't care id, but time!
+        return activity.id
+        #return activity.created_at #note for activity we don't care id, but time!
 
     @classmethod
     def get(cls, activity_id):
@@ -40,6 +41,10 @@ class Activity(Base):
 
     @classmethod
     def get_all(cls, board_id):
-        card_id = long(board_id)
         activities = mysql_session.query(cls).filter_by(board_id = board_id)
+        return activities
+
+    @classmethod
+    def get_all_by_user(cls,user_id):
+        activities = mysql_session.query(cls).filter_by(user_id = user_id)
         return activities
